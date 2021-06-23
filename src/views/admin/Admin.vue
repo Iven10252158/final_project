@@ -8,7 +8,7 @@
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" @click='logout'>Sign out</a>
             </li>
         </ul>
     </header>
@@ -31,10 +31,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <router-link to='/admin/admin_products' class="nav-link">
               <span data-feather="shopping-cart"></span>
-              Products
-            </a>
+                Products
+            </router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
@@ -94,3 +94,49 @@
 </div>
 <router-view></router-view>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    logout () {
+      const api = `${process.env.VUE_APP_URL}logout`
+      this.$http.post(api)
+        .then(res => {
+          if (res.data.success) {
+            this.$router.push('/login')
+            console.log(res)
+          } else {
+            console.log(res)
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+    // 做checkapi
+    // /api/user/check
+    checkLogin () {
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      console.log(token)
+      this.$http.defaults.headers.common.Authorization = token
+      this.$http.post(`${process.env.VUE_APP_URL}api/user/check`)
+        .then(res => {
+          if (res.data.success) {
+            console.log(res.data.success)
+          } else {
+            console.log(res.data.success)
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  mounted () {
+    this.checkLogin()
+  }
+}
+</script>

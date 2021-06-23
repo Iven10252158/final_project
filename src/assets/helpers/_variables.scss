@@ -79,8 +79,8 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary":    rgba(25, 77, 51,0.8),   //$primary,
-  "secondary":  rgba(51, 153, 102,0.7), //$secondary,
+  "primary":    rgb(90, 147, 88),//rgb(25, 77, 51),   //$primary,
+  "secondary":  $secondary,
   "success":    $success,
   "info":       $info,
   "warning":    #E6c35c,//$warning,
@@ -257,6 +257,7 @@ $spacers: (
   4: $spacer * 1.5,
   5: $spacer * 3,
   6: $spacer * 4,
+  7: $spacer * 5,
 ) !default;
 
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
@@ -290,7 +291,7 @@ $body-text-align:           null !default;
 $link-color:                              $primary !default;
 $link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
-$link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-color:                       #000;//shift-color($link-color, $link-shade-percentage) !default;
 $link-hover-decoration:                   null !default;
 
 $stretched-link-pseudo-element:           after !default;
@@ -434,7 +435,7 @@ $font-size-lg:                $font-size-base * 1.25 !default;
 $font-weight-lighter:         lighter !default;
 $font-weight-light:           300 !default;
 $font-weight-normal:          400 !default;
-$font-weight-bold:            700 !default;
+$font-weight-bold:            900 !default;
 $font-weight-bolder:          bolder !default;
 
 $font-weight-base:            $font-weight-normal !default;
@@ -1046,7 +1047,7 @@ $pagination-padding-x-sm:           .5rem !default;
 $pagination-padding-y-lg:           .75rem !default;
 $pagination-padding-x-lg:           1.5rem !default;
 
-$pagination-color:                  #000;//$link-color !default;
+$pagination-color:                  rgba(25,77,51,0.8);//$link-color !default;
 $pagination-bg:                     $white !default;
 $pagination-border-width:           $border-width !default;
 $pagination-border-radius:          $border-radius !default;

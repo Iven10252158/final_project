@@ -1,11 +1,10 @@
-
 <template>
 <Loading :active= "isLoading">
    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
     <div></div><div><div></div></div>
     </div></div>
 </Loading>
-<div class="container mb-2">
+<div class="container mb-2 mt-7">
     <!-- <h1>前台_單一產品細節</h1> -->
   <div class="row mt-3 mt-sm-3">
     <div class="col-12 col-sm-6">

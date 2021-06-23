@@ -7,3 +7,13 @@
             </div>
     </div>
 </template>
+<style lang="scss">
+.bg-cover{
+    background-size: cover;
+    background-position: center center;
+}
+.banner-text{
+    padding: 80px 120px;
+    background-color:rgba(0, 0, 0,0.3);
+}
+</style>

@@ -1,4 +1,10 @@
 <template>
+<!-- header -->
+<div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1555952012-6a700791736f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80');height:400px">
+            <div class="banner-text text-white">
+                <h1>產品列表</h1>
+            </div>
+    </div>
 <Loading :active= "isLoading">
     <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
     <div></div><div><div></div></div>
@@ -8,7 +14,7 @@
     <div class="row">
         <div class="col-4 my-2"  v-for="item in products" :key="item.id">
             <div class="card h-100  pb-3">
-                <div class="bg-cover  product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
+                <div class="bg-cover bg-white product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
                   <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
                     查看更多
                   </router-link>
@@ -96,3 +102,36 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .banner-text{
+    margin-top: 40px;
+    padding: 60px 120px;
+    background-color:rgba(0, 0, 0,0.3);
+  }
+  .bg-cover{
+    background-position: center center;
+    background-size: cover;
+}
+.mask{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background:rgba(0, 0, 0,0.5);     // rgba(101, 101, 101, 0.4);
+    height: 200px;
+    line-height: 200px;
+    color: #ffffff;
+    opacity: 0;
+}
+.product_image{
+    &:hover{
+        .mask{
+            cursor: pointer;
+            opacity:1;
+        }
+    }
+}
+
+</style>
