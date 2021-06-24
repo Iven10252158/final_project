@@ -25,7 +25,7 @@
           <h5 class="card-title">【選擇方案】</h5>
           <div class="d-flex justify-content-between">
             <h6 class="card-text">即刻報名，只要4人就能成團</h6>
-            <p class="card-text text-danger">${{product.price}}/團</p>
+            <p class="card-text text-danger">${{$filters.currency(product.price)}}/團</p>
           </div>
           <select class="form-select mb-3" aria-label="Default select example">
             <option selected>Open this select menu</option>
@@ -38,7 +38,7 @@
            <p class="card-text">超過10人請洽客服享額外優惠</p>
         </div>
         <div class="card-footer bg-white border-0 pb-4 d-flex justify-content-between">
-          <p class="card-text text-danger">小計 ${{product.price}}元</p>
+          <p class="card-text text-danger">小計 ${{$filters.currency(product.price)}}元</p>
           <button type="button" class="btn btn-danger w-50">按我報名</button>
         </div>
       </div>

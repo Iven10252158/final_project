@@ -55,7 +55,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" @click="checkSave">確定</button>
       </div>
     </div>
   </div>
@@ -77,6 +77,10 @@ export default {
   mounted () {
     this.bsModal = new Modal(this.$refs.innerProductModal)
   },
+  // 在內層的productModal會接收來自外面的tempProduct傳進來的值，也就是props:['product']
+  // 但是內層接收到的值是“不可以”修改外面傳進來的值，所以可以再寫一個資料集tempProduct（內層的）來放外層傳進來的值
+  // 因為不允許被修改的關係，因此可以使用watch來監聽props的值，當product有更動時，當 product 的值有更動時（更動時機：重開編輯 Modal，product 會被重新賦值。程式碼），就會執行 this.tempProduct = this.product 這個動作，
+  // 讓子元件內的 data （tempProduct）去接替傳進來的 data（product），再用接替的那個 data 去修改值才不會出現錯誤
   watch: {
     product () {
       this.tempProduct = this.product
@@ -88,6 +92,9 @@ export default {
     },
     hideModal () {
       this.bsModal.hide()
+    },
+    checkSave () {
+      this.$emit('check-save')
     }
   }
 }

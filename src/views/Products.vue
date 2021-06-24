@@ -1,7 +1,7 @@
 <template>
 <!-- header -->
 <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1555952012-6a700791736f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80');height:400px">
-            <div class="banner-text text-white">
+            <div class="product-text text-white">
                 <h1>產品列表</h1>
             </div>
     </div>
@@ -104,8 +104,8 @@ export default {
 </script>
 
 <style lang="scss">
-  .banner-text{
-    margin-top: 40px;
+  .product-text{
+    // margin-top: 40px;
     padding: 60px 120px;
     background-color:rgba(0, 0, 0,0.3);
   }

@@ -18,6 +18,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
+// 1.引入“千分號”程式碼
+import { currency, date } from './methods/filters.js'
 
 // 加入所有規則
 Object.keys(AllRrules).forEach((rule) => {
@@ -33,6 +35,8 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+// 2.將“千分號”設定為全域屬性
+app.config.globalProperties.$filters = { currency, date }
 // 註冊元件
 app.component('Form', Form)
 app.component('Field', Field)

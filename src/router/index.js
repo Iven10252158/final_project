@@ -17,7 +17,7 @@ const routes = [
         component: () => import('@/views/Index.vue')
       },
       {
-        path: '/about',
+        path: 'about',
         //   name: 'About',
         //   // route level code-splitting
         //   // this generates a separate chunk (about.[hash].js) for this route
@@ -49,6 +49,10 @@ const routes = [
       {
         path: 'admin_products',
         component: () => import('@/views/admin/Admin_products.vue')
+      },
+      {
+        path: 'admin_coupons',
+        component: () => import('@/views/admin/Admin_coupons.vue')
       }
     ]
   }
