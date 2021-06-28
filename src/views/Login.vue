@@ -3,25 +3,25 @@
     <div class="login container d-flex justify-content-center align-items-center">
     <div class="card mt-3  py-3" style="width:400px">
         <div class="card-body">
-            <h5 class="card-title text-center">登入</h5>
-                <Form v-slot="{ errors }">
-                    <label for="email">帳號</label>
-                    <Field id="email" name="email" type="email"
-                    class="form-control mb-3"
-                    :class="{ 'is-invalid': errors['email'] }"
-                    placeholder="請輸入 Email" rules="email|required"
-                    v-model="account"></Field>
-                    <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
-
-                    <label for="password">密碼</label>
-                    <Field id="password" name="密碼" type="password"
-                    class="form-control mb-4"
-                    :class="{ 'is-invalid': errors['密碼'] }"
-                    placeholder="請輸入 密碼" rules="min:8|required"
-                    v-model="password" @keyup.enter="signIn"></Field>
-                    <ErrorMessage name="密碼" class="invalid-feedback"></ErrorMessage>
-                </Form>
-                <button type="button" class="btn btn-info w-100" @click="signIn">登入</button>
+            <h5 class="card-title text-center mb-3">登入</h5>
+                <div class="form-group mb-3">
+                <label for="email">帳號</label>
+                <input type="email" id="email" class="form-control" placeholder="請輸入電子郵件" v-model="account" @keyup.enter='signIn'>
+                </div>
+                <div class="form-group">
+                  <label for="password">密碼</label>
+                  <input v-if="isShow" type="password"  id="password" class="form-control" placeholder="請輸入密碼" v-model="password" @keyup.enter='signIn'>
+                  <input v-else type="text"  id="password" class="form-control" placeholder="請輸入密碼" v-model="password" @keyup.enter='signIn'>
+                  <div class="mt-2">
+                    <input type="checkbox" id="showPsw" @click="change">
+                    <label for="showPsw" class="text-dark">
+                    <small>{{isShow?'顯示密碼':'隱藏密碼'}}</small>
+                    </label>
+                  </div>
+                <!-- <br> -->
+                <a href="#"><small>忘記密碼?</small></a>
+                </div>
+                <button type="button" class="btn btn-primary w-100 mt-3" @click="signIn">登入</button>
         </div>
     </div>
 </div>
@@ -34,10 +34,14 @@ export default {
       account: '',
       password: '',
       token: '',
-      expired: ''
+      expired: '',
+      isShow: true
     }
   },
   methods: {
+    change () {
+      this.isShow = !this.isShow
+    },
     signIn () {
     //   /admin/signin
       const user = {
@@ -82,6 +86,6 @@ export default {
         right:0 ;
     }
     .card{
-        background: rgb(230, 230, 230);
+        background:#fff; //rgb(230, 230, 230);
     }
 </style>

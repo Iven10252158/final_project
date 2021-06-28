@@ -5,13 +5,9 @@
     </div></div>
 </Loading>
 <div class="container mb-2 mt-7">
-    <!-- <h1>前台_單一產品細節</h1> -->
   <div class="row mt-3 mt-sm-3">
     <div class="col-12 col-sm-6">
       <div class="bg-cover mb-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
-        <!-- <div class="main_item mt-3 mb-0">
-          <img :src="imgUrl" class="img-fluid" alt="">
-        </div> -->
         <div class="pb-3" >
           <a href="#" v-for="(item,index) in imagesUrl" :key="index"  @click.prevent="click(item,index)">
             <img class="picture pe-2" :src="item" alt="">
@@ -19,7 +15,7 @@
         </div>
         </div>
     <div class="col-12 col-sm-6" >
-      <h3 class="mb-3">{{product.title}}</h3>
+      <h3 class="mb-3">{{product.title}}/{{product.content2}}</h3>
       <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">【選擇方案】</h5>
@@ -56,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {

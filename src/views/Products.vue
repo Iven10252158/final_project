@@ -1,4 +1,5 @@
 <template>
+<NavBar></NavBar>
 <!-- header -->
 <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1555952012-6a700791736f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80');height:400px">
             <div class="product-text text-white">
@@ -53,7 +54,7 @@
 
 <script>
 import pagination from '@/components/Pagination.vue'
-
+import NavBar from '@/components/Navbar.vue'
 export default {
   data () {
     return {
@@ -98,7 +99,8 @@ export default {
     this.getProducts()
   },
   components: {
-    pagination
+    pagination,
+    NavBar
   }
 }
 </script>

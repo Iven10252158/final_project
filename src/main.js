@@ -14,6 +14,7 @@ import AllRrules from '@vee-validate/rules'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 // 引入語系功能
 import { localize, setLocale } from '@vee-validate/i18n'
+import 'bootstrap'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'

@@ -60,7 +60,9 @@ export default {
     return {
       allProducts: [],
       pagination: {},
-      tempProduct: {}, // 資料的暫存區
+      tempProduct: {
+        content2: ''
+      }, // 資料的暫存區
       isNew: false
     }
   },

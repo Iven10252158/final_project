@@ -1,46 +1,87 @@
 <template>
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mt-1">
-          <h6 class="mb-3">購物車</h6>
-          <!-- <button type="button" class="backToShop btn btn-outline-primary rounded-pill mb-2 btn-sm p-2"> -->
-              <router-link to="/products" class="backToShopLink btn btn-outline-primary rounded-pill mb-2 px-3">
-                <i class="fas fa-caret-left"></i>
-                繼續選購
-              </router-link>
-          <!-- </button> -->
-        </div>
-    <ul class='row list-unstyled border-top border-2 pt-3 d-flex align-items-center' v-for='item in cart.carts' :key='item.id'>
-        <li class="col-2 bg-cover" :style="{backgroundImage:'url(' +item.product.imageUrl+ ')',height:'120px' }"></li>
-        <li class="col-3 ps-3">{{item.product.title}}</li>
-        <li class="col-2">
-            <div class="input-group ms-7">
-                <button type="button" :disabled="item.qty===1" @click="reduce(item)"
-                class="btn btn-outline-primary btn-sm input-group-text">
-                    <i class="fas fa-minus"></i>
+  <NavBar></NavBar>
+  <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1592805145006-353114433db5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80');height:400px">
+      <div class="cart-text text-white">
+          <h3 class="pt-2">購物車</h3>
+      </div>
+  </div>
+  <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h6 class="mb-3 mt-5">購物明細</h6>
+            <router-link to="/products" class="backToShopLink btn btn-outline-primary rounded-pill mb-2 px-3 mt-4">
+              <i class="fas fa-caret-left"></i>
+              繼續選購
+            </router-link>
+      </div>
+        <!-- 購物車 -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th class="d-none d-sm-block d-sm-table-cell" width="300">商品名稱</th>
+              <th class="text-center" width="300">
+                <span class="d-inline d-sm-none">名稱/</span>
+                數量</th>
+              <th class="text-center text-sm-end" width="150">金額</th>
+              <th class="text-center text-sm-end">刪除</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pt-1" v-for='item in cart.carts' :key='item.id'>
+              <td class="align-middle d-none d-sm-table-cell">{{item.product.title}}</td>
+              <td class="ps-sm-5 align-middle d-table-cell">
+                  <p class="d-sm-none">{{item.product.title}}</p>
+                <div class=" input-group mx-auto">
+                    <button type="button" :disabled="item.qty===1" @click="reduce(item)"
+                        class="btn btn-primary btn-sm rounded-0">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="qty_input border border-2 pt-1 text-center px-3">{{item.qty}}</span>
+                    <button type="button" @click="addNum(item)"
+                        class="btn btn-outline-primary btn-sm rounded-0">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+              </td>
+              <td class="align-middle text-center text-sm-end">NT {{$filters.currency(item.total)}}</td>
+              <td class="align-middle text-center text-sm-end">
+                <button type="button" class="btn btn-outline-danger" @click="deleteCartProduct(item)">
+                  <i class="far fa-trash-alt"></i>
                 </button>
-                <p class="form-control text-center m-0 border-end-0 border-start-0">{{item.qty}}</p>
-                <button type="button"  @click="addNum(item)"
-                class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i>
-                </button>
-            </div>
-        </li>
-        <li class="col-3 text-end">{{$filters.currency(item.total)}}</li>
-        <li class="col-2 text-end">
-        <button type="button" class="btn btn-outline-danger input-group-text"
-        @click="deleteCartProduct(item)">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-        </li>
-    </ul>
-    </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 套用優惠券 -->
+      <div class="input-group mb-3">
+        <input type="text" class="form-control rounded-0" v-model="coupon_code" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon">套用優惠券</span>
+      </div>
+      <div :class="{ 'text-decoration-line-through':isTrue, 'text-secondary':isTrue, 'p':isTrue}">
+        <p class="h5 text-end pe-5">總計:
+          <span>NT {{$filters.currency(cart.total)}}元</span>
+        </p>
+      </div>
+      <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
+        <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
+      </p>
+  </div>
+
 </template>
 
 <script>
+import NavBar from '@/components/Navbar.vue'
 export default {
+  components: {
+    NavBar
+  },
   data () {
     return {
-      cart: []
+      cart: [],
+      coupon_code: '',
+      isTrue: false,
+      finalPrice: ''
     }
   },
   methods: {
@@ -50,9 +91,7 @@ export default {
       this.$http.get(api)
         .then(res => {
           this.cart = res.data.data
-          // const { carts } = res.data.data
-          //   this.cart = carts
-          console.log(res)
+          console.log('購物車', res)
           console.log(this.cart)
         })
     },
@@ -105,6 +144,21 @@ export default {
         this.updateCart(item)
       }
       console.log(item)
+    },
+    // 套用優惠券
+    inputCoupon () {
+      const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/coupon`
+      const coupon = {
+        code: this.coupon_code
+      }
+      this.$http.post(api, { data: coupon })
+        .then(res => {
+          this.getCartList()
+          this.finalPrice = res.data.data.final_total
+          this.isTrue = !this.isTrue
+          console.log(res)
+          console.log(res.data.data.final_total)
+        })
     }
   },
   mounted () {
@@ -121,14 +175,23 @@ export default {
     background-position: center center;
     background-size: cover;
     }
-    // .backToShop{
-
-    // }
     .backToShopLink{
         margin-top: 80px;
         color:rgb(90, 147, 88);
        &:hover{
           color:#fff
         }
+    }
+    .cart-text{
+      padding:20px 60px;
+      background-color:rgba(0, 0, 0,0.5);
+    }
+    .qty_input{
+      width: 50%;
+    }
+    .input-group{
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
     }
 </style>
