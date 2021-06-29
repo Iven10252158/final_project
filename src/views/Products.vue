@@ -1,9 +1,9 @@
 <template>
 <NavBar></NavBar>
 <!-- header -->
-<div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1555952012-6a700791736f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80');height:400px">
+<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1605465746300-0318f1e96278?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:400px">
             <div class="product-text text-white">
-                <h1>產品列表</h1>
+                <h1 class="pt-1">產品列表</h1>
             </div>
     </div>
 <Loading :active= "isLoading">
@@ -12,9 +12,17 @@
     </div></div>
 </Loading>
 <div class="container">
+  <apply-modal ref="applyModal" :apply="applyData"></apply-modal>
     <div class="row">
-        <div class="col-4 my-2"  v-for="item in products" :key="item.id">
-            <div class="card h-100  pb-3">
+      <div class="col-3 my-4">
+          <ul class="list-group pe-auto">
+            <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)">全部商品</li>
+            <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
+              @click="changeProduct(item)" :class="{'bg-primary':item[index]===index}">{{item}}/{{index}}</li>
+          </ul>
+      </div>
+        <div class="col-3 my-4"  v-for="item in typeProduct" :key="item.id">
+            <div class="card h-100 pb-3">
                 <div class="bg-cover bg-white product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
                   <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
                     查看更多
@@ -27,17 +35,10 @@
                 </div>
                 <div class="card-footer bg-white border-0">
                     <div class="d-flex justify-content-between">
-                      <div class="input-group text-center">
-                        <button type="button" class="input-group-text">
-                          <i class="fas fa-minus"></i>
-                        </button>
-                         <p class="form-control m-0"></p>
-                         <button type="button" class="input-group-text">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </div>
-                        <button type="button" class="btn btn-outline-danger fs-4 border-0" @click="addToCart(item.id)">
+                      <!-- @click="addToCart(item.id)" -->
+                        <button type="button" class="btn btn-outline-primary w-100" @click="openApplyModal(item)">
                           <i class="fas fa-cart-plus"></i>
+                          我要報名
                         </button>
                     </div>
                 </div>
@@ -55,6 +56,7 @@
 <script>
 import pagination from '@/components/Pagination.vue'
 import NavBar from '@/components/Navbar.vue'
+import applyModal from '@/components/ApplyModal.vue'
 export default {
   data () {
     return {
@@ -62,10 +64,23 @@ export default {
       products: [],
       pagination: {},
       isLoading: false,
-      cart: {}
+      cart: {},
+      applyData: {},
+      typeProduct: [],
+      productName: []
     }
   },
   methods: {
+    changeProduct (item, index) {
+      this.typeProduct = this.products.filter((element, index) => {
+        if (item === element.category) {
+          console.log(item, index)
+          return element
+        } else if (item === undefined) {
+          return this.products
+        }
+      })
+    },
     getProducts (page = 1) {
       this.isLoading = true
       // /api/:api_path/products
@@ -75,9 +90,17 @@ export default {
             this.isLoading = false
             const { products, pagination } = res.data
             this.products = products
+            // 為了讓一進到產品列表就有產品資料
+            this.typeProduct = this.products
             this.pagination = pagination
-            console.log(res)
-            console.log(products)
+            this.products.filter(item => {
+              if (this.productName.indexOf(item.category) === -1) {
+                this.productName.push(item.category)
+                console.log(this.productName)
+              }
+            })
+            // console.log(res)
+            // console.log(products)
           }
         })
     },
@@ -93,14 +116,21 @@ export default {
             console.log(res)
           }
         })
+    },
+    openApplyModal (item) {
+      this.$refs.applyModal.showModal()
+      this.applyData = item
+      // console.log(this.applyData)
     }
   },
   mounted () {
+    // this.$refs.applyModal.showModal()
     this.getProducts()
   },
   components: {
     pagination,
-    NavBar
+    NavBar,
+    applyModal
   }
 }
 </script>
@@ -108,7 +138,7 @@ export default {
 <style lang="scss">
   .product-text{
     // margin-top: 40px;
-    padding: 60px 120px;
+    padding: 20px 60px;
     background-color:rgba(0, 0, 0,0.3);
   }
   .bg-cover{

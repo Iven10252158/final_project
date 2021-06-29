@@ -13,8 +13,32 @@
       <div class="modal-body">
         <div class="row">
             <div class="col-4">
-                <p>圖片上傳</p>
-                <div class="border border-left border-3"></div>
+              <div class="form-group">
+                <label for="fileInput" class="form-check-label">主要圖片</label>
+                <input type="file" class="form-control" @change="uploadFile" id="fileInput">
+                <input type="text" class="form-control mt-2" v-model="tempProduct.imageUrl">
+                <img :src="tempProduct.imageUrl" class="img-fluid" alt="">
+              </div>
+              <div>多圖新增</div>
+              <div v-if="Array.isArray(tempProduct.imagesUrl)">
+                <div v-for="(image,index) in tempProduct.imagesUrl" :key="index">
+                  <div class="form-group my-3">
+                    <label for="">圖片網址</label>
+                    <input type="text" class="form-control" placeholder="請輸入圖片連結" v-model="tempProduct.imagesUrl[index]">
+                  </div>
+                  <img :src="image" class="img-fluid">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-outline-primary w-100" @click="tempProduct.imagesUrl.push('')">新增圖片</button>
+                    <button type="button" class="btn btn-outline-danger my-1 w-100" @click="tempProduct.imagesUrl.pop()" :class="{'disabled':tempProduct.imagesUrl.length==0}">
+                          刪除圖片
+                    </button>
+                </div>
+              </div>
+
+              <div v-else>
+                  <button type="button" class="btn btn-primary w-100 my-2" @click="createdImages">新增陣列圖片</button>
+              </div>
             </div>
             <div class="col-8">
                 <div class="row form-group">
@@ -95,6 +119,25 @@ export default {
     },
     checkSave () {
       this.$emit('check-save')
+    },
+    uploadFile () {
+      // console.dir(fileInput.files[0]);
+      // eslint-disable-next-line no-undef
+      const file = fileInput.files[0]
+      // 以formData形式上傳 這個new FormData();會把要上傳的檔案，轉成以表單的形式發送
+      const formData = new FormData()
+      formData.append('file-to-upload', file)
+      this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/upload`, formData)
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            this.tempProduct.imageUrl = res.data.imageUrl
+            console.log(this.tempProduct.imageUrl)
+          }
+        })
+    },
+    createdImages () {
+      this.tempProduct.imagesUrl = ['']
     }
   }
 }

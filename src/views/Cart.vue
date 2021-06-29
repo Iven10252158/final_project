@@ -18,20 +18,26 @@
         <table class="table">
           <thead class="bg-primary text-white">
             <tr>
-              <th class="d-none d-sm-block d-sm-table-cell" width="300">商品名稱</th>
+              <th class="d-none d-sm-block d-sm-table-cell ps-3" width="300">商品名稱</th>
               <th class="text-center" width="300">
-                <span class="d-inline d-sm-none">名稱/</span>
+                <span class="d-inline d-sm-none ps-3">名稱/</span>
                 數量</th>
-              <th class="text-center text-sm-end" width="150">金額</th>
-              <th class="text-center text-sm-end">刪除</th>
+              <th class="text-center" max-width="150">金額</th>
+              <th class="text-center text-sm-end pe-4">刪除</th>
             </tr>
           </thead>
           <tbody>
             <tr class="pt-1" v-for='item in cart.carts' :key='item.id'>
-              <td class="align-middle d-none d-sm-table-cell">{{item.product.title}}</td>
+              <td class="d-none d-sm-table-cell ps-3">
+                <p class="mb-0 pt-2">{{item.product.title}}</p>
+                <p class="d-none d-sm-table-cell" v-if="finalPrice === cart.final_total"
+                :class="{'text-success':isTrue}">已套用此優惠</p>
+              </td>
               <td class="ps-sm-5 align-middle d-table-cell">
                   <p class="d-sm-none">{{item.product.title}}</p>
-                <div class=" input-group mx-auto">
+                  <p class="d-sm-none" v-if="finalPrice === cart.final_total"
+                    :class="{'text-success':isTrue}">已套用此優惠</p>
+                <div class=" input-group mx-auto ps-sm-4">
                     <button type="button" :disabled="item.qty===1" @click="reduce(item)"
                         class="btn btn-primary btn-sm rounded-0">
                         <i class="fas fa-minus"></i>
@@ -43,8 +49,15 @@
                     </button>
                 </div>
               </td>
-              <td class="align-middle text-center text-sm-end">NT {{$filters.currency(item.total)}}</td>
-              <td class="align-middle text-center text-sm-end">
+              <td class="text-center">
+                <p class="pt-2 mb-0" :class="{ 'text-decoration-line-through':isTrue , 'text-secondary':isTrue}">
+                  NT {{$filters.currency(item.total)}}
+                </p>
+                <span v-if="finalPrice === cart.final_total"
+                :class="{'text-success':isTrue}"
+                >NT {{$filters.currency(item.final_total)}}</span>
+              </td>
+              <td class="align-middle text-center text-sm-end pe-3">
                 <button type="button" class="btn btn-outline-danger" @click="deleteCartProduct(item)">
                   <i class="far fa-trash-alt"></i>
                 </button>
@@ -153,11 +166,20 @@ export default {
       }
       this.$http.post(api, { data: coupon })
         .then(res => {
-          this.getCartList()
-          this.finalPrice = res.data.data.final_total
-          this.isTrue = !this.isTrue
-          console.log(res)
-          console.log(res.data.data.final_total)
+          if (res.data.success) {
+            this.getCartList()
+            this.finalPrice = res.data.data.final_total
+            this.isTrue = !this.isTrue
+            console.log(res)
+            console.log(res.data.data.final_total)
+          } else {
+            console.log('請確認輸入的代碼')
+          }
+        }).catch(err => {
+          if (err.data === undefined) {
+            // console.log(err, '找不到優惠代碼')
+            console.log('找不到優惠代碼')
+          }
         })
     }
   },
@@ -188,10 +210,5 @@ export default {
     }
     .qty_input{
       width: 50%;
-    }
-    .input-group{
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
     }
 </style>
