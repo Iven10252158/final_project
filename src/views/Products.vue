@@ -1,5 +1,10 @@
 <template>
 <NavBar></NavBar>
+<Loading :active= "isLoading">
+    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+    <div></div><div><div></div></div>
+    </div></div>
+</Loading>
 <!-- header -->
 <div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1605465746300-0318f1e96278?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:400px">
             <div class="product-text text-white">
@@ -7,9 +12,52 @@
             </div>
     </div>
 
- <apply-modal ref="applyModal" :apply="applyData"></apply-modal>
+<apply-modal ref="applyModal" :apply="applyData"></apply-modal>
 <div class="container">
-    <productsCard></productsCard>
+     <div class="row">
+        <div class="col-12 col-sm-4">
+            <div class="col-12 mt-4">
+                <input type="text" class="form-control" placeholder="請輸入關鍵字" v-model="search"
+                @input="searchProduct(search)">
+            </div>
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <ul class="list-group pe-auto">
+                    <li class="list-group-item list-group-item-action " @click="changeProduct(item,index)"
+                    :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">全部商品</li>
+                    <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
+                        @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{item}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8">
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
+                    <div class="card h-100 pb-3">
+                        <div class="bg-cover bg-white product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
+                        <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
+                            查看更多
+                        </router-link>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.title}}</h5>
+                        <p class="card-text">{{item.id}}</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <div class="d-flex justify-content-between">
+                        <!-- @click="addToCart(item.id)" -->
+                            <button type="button" class="btn btn-outline-primary w-100" @click="openApplyModal(item)">
+                            <i class="fas fa-cart-plus"></i>
+                            我要報名
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+    </div>
   <div class="d-flex justify-content-center">
       <pagination :pages="pagination" @change-page="getProducts"></pagination>
   </div>
@@ -22,54 +70,75 @@
 import pagination from '@/components/Pagination.vue'
 import NavBar from '@/components/Navbar.vue'
 import applyModal from '@/components/ApplyModal.vue'
-import productsCard from '@/components/ProductsCard.vue'
 export default {
   data () {
     return {
       num: 1,
       products: [],
       pagination: {},
-
       cart: {},
       applyData: {},
       typeProduct: [],
-      productName: []
+      productName: [],
+      productValue: '',
+      isLoading: false,
+      search: '',
+      color: {
+        'bg-primary': true,
+        ' text-white': true
+      }
     }
   },
   methods: {
-    // changeProduct (item, index) {
-    //   this.typeProduct = this.products.filter((element, index) => {
-    //     if (item === element.category) {
-    //       console.log(item, index)
-    //       return element
-    //     } else if (item === undefined) {
-    //       return this.products
-    //     }
-    //   })
-    // },
-    // getProducts (page = 1) {
-    //   this.isLoading = true
-    //   // /api/:api_path/products
-    //   this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products?page=${page}`)
-    //     .then(res => {
-    //       if (res.data.success) {
-    //         this.isLoading = false
-    //         const { products, pagination } = res.data
-    //         this.products = products
-    //         // 為了讓一進到產品列表就有產品資料
-    //         this.typeProduct = this.products
-    //         this.pagination = pagination
-    //         this.products.filter(item => {
-    //           if (this.productName.indexOf(item.category) === -1) {
-    //             this.productName.push(item.category)
-    //             console.log(this.productName)
-    //           }
-    //         })
-    //         // console.log(res)
-    //         // console.log(products)
-    //       }
-    //     })
-    // },
+    searchProduct (value) {
+      console.log(value)
+      this.typeProduct = this.products.filter(item => {
+        if (item.title.match(value)) {
+          return item
+        } else if (value === '') {
+          return this.products
+        }
+      })
+      // }
+    },
+    changeProduct (item, index) {
+      console.log(item, index)
+      this.typeProduct = this.products.filter((element, index) => {
+        if (item === element.category) {
+          // this.color = !this.color
+          this.productValue = item
+          console.log(this.productValue)
+          return element
+        } else if (item === undefined) {
+          // this.color = true
+          this.productValue = 'total'
+          return this.products
+        }
+      })
+    },
+    getProducts (page = 1) {
+      this.isLoading = true
+      // /api/:api_path/products
+      this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products?page=${page}`)
+        .then(res => {
+          if (res.data.success) {
+            this.isLoading = false
+            const { products, pagination } = res.data
+            this.products = products
+            // 為了讓一進到產品列表就有產品資料
+            this.typeProduct = this.products
+            this.pagination = pagination
+            this.products.filter(item => {
+              if (this.productName.indexOf(item.category) === -1) {
+                this.productName.push(item.category)
+                console.log(this.productName)
+              }
+            })
+            // console.log(res)
+            // console.log(products)
+          }
+        })
+    },
     addToCart (id, qty = 1) {
       const cart = {
         product_id: id,
@@ -91,13 +160,13 @@ export default {
   },
   mounted () {
     // this.$refs.applyModal.showModal()
-    // this.getProducts()
+    this.getProducts()
+    this.productValue = 'total'
   },
   components: {
     pagination,
     NavBar,
-    applyModal,
-    productsCard
+    applyModal
   }
 }
 </script>

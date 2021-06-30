@@ -1,6 +1,6 @@
 <template>
     <!-- Modal -->
-<div class="modal fade" ref="delModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" ref="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
@@ -20,27 +20,28 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+// import Modal from 'bootstrap/js/dist/modal'
+import mixinModal from '@/mixins/modalMixin.js'
 export default {
+  mixins: [mixinModal],
   props: ['delProduct'],
   data () {
     return {
-      delModal: ''
     }
   },
   methods: {
-    showModal () {
-      this.delModal.show()
-    },
-    hideModal () {
-      this.delModal.hide()
-    },
+    // showModal () {
+    //   // this.delModal.show()
+    // },
+    // hideModal () {
+    //   // this.delModal.hide()
+    // },
     checkDelete () {
       this.$emit('checkDelete')
     }
   },
   mounted () {
-    this.delModal = new Modal(this.$refs.delModal)
+    // this.delModal = new Modal(this.$refs.delModal)
   }
 }
 </script>

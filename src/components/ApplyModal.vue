@@ -1,6 +1,6 @@
 <template>
 <!-- Modal -->
-<div class="modal fade" ref="applyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" ref="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,8 +21,10 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import modalMixin from '@/mixins/modalMixin'
+// import Modal from 'bootstrap/js/dist/modal'
 export default {
+  mixins: [modalMixin],
   props: ['apply'],
   data () {
     return {
@@ -30,12 +32,12 @@ export default {
     }
   },
   methods: {
-    showModal () {
-      this.bsApplyModal.show()
-    }
+    // showModal () {
+    //   this.bsApplyModal.show()
+    // }
   },
   mounted () {
-    this.bsApplyModal = new Modal(this.$refs.applyModal)
+  // this.bsApplyModal = new Modal(this.$refs.applyModal)
   }
 }
 </script>

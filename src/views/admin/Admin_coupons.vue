@@ -1,4 +1,9 @@
 <template>
+  <Loading :active= "isLoading">
+    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+    <div></div><div><div></div></div>
+    </div></div>
+  </Loading>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-end mt-4 me-2">
             <button type="button" class="btn btn-primary text-white" @click="openCouponModal('new')">建立新優惠券</button>
@@ -46,7 +51,8 @@ export default {
     return {
       isNew: false,
       allCoupons: [],
-      tempCoupon: {}
+      tempCoupon: {},
+      isLoading: true
     }
   },
   methods: {
@@ -71,11 +77,13 @@ export default {
     },
     // 取得優惠券列表
     getCouponsList () {
-    // /api/:api_path/admin/coupons?page=:page
+      this.isLoading = true
+      // /api/:api_path/admin/coupons?page=:page
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupons`
       this.$http.get(api)
         .then(res => {
           if (res.data.success) {
+            this.isLoading = false
             const { coupons } = res.data
             this.allCoupons = coupons
             console.log(res)

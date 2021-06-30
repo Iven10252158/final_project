@@ -1,5 +1,10 @@
 <template>
   <NavBar></NavBar>
+  <Loading :active= "isLoading">
+    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+    <div></div><div><div></div></div>
+    </div></div>
+  </Loading>
   <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1592805145006-353114433db5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80');height:400px">
       <div class="cart-text text-white">
           <h3 class="pt-2">購物車</h3>
@@ -94,15 +99,18 @@ export default {
       cart: [],
       coupon_code: '',
       isTrue: false,
-      finalPrice: ''
+      finalPrice: '',
+      isLoading: true
     }
   },
   methods: {
     // 取得購物車列表
     getCartList () {
+      this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(api)
         .then(res => {
+          this.isLoading = false
           this.cart = res.data.data
           console.log('購物車', res)
           console.log(this.cart)

@@ -1,6 +1,6 @@
 <template>
  <!-- Modal -->
-<div class="modal fade" ref='innerProductModal' tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" ref='modal' tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -87,9 +87,10 @@
 </template>
 
 <script>
-// 引入BS裡的Modal的方法
-import Modal from 'bootstrap/js/dist/modal'
+import modalMixin from '@/mixins/modalMixin'
+
 export default {
+  mixins: [modalMixin],
   props: ['product'],
   data () {
     return {
@@ -99,7 +100,7 @@ export default {
     }
   },
   mounted () {
-    this.bsModal = new Modal(this.$refs.innerProductModal)
+    // this.bsModal = new Modal(this.$refs.innerProductModal)
   },
   // 在內層的productModal會接收來自外面的tempProduct傳進來的值，也就是props:['product']
   // 但是內層接收到的值是“不可以”修改外面傳進來的值，所以可以再寫一個資料集tempProduct（內層的）來放外層傳進來的值
@@ -111,12 +112,12 @@ export default {
     }
   },
   methods: {
-    showModal () {
-      this.bsModal.show()
-    },
-    hideModal () {
-      this.bsModal.hide()
-    },
+    // showModal () {
+    //   this.bsModal.show()
+    // },
+    // hideModal () {
+    //   this.bsModal.hide()
+    // },
     checkSave () {
       this.$emit('check-save')
     },

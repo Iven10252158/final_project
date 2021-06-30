@@ -1,4 +1,9 @@
 <template>
+  <Loading :active= "isLoading">
+    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+    <div></div><div><div></div></div>
+    </div></div>
+  </Loading>
     <div class="container">
        <div class="row">
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -63,16 +68,19 @@ export default {
       tempProduct: {
         content2: ''
       }, // 資料的暫存區
-      isNew: false
+      isNew: false,
+      isLoading: true
     }
   },
   methods: {
     // 取得後台產品列表
     getProducts (page = 1) {
+      this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.$http.get(api)
         .then(res => {
           if (res.data.success) {
+            this.isLoading = false
             const { products, pagination } = res.data
             this.allProducts = products
             this.pagination = pagination

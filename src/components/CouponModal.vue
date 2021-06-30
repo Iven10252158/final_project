@@ -1,6 +1,6 @@
 <template>
 <!-- Modal -->
-<div class="modal fade" ref="couponModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" ref="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,8 +35,10 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+// import Modal from 'bootstrap/js/dist/modal'
+import mixinModal from '@/mixins/modalMixin.js'
 export default {
+  mixins: [mixinModal],
   props: ['content'],
   data () {
     return {
@@ -60,18 +62,18 @@ export default {
     }
   },
   methods: {
-    showModal () {
-      this.couponModal.show()
-    },
-    hideModal () {
-      this.couponModal.hide()
-    },
+    // showModal () {
+    //   this.couponModal.show()
+    // },
+    // hideModal () {
+    //   this.couponModal.hide()
+    // },
     saveCoupon () {
       this.$emit('saveCoupon', this.tempCoupon)
     }
   },
   mounted () {
-    this.couponModal = new Modal(this.$refs.couponModal)
+    // this.couponModal = new Modal(this.$refs.couponModal)
   }
 }
 </script>

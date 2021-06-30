@@ -1,4 +1,9 @@
 <template>
+    <Loading :active= "isLoading">
+        <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+        <div></div><div><div></div></div>
+        </div></div>
+    </Loading>
     <div class="container">
         <section class="row g-0">
             <div class="col-12 col-lg-6 d-flex align-items-center">
@@ -36,6 +41,22 @@
         <h3>決定要享受一場山林的沐浴了嗎？</h3>
     </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      isLoading: true
+    }
+  },
+  mounted () {
+    this.isLoading = true
+    setTimeout(() => {
+      this.isLoading = false
+    }, 1000)
+  }
+}
+</script>
 <style lang="scss">
     img{
         max-width: 100%;
