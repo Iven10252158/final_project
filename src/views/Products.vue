@@ -6,13 +6,13 @@
     </div></div>
 </Loading>
 <!-- header -->
-<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1605465746300-0318f1e96278?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:400px">
+<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1593860572411-8e5f9426a26c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:400px">
             <div class="product-text text-white">
                 <h1 class="pt-1">產品列表</h1>
             </div>
     </div>
 
-<apply-modal ref="applyModal" :apply="applyData"></apply-modal>
+<apply-modal ref="applyModal" :apply="applyData" @into-cart="addToCart"></apply-modal>
 <div class="container">
      <div class="row">
         <div class="col-12 col-sm-4">
@@ -42,12 +42,15 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{item.title}}</h5>
-                        <p class="card-text">{{item.id}}</p>
+                        <div class="card-text d-flex justify-content-between">
+                          <del class="text-muted">{{$filters.currency(item.origin_price)}}</del>
+                          <h6>{{$filters.currency(item.price)}}</h6>
+                        </div>
                     </div>
                     <div class="card-footer bg-white border-0">
                         <div class="d-flex justify-content-between">
                         <!-- @click="addToCart(item.id)" -->
-                            <button type="button" class="btn btn-outline-primary w-100" @click="openApplyModal(item)">
+                            <button type="button" class="btn btn-outline-primary w-100" @click="openApplyModal (item)">
                             <i class="fas fa-cart-plus"></i>
                             我要報名
                             </button>
@@ -82,22 +85,23 @@ export default {
       productName: [],
       productValue: '',
       isLoading: false,
-      search: '',
-      color: {
-        'bg-primary': true,
-        ' text-white': true
-      }
+      search: ''
     }
   },
   methods: {
     searchProduct (value) {
+      this.productValue = 'total'
       console.log(value)
       this.typeProduct = this.products.filter(item => {
         if (item.title.match(value)) {
+          console.log(item)
           return item
-        } else if (value === '') {
-          return this.products
         }
+        this.productValue = ''
+        // else if可以不用寫
+        // } else if (value === '') {
+        //   return this.products
+        // }
       })
       // }
     },
@@ -139,12 +143,13 @@ export default {
           }
         })
     },
-    addToCart (id, qty = 1) {
+    addToCart (item, qty = 1) {
+      // console.log('有了嗎？')
       const cart = {
-        product_id: id,
+        product_id: item.id,
         qty
       }
-      // console.log(cart)
+      console.log(cart)
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
@@ -155,7 +160,7 @@ export default {
     openApplyModal (item) {
       this.$refs.applyModal.showModal()
       this.applyData = item
-      // console.log(this.applyData)
+      console.log(this.applyData)
     }
   },
   mounted () {

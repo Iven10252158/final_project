@@ -12,8 +12,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary w-100 text-white"
+        @click="addToCart(apply, qty)">加入購物車</button>
       </div>
     </div>
   </div>
@@ -32,6 +32,9 @@ export default {
     }
   },
   methods: {
+    addToCart (apply, qty) {
+      this.$emit('intoCart', apply, qty)
+    }
     // showModal () {
     //   this.bsApplyModal.show()
     // }

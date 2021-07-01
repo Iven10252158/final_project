@@ -29,6 +29,9 @@
             <router-link to="/cart" class="h4 fw-bold nav-link">
                 <i class=" fas fa-cart-plus"></i>
             </router-link>
+            <div class="position-relative"  v-if="cart.carts">
+              <span class="cartQty rounded-pill position-absolute badge bg-warning text-white">{{cart.carts.length}}</span>
+            </div>
         </div>
         </div>
         </div>
@@ -39,12 +42,27 @@
 export default {
   data () {
     return {
+      cart: {},
       classList: {
         navBarTop: ''
       }
     }
   },
+  methods: {
+    getCartList () {
+      this.isLoading = true
+      const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
+      this.$http.get(api)
+        .then(res => {
+          this.isLoading = false
+          this.cart = res.data.data
+          console.log('購物車', res)
+          console.log(this.cart)
+        })
+    }
+  },
   mounted () {
+    this.getCartList()
     window.addEventListener('scroll', () => {
     //   console.log(window.scrollY)
       const windowY = window.scrollY
@@ -61,3 +79,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .cartQty{
+    bottom:35px;
+    right:-3px;
+  }
+</style>

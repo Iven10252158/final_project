@@ -4,7 +4,13 @@
     <div></div><div><div></div></div>
     </div></div>
 </Loading>
-<div class="container mb-2 mt-7">
+<NavBar></NavBar>
+<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1560968255-05e3051ac066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1639&q=80');height:400px">
+    <div class="product-text text-white">
+        <h1 class="pt-1">產品介紹</h1>
+    </div>
+</div>
+<div class="container mb-2">
   <div class="row mt-3 mt-sm-3">
     <div class="col-12 col-sm-6">
       <div class="bg-cover mb-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
@@ -23,19 +29,20 @@
             <h6 class="card-text">即刻報名，只要4人就能成團</h6>
             <p class="card-text text-danger">${{$filters.currency(product.price)}}/團</p>
           </div>
-          <select class="form-select mb-3" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="4">4人成團，搭配響導1名</option>
-            <option value="6">6人成團，搭配響導2名</option>
-            <option value="8">8人成團，搭配響導2名</option>
+          <select v-model="program" class="form-select mb-3" aria-label="Default select example">
+            <option disabled value="">請選擇</option>
+            <option value="4人成團，搭配響導1名">4人成團，搭配響導1名</option>
+            <option value="6人成團，搭配響導2名">6人成團，搭配響導2名</option>
+            <option value="8人成團，搭配響導2名">8人成團，搭配響導2名</option>
           </select>
+          <p v-if="program">選擇的方案：{{program || 請選擇}}</p>
           <h6 class="card-text mb-1 text-primary fw-bold">【費用包含】</h6>
           <small class="card-text">領隊費、登山險、其他行政等作業支出、入山證、山屋申請、餐費</small>
            <p class="card-text">超過10人請洽客服享額外優惠</p>
         </div>
         <div class="card-footer bg-white border-0 pb-4 d-flex justify-content-between">
           <p class="card-text text-danger">小計 ${{$filters.currency(product.price)}}元</p>
-          <button type="button" class="btn btn-danger w-50">按我報名</button>
+          <button type="button" class="btn btn-danger w-50" @click="addToCart(product)">按我報名</button>
         </div>
       </div>
       <button type="button" class="btn btn-warning w-100">聯絡我們</button>
@@ -52,10 +59,14 @@
 </template>
 
 <script>
-
+import NavBar from '@/components/Navbar.vue'
 export default {
+  components: {
+    NavBar
+  },
   data () {
     return {
+      program: '',
       imgUrl: '',
       imagesUrl: [],
       product: {},
@@ -84,6 +95,20 @@ export default {
             console.log(res)
             this.imagesUrl = res.data.product.imagesUrl
             console.log(this.imagesUrl)
+          }
+        })
+    },
+    addToCart (item, qty = 1) {
+      // console.log('有了嗎？')
+      const cart = {
+        product_id: item.id,
+        qty
+      }
+      console.log(cart)
+      this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
+        .then(res => {
+          if (res.data.success) {
+            console.log(res)
           }
         })
     }
