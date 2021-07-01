@@ -35,6 +35,7 @@
             <tr class="pt-1" v-for='item in cart.carts' :key='item.id'>
               <td class="d-none d-sm-table-cell ps-3">
                 <p class="mb-0 pt-2">{{item.product.title}}</p>
+                <p class="mb-0 pt-2">{{item.product.program}}</p>
                 <p class="d-none d-sm-table-cell" v-if="finalPrice === cart.final_total"
                 :class="{'text-success':isTrue}">已套用此優惠</p>
               </td>

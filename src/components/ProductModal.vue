@@ -62,7 +62,15 @@
                             <label for="price">售價</label>
                             <input type="number" class='form-control' min='0' id='price' v-model.number="tempProduct.price">
                             </div>
-                            <hr class='mt-3'>
+                            <div class="col-12 mt-3">
+                            <select v-model="tempProduct.program" class="form-select mb-3" aria-label="Default select example">
+                              <option value="">請選擇</option>
+                              <option value="4人成團，搭配響導1名">4人成團，搭配響導1名</option>
+                              <option value="6人成團，搭配響導2名">6人成團，搭配響導2名</option>
+                              <option value="8人成團，搭配響導2名">8人成團，搭配響導2名</option>
+                            </select>
+                            </div>
+                            <hr class='mt-1'>
                         </div>
                         <label for="description">產品描述</label>
                         <textarea type="text" rows="6" class="form-control" id="description" v-model="tempProduct.description"></textarea>
