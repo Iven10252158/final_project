@@ -21,7 +21,7 @@
         </div>
         </div>
     <div class="col-12 col-sm-6" >
-      <h3 class="mb-3">{{product.title}}/{{product.content2}}</h3>
+      <h3 class="mb-3">{{product.title}}/{{product.program}}</h3>
       <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">【選擇方案】</h5>
@@ -29,13 +29,7 @@
             <h6 class="card-text">即刻報名，只要4人就能成團</h6>
             <p class="card-text text-danger">${{$filters.currency(product.price)}}/團</p>
           </div>
-          <select v-model="product.program" class="form-select mb-3" aria-label="Default select example">
-            <option disabled value="">請選擇</option>
-            <option value="4人成團，搭配響導1名">4人成團，搭配響導1名</option>
-            <option value="6人成團，搭配響導2名">6人成團，搭配響導2名</option>
-            <option value="8人成團，搭配響導2名">8人成團，搭配響導2名</option>
-          </select>
-          <p v-if="product.program">選擇的方案：{{product.program || 請選擇}}</p>
+
           <h6 class="card-text mb-1 text-primary fw-bold">【費用包含】</h6>
           <small class="card-text">領隊費、登山險、其他行政等作業支出、入山證、山屋申請、餐費</small>
            <p class="card-text">超過10人請洽客服享額外優惠</p>
