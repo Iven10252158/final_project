@@ -4,7 +4,7 @@
     <div></div><div><div></div></div>
     </div></div>
 </Loading>
-<NavBar></NavBar>
+<NavBar :carts="cart"></NavBar>
 <div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1560968255-05e3051ac066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1639&q=80');height:400px">
     <div class="product-text text-white">
         <h1 class="pt-1">產品介紹</h1>
@@ -21,16 +21,16 @@
         </div>
         </div>
     <div class="col-12 col-sm-6" >
-      <h3 class="mb-3">{{product.title}}/{{product.program}}</h3>
+      <h3 class="mb-3">{{product.title}}</h3>
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">【選擇方案】</h5>
+          <h5 class="card-title">【方案】</h5>
           <div class="d-flex justify-content-between">
-            <h6 class="card-text">即刻報名，只要4人就能成團</h6>
+            <h6 class="card-text bg-primary text-white p-1">{{product.program}}</h6>
             <p class="card-text text-danger">${{$filters.currency(product.price)}}/團</p>
           </div>
 
-          <h6 class="card-text mb-1 text-primary fw-bold">【費用包含】</h6>
+          <h6 class="card-text mb-1 fw-bold">【費用包含】</h6>
           <small class="card-text">領隊費、登山險、其他行政等作業支出、入山證、山屋申請、餐費</small>
            <p class="card-text">超過10人請洽客服享額外優惠</p>
         </div>
@@ -49,18 +49,21 @@
     <div class="col-6"></div>
   </div>
 </div>
-
+<Footer></Footer>
 </template>
 
 <script>
 import NavBar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import emitter from '@/methods/mitt'
 export default {
   components: {
-    NavBar
+    NavBar,
+    Footer
   },
   data () {
     return {
-      program: '',
+      cart: {},
       imgUrl: '',
       imagesUrl: [],
       product: {},
@@ -82,33 +85,48 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.imgUrl = res.data.product.imageUrl
-            console.log(this.imgUrl)
+            // console.log(this.imgUrl)
             this.isLoading = false
             const { product } = res.data
             this.product = product
-            console.log(res)
+            // console.log(res)
             this.imagesUrl = res.data.product.imagesUrl
-            console.log(this.imagesUrl)
+            // console.log(this.imagesUrl)
           }
         })
     },
+    getCartList () {
+      this.isLoading = true
+      const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
+      this.$http.get(api)
+        .then(res => {
+          this.isLoading = false
+          this.cart = res.data.data
+          // console.log('購物車', res)
+          // console.log(this.cart)
+        })
+    },
     addToCart (item, qty = 1) {
-      // console.log('有了嗎？')
+      this.isLoading = true
       const cart = {
         product_id: item.id,
         qty
       }
-      console.log(cart)
+      // console.log(cart)
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            this.isLoading = false
+            // console.log(res)
+            emitter.emit('update-qty')
+            this.getCartList()
           }
         })
     }
   },
   mounted () {
     this.getProduct()
+    this.getCartList()
     // console.log(this.$route)
   }
 }

@@ -21,7 +21,7 @@
                 <!-- <br> -->
                 <a href="#"><small>忘記密碼?</small></a>
                 </div>
-                <button type="button" class="btn btn-primary w-100 mt-3" @click="signIn">登入</button>
+                <button type="button" class="btn btn-primary w-100 mt-3" @click.prevent="signIn">登入</button>
         </div>
     </div>
 </div>
@@ -64,7 +64,8 @@ export default {
         })
     }
   },
-  mounted () {}
+  mounted () {
+  }
 }
 </script>
 

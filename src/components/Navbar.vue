@@ -29,9 +29,16 @@
             <router-link to="/cart" class="h4 fw-bold nav-link">
                 <i class=" fas fa-cart-plus"></i>
             </router-link>
-            <div class="position-relative"  v-if="cart.carts">
-              <span class="cartQty rounded-pill position-absolute badge bg-warning text-white">{{cart.carts.length}}</span>
-            </div>
+            <div class="position-relative" v-if="cart.carts">
+                <span class="cartQty rounded-pill position-absolute badge bg-warning text-white" >
+                  {{cart.carts.length}}
+                </span>
+              </div>
+              <!-- <div class="position-relative" v-for="item in carts" :key="item">
+                <span class="cartQty rounded-pill position-absolute badge bg-warning text-white" v-if="item">
+                  {{item.length}}
+                </span>
+              </div> -->
         </div>
         </div>
         </div>
@@ -39,7 +46,9 @@
 </template>
 
 <script>
+import emitter from '@/methods/mitt'
 export default {
+  props: ['carts'],
   data () {
     return {
       cart: {},
@@ -56,7 +65,7 @@ export default {
         .then(res => {
           this.isLoading = false
           this.cart = res.data.data
-          console.log('購物車', res)
+          // console.log('購物車', res)
           console.log(this.cart)
         })
     }
@@ -64,7 +73,7 @@ export default {
   mounted () {
     this.getCartList()
     window.addEventListener('scroll', () => {
-    //   console.log(window.scrollY)
+    // console.log(window.scrollY)
       const windowY = window.scrollY
       if (windowY > 1) {
         this.classList = {
@@ -75,6 +84,9 @@ export default {
           navBarTop: ''
         }
       }
+    })
+    emitter.on('update-qty', () => {
+      this.getCartList()
     })
   }
 }

@@ -67,7 +67,6 @@
                               <option value="">請選擇</option>
                               <option value="4人成團，搭配響導1名">4人成團，搭配響導1名</option>
                               <option value="6人成團，搭配響導2名">6人成團，搭配響導2名</option>
-                              <option value="8人成團，搭配響導2名">8人成團，搭配響導2名</option>
                             </select>
                             </div>
                             <hr class='mt-1'>

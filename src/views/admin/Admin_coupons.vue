@@ -104,11 +104,9 @@ export default {
       this.$http[httpMethods](api, { data: item })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
             this.getCouponsList()
             this.$refs.discountModal.hideModal()
-          } else {
-            console.log(res)
           }
         }).catch(err => {
           console.log(err)

@@ -1,6 +1,6 @@
 <template>
 <NavBar></NavBar>
-<Loading :active= "isLoading">
+<Loading :active="isLoading">
     <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
     <div></div><div><div></div></div>
     </div></div>
@@ -41,7 +41,7 @@
                         </router-link>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{item.title}}</h5>
+                        <h5 class="card-title text-hidden">{{item.title}}</h5>
                         <div class="card-text d-flex justify-content-between">
                           <del class="text-muted">{{$filters.currency(item.origin_price)}}</del>
                           <h6>{{$filters.currency(item.price)}}</h6>
@@ -65,13 +65,14 @@
       <pagination :pages="pagination" @change-page="getProducts"></pagination>
   </div>
 </div>
-
+<Footer></Footer>
 <router-view></router-view>
 </template>
 
 <script>
 import pagination from '@/components/Pagination.vue'
 import NavBar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 import applyModal from '@/components/ApplyModal.vue'
 export default {
   data () {
@@ -171,6 +172,7 @@ export default {
   components: {
     pagination,
     NavBar,
+    Footer,
     applyModal
   }
 }
@@ -185,8 +187,8 @@ export default {
   .bg-cover{
     background-position: center center;
     background-size: cover;
-}
-.mask{
+  }
+  .mask{
     top: 0;
     left: 0;
     right: 0;
@@ -197,14 +199,19 @@ export default {
     line-height: 200px;
     color: #ffffff;
     opacity: 0;
-}
-.product_image{
-    &:hover{
-        .mask{
-            cursor: pointer;
-            opacity:1;
-        }
-    }
-}
+  }
+  .product_image{
+      &:hover{
+          .mask{
+              cursor: pointer;
+              opacity:1;
+          }
+      }
+  }
+  .text-hidden{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
 </style>

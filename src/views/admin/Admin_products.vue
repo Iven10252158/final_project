@@ -79,16 +79,14 @@ export default {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.$http.get(api)
         .then(res => {
+          console.log('錯誤的res', res)
           if (res.data.success) {
             this.isLoading = false
-            const { products, pagination } = res.data
-            this.allProducts = products
-            this.pagination = pagination
-          } else {
-            console.log(res)
+            this.allProducts = res.data.products
+            this.pagination = res.data.pagination
           }
         }).catch(err => {
-          console.log(err)
+          console.log('錯誤的err', err)
         })
     },
     // click執行openModal函式時，會帶入2個參數
@@ -153,7 +151,7 @@ export default {
         })
     }
   },
-  mounted () {
+  created () {
     this.getProducts()
     // this.$refs.productModal.showModal()
     // this.$refs.deleteModal.showModal()

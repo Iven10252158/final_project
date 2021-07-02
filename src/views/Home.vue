@@ -7,15 +7,19 @@
         <h5>那些你值得知道的山林小故事</h5>
     </div>
   </div>
-<router-view></router-view>
+   <router-view></router-view>
+
+    <Footer></Footer>
 </template>
 
 <script>
 import NavBar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 export default {
   name: 'Home',
   components: {
-    NavBar
+    NavBar,
+    Footer
   }
 }
 </script>

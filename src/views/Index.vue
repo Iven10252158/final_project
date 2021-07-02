@@ -1,4 +1,12 @@
 <template>
+<!-- <NavBar></NavBar>
+ <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:600px">
+    <div class="banner-text text-white">
+        <h1>CLIMBER</h1>
+        <h3>最美的風景，在台灣</h3>
+        <h5>那些你值得知道的山林小故事</h5>
+    </div>
+  </div> -->
     <Loading :active= "isLoading">
         <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
         <div></div><div><div></div></div>
@@ -29,11 +37,11 @@
         </section>
     </div>
     <section>
-        <div class="bg-cover article mt-5" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:200px">
+        <div class="bg-cover article mt-5 pt-3" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80')">
         <ul class="lnt list-unstyled rounded p-3 text-center text-white">
             <li class="h3">為了延續美好的山林，請遵守無痕山林運動</li>
             <li class="h6">Leave No Trace(LNT)於 2006 年底在台灣正式命名為「無痕山林運動」</li>
-            <li class="h6">顧名思義就是「不留下任何痕跡在山林」</li>
+            <li class="h6">顧名思義就是<br>「不留下任何痕跡在山林」</li>
         </ul>
         </div>
     </section>
@@ -43,7 +51,11 @@
 </template>
 
 <script>
+// import NavBar from '@/components/Navbar.vue'
 export default {
+//   components: {
+//     NavBar
+//   },
   data () {
     return {
       isLoading: true
@@ -66,10 +78,7 @@ export default {
         background-size: cover;
     }
     .article{
-        /*   width: 960px; */
-        height: 200px;
         margin: 0 auto;
-        padding: 40px;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center center;

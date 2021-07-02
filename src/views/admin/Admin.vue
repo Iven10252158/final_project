@@ -72,15 +72,15 @@ export default {
     // 做checkapi
     // /api/user/check
     checkLogin () {
-      const token = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
-      console.log(token)
-      this.$http.defaults.headers.common.Authorization = token
-      this.$http.post(`${process.env.VUE_APP_URL}api/user/check`)
+      const api = `${process.env.VUE_APP_URL}api/user/check`
+      const token2 = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      console.log('卻可api的偷啃', token2)
+      this.$http.defaults.headers.common.Authorization = `${token2}`
+      this.$http.post(api)
         .then(res => {
           if (res.data.success) {
-            console.log(res.data.success)
-          } else {
-            console.log(res.data.success)
+            console.log('卻可api', res)
+            // this.$router.push('/admin')
           }
         }).catch(err => {
           console.log(err)

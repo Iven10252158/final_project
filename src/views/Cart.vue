@@ -13,7 +13,7 @@
   <div class="container">
       <div class="d-flex justify-content-between align-items-center">
         <h6 class="mb-3 mt-5">購物明細</h6>
-            <router-link to="/products" class="backToShopLink btn btn-outline-primary rounded-pill mb-2 px-3 mt-4">
+            <router-link to="/products" class="stepLink btn btn-outline-primary rounded-pill mb-2 px-3 mt-4">
               <i class="fas fa-caret-left"></i>
               繼續選購
             </router-link>
@@ -35,12 +35,13 @@
             <tr class="pt-1" v-for='item in cart.carts' :key='item.id'>
               <td class="d-none d-sm-table-cell ps-3">
                 <p class="mb-0 pt-2">{{item.product.title}}</p>
-                <p class="mb-0 pt-2">{{item.product.program}}</p>
+                <p class="mb-0 pt-sm-2 text-danger">{{item.product.program}}</p>
                 <p class="d-none d-sm-table-cell" v-if="finalPrice === cart.final_total"
                 :class="{'text-success':isTrue}">已套用此優惠</p>
               </td>
               <td class="ps-sm-5 align-middle d-table-cell">
                   <p class="d-sm-none">{{item.product.title}}</p>
+                  <p class="d-sm-none mb-0 text-danger">{{item.product.program}}</p>
                   <p class="d-sm-none" v-if="finalPrice === cart.final_total"
                     :class="{'text-success':isTrue}">已套用此優惠</p>
                 <div class=" input-group mx-auto ps-sm-4">
@@ -55,7 +56,7 @@
                     </button>
                 </div>
               </td>
-              <td class="text-center">
+              <td class="text-center align-middle">
                 <p class="pt-2 mb-0" :class="{ 'text-decoration-line-through':isTrue , 'text-secondary':isTrue}">
                   NT {{$filters.currency(item.total)}}
                 </p>
@@ -82,6 +83,12 @@
           <span>NT {{$filters.currency(cart.total)}}元</span>
         </p>
       </div>
+      <div class="d-flex justify-content-end">
+          <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3">
+            下一步
+            <i class="fas fa-caret-right"></i>
+          </router-link>
+      </div>
       <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
         <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
       </p>
@@ -91,6 +98,7 @@
 
 <script>
 import NavBar from '@/components/Navbar.vue'
+import emitter from '@/methods/mitt'
 export default {
   components: {
     NavBar
@@ -114,7 +122,7 @@ export default {
           this.isLoading = false
           this.cart = res.data.data
           console.log('購物車', res)
-          console.log(this.cart)
+          // console.log(this.cart)
         })
     },
     // 更新購物車
@@ -127,7 +135,7 @@ export default {
       this.$http.put(api, { data: cart })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
             this.getCartList()
           } else {
             console.log(res)
@@ -142,8 +150,9 @@ export default {
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
+            emitter.emit('update-qty')
             this.getCartList()
-            console.log(res)
+            // console.log(res)
           } else {
             console.log(res)
           }
@@ -198,7 +207,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   h6{
       margin-top: 100px;
   }
@@ -206,7 +215,7 @@ export default {
     background-position: center center;
     background-size: cover;
     }
-    .backToShopLink{
+    .stepLink{
         margin-top: 80px;
         color:rgb(90, 147, 88);
        &:hover{
