@@ -8,6 +8,7 @@
        <div class="row">
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-end mt-3">
+                  <!-- <Toast></Toast> -->
                     <button type='button' class="btn btn-primary text-white" @click="openModal('new')">新增產品</button>
                 </div>
                 <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
@@ -33,8 +34,8 @@
                             </td>
                             <td class='col-3 col-md-2 d-flex align-items-center'>
                                 <div class="btn-group">
-                                    <button type='button' class="editBtn btn btn-outline-primary" @click="openModal('edit',item)">編輯</button>
-                                    <button type='button' class="btn btn-outline-danger" @click="openModal('delete',item)">刪除</button>
+                                    <button type='button' class="editBtn btn btn-outline-primary btn-sm" @click="openModal('edit',item)">編輯</button>
+                                    <button type='button' class="btn btn-outline-danger btn-sm" @click="openModal('delete',item)">刪除</button>
                                 </div>
                             </td>
                         </tr>
@@ -54,12 +55,15 @@
 import pagination from '@/components/Pagination.vue'
 import ProductModal from '@/components/ProductModal.vue'
 import DeleteModal from '@/components/DelProductModal.vue'
+// import Toast from '@/components/ToastMessages.vue'
 
 export default {
+  inject: ['MessageStatus'],
   components: {
     pagination,
     ProductModal,
     DeleteModal
+    // Toast
   },
   data () {
     return {
@@ -79,7 +83,7 @@ export default {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.$http.get(api)
         .then(res => {
-          console.log('錯誤的res', res)
+          console.log('getProducts', res)
           if (res.data.success) {
             this.isLoading = false
             this.allProducts = res.data.products
@@ -116,17 +120,21 @@ export default {
       // 先宣告新增的api
       let api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethods = 'post'
+      let status = '新增產品'
       // 再用isNew判斷要使用新增的api or 修改的api
       if (!this.isNew) {
         api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
         httpMethods = 'put'
+        status = '更新產品'
       }
       this.$http[httpMethods](api, { data: this.tempProduct })
         .then(res => {
           if (res.data.success) {
+            this.MessageStatus(res, status)
             this.getProducts()
-            console.log(res)
+            console.log('updateProduct', res)
           } else {
+            this.MessageStatus(res, status)
             console.log(res)
           }
           this.$refs.productModal.hideModal()
@@ -140,10 +148,12 @@ export default {
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
+            this.MessageStatus(res, '刪除產品')
             this.$refs.deleteModal.hideModal()
             this.getProducts()
             console.log(res)
           } else {
+            this.MessageStatus(res, '刪除產品')
             console.log(res)
           }
         }).catch(err => {

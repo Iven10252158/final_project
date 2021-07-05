@@ -30,8 +30,10 @@
                         <span v-else>未啟用</span>
                     </td>
                     <td class="col-3 text-end">
-                        <button type="button" class="editBtn btn btn-outline-primary me-2 btn-sm"  @click="openCouponModal('edit',item)">編輯</button>
+                      <div class="btn-group">
+                        <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="openCouponModal('edit',item)">編輯</button>
                         <button type="button" class="btn btn-outline-danger btn-sm" @click="openCouponModal('delete',item)">刪除</button>
+                      </div>
                     </td>
                 </tr>
             </tbody>
@@ -47,6 +49,7 @@ export default {
     couponModal,
     deleteCouponModal
   },
+  inject: ['MessageStatus'],
   data () {
     return {
       isNew: false,
@@ -96,17 +99,22 @@ export default {
     // 新增的api、方法
       let api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupon`
       let httpMethods = 'post'
+      let status = '新增優惠券'
       if (!this.isNew) {
         // 修改的api、方法
         api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupon/${item.id}`
         httpMethods = 'put'
+        status = '編輯優惠券'
       }
       this.$http[httpMethods](api, { data: item })
         .then(res => {
           if (res.data.success) {
             // console.log(res)
+            this.MessageStatus(res, status)
             this.getCouponsList()
             this.$refs.discountModal.hideModal()
+          } else {
+            this.MessageStatus(res, status)
           }
         }).catch(err => {
           console.log(err)
@@ -119,10 +127,12 @@ export default {
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
+            this.MessageStatus(res, '刪除優惠券')
             console.log(res)
             this.getCouponsList()
             this.$refs.deleteCouponModal.hideModal()
           } else {
+            this.MessageStatus(res, '刪除優惠券')
             console.log(res)
           }
         }).catch(err => {

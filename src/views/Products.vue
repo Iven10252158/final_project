@@ -130,6 +130,7 @@ export default {
             this.isLoading = false
             const { products, pagination } = res.data
             this.products = products
+            console.log(res)
             // 為了讓一進到產品列表就有產品資料
             this.typeProduct = this.products
             this.pagination = pagination
@@ -139,7 +140,6 @@ export default {
                 console.log(this.productName)
               }
             })
-            // console.log(res)
             // console.log(products)
           }
         })

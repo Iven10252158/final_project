@@ -83,8 +83,8 @@
           <span>NT {{$filters.currency(cart.total)}}元</span>
         </p>
       </div>
-      <div class="d-flex justify-content-end">
-          <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3">
+      <div class="d-flex justify-content-end" v-if="cart.carts">
+          <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3" :class="{'disabled':cart.carts.length===0}">
             下一步
             <i class="fas fa-caret-right"></i>
           </router-link>
@@ -98,8 +98,9 @@
 
 <script>
 import NavBar from '@/components/Navbar.vue'
-import emitter from '@/methods/mitt'
+// import emitter from '@/methods/mitt'
 export default {
+  inject: ['emitter'],
   components: {
     NavBar
   },
@@ -150,7 +151,7 @@ export default {
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
-            emitter.emit('update-qty')
+            this.emitter.emit('update-qty')
             this.getCartList()
             // console.log(res)
           } else {

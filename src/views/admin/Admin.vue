@@ -22,10 +22,10 @@
            <h5 class="text-center text-primary">管理後台</h5>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-primary" href="#">
-              <span data-feather="file"></span>
-              訂單管理
-            </a>
+            <router-link to='/admin/admin_orders' class="nav-link text-primary">
+              <span data-feather="shopping-cart"></span>
+                訂單管理
+            </router-link>
           </li>
           <li class="nav-item">
             <router-link to='/admin/admin_products' class="nav-link text-primary">
@@ -42,6 +42,11 @@
         </ul>
       </div>
     </nav>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex mt-4 me-2">
+          <h2>管理後台</h2>
+        </div>
+    </main>
   </div>
 </div>
 <router-view></router-view>
@@ -49,6 +54,7 @@
 
 <script>
 export default {
+  inject: ['MessageStatus'],
   data () {
     return {
 
@@ -79,15 +85,18 @@ export default {
       this.$http.post(api)
         .then(res => {
           if (res.data.success) {
+            // this.MessageStatus(res)
             console.log('卻可api', res)
             // this.$router.push('/admin')
+          } else {
+            this.MessageStatus(res, '登入')
           }
         }).catch(err => {
           console.log(err)
         })
     }
   },
-  mounted () {
+  created () {
     this.checkLogin()
   }
 }

@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  inject: ['MessageStatus'],
   data () {
     return {
       account: '',
@@ -55,11 +56,14 @@ export default {
             const { token, expired } = res.data
             this.token = token
             this.expired = expired
+            this.MessageStatus(res, '登入')
             console.log(this.token)
             console.log(this.expired)
             // 把token、expired存到cookie裡
             document.cookie = `week3homeworkTK=${token}; expires=${new Date(expired)}; path=/`
             this.$router.push('/admin')
+          } else {
+            this.MessageStatus(res, '登入')
           }
         })
     }

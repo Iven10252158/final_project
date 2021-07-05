@@ -53,6 +53,7 @@ export default {
   },
   data () {
     return {
+      orderId: '',
       form: {
         user: {
           name: '',
@@ -73,6 +74,9 @@ export default {
       this.$http.post(api, { data: order })
         .then(res => {
           console.log(res)
+          this.orderId = res.data.orderId
+          console.log(this.orderId)
+          this.$router.push(`/ordercheckout/${this.orderId}`)
         })
     }
   }
