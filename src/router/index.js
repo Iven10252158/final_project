@@ -13,13 +13,14 @@ const routes = [
       {
         path: 'about',
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+      },
+      {
+        path: 'products',
+        component: () => import('@/views/Products.vue')
       }
     ]
   },
-  {
-    path: '/products',
-    component: () => import('@/views/Products.vue')
-  },
+
   {
     path: '/product/:id',
     component: () => import('@/views/Product.vue')
@@ -63,7 +64,7 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  linkActiveClass: 'text-Lightgreen'
+  linkActiveClass: 'text-grey'
 })
 
 export default router

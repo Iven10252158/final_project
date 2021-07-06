@@ -116,17 +116,22 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
+            console.log(res)
             this.isLoading = false
-            // console.log(res)
+            this.$swal({
+              icon: 'success',
+              title: `${res.data.data.product.title} <br/>${res.data.message}`
+            })
+            // console.log(res.data.data.product.title)
             emitter.emit('update-qty')
-            this.getCartList()
+            // this.getCartList()
           }
         })
     }
   },
   mounted () {
     this.getProduct()
-    this.getCartList()
+    // this.getCartList()
     // console.log(this.$route)
   }
 }

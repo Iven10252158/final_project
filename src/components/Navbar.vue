@@ -13,13 +13,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
             <li class="nav-item">
-                <router-link to="/index" class="h5 nav-link">首頁</router-link>
+                <router-link to="/index" class="h6 nav-link">首頁</router-link>
             </li>
             <li class="nav-item">
-                <router-link to="/about" class="h5 nav-link">關於我們</router-link>
+                <router-link to="/about" class="h6 nav-link">關於我們</router-link>
             </li>
             <li class="nav-item">
-                <router-link to="/products" class="h5 nav-link">產品列表</router-link>
+                <router-link to="/products" class="h6 nav-link">產品列表</router-link>
             </li>
         </ul>
         <div class="d-flex">
@@ -78,7 +78,7 @@ export default {
       const windowY = window.scrollY
       if (windowY > 1) {
         this.classList = {
-          navBarTop: 'bg-primary-bg'
+          navBarTop: 'bg-primary'
         }
       } else {
         this.classList = {

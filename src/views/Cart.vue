@@ -83,17 +83,16 @@
           <span>NT {{$filters.currency(cart.total)}}元</span>
         </p>
       </div>
+      <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
+          <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
+        </p>
       <div class="d-flex justify-content-end" v-if="cart.carts">
           <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3" :class="{'disabled':cart.carts.length===0}">
             下一步
             <i class="fas fa-caret-right"></i>
           </router-link>
       </div>
-      <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
-        <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
-      </p>
   </div>
-
 </template>
 
 <script>
@@ -122,12 +121,12 @@ export default {
         .then(res => {
           this.isLoading = false
           this.cart = res.data.data
-          console.log('購物車', res)
+          // console.log('購物車', res)
           // console.log(this.cart)
         })
     },
     // 更新購物車
-    updateCart (item) {
+    updateCart (item, qty) {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product.id,
@@ -136,28 +135,46 @@ export default {
       this.$http.put(api, { data: cart })
         .then(res => {
           if (res.data.success) {
-            // console.log(res)
+            console.log(res)
+            this.$swal({
+              icon: 'success',
+              title: `${res.data.message}`
+            })
             this.getCartList()
           } else {
-            console.log(res)
+            this.$swal({
+              icon: 'error',
+              title: `${res.data.message}`
+            })
+            console.log('res', res)
           }
-        }).catch(err => {
-          console.log(err)
         })
     },
     // 刪除購物車內的一筆資料
     deleteCartProduct (item) {
+      // this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
-            this.emitter.emit('update-qty')
             this.getCartList()
+            // this.isLoading = false
+            this.$swal({
+              icon: 'success',
+              title: `${res.data.message}`
+            })
+            this.emitter.emit('update-qty')
             // console.log(res)
           } else {
             console.log(res)
+            this.$swal({
+              icon: 'error',
+              title: `${res.data.message}`
+            })
           }
         }).catch(err => {
+          this.getCartList()
+          // this.isLoading = false
           console.log(err)
         })
     },
@@ -189,14 +206,22 @@ export default {
             this.getCartList()
             this.finalPrice = res.data.data.final_total
             this.isTrue = !this.isTrue
-            console.log(res)
-            console.log(res.data.data.final_total)
+            this.$swal({
+              icon: 'success',
+              title: `${res.data.message}`
+            })
+            // console.log(res)
+            // console.log(res.data.data.final_total)
           } else {
-            console.log('請確認輸入的代碼')
+            this.$swal({
+              icon: 'error',
+              title: '請確認輸入的代碼'
+            })
+            // console.log('請確認輸入的代碼')
           }
         }).catch(err => {
           if (err.data === undefined) {
-            // console.log(err, '找不到優惠代碼')
+            console.log(err, '找不到優惠代碼')
             console.log('找不到優惠代碼')
           }
         })

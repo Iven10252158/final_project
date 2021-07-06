@@ -1,12 +1,12 @@
 <template>
-<NavBar></NavBar>
+<!-- <NavBar></NavBar> -->
 <Loading :active="isLoading">
     <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
     <div></div><div><div></div></div>
     </div></div>
 </Loading>
 <!-- header -->
-<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1593860572411-8e5f9426a26c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:400px">
+<div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1420582282039-a6d11404cb66?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:400px">
             <div class="product-text text-white">
                 <h1 class="pt-1">產品列表</h1>
             </div>
@@ -65,14 +65,14 @@
       <pagination :pages="pagination" @change-page="getProducts"></pagination>
   </div>
 </div>
-<Footer></Footer>
+<!-- <Footer></Footer> -->
 <router-view></router-view>
 </template>
 
 <script>
 import pagination from '@/components/Pagination.vue'
-import NavBar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
+// import NavBar from '@/components/Navbar.vue'
+// import Footer from '@/components/Footer.vue'
 import applyModal from '@/components/ApplyModal.vue'
 export default {
   data () {
@@ -154,7 +154,7 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
           }
         })
     },
@@ -171,8 +171,8 @@ export default {
   },
   components: {
     pagination,
-    NavBar,
-    Footer,
+    // NavBar,
+    // Footer,
     applyModal
   }
 }

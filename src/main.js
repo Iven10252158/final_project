@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
+// sweetAlert套件
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 // fontAwesome套件
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
@@ -34,8 +37,15 @@ configure({
 })
 // 啟用語系
 setLocale('zh_TW')
-
+// sweetAlert 客製化
+const options = {
+  toast: true,
+  position: 'center',
+  showConfirmButton: false,
+  timer: 3000
+}
 const app = createApp(App)
+app.use(VueSweetalert2, options)
 // 2.將“千分號”設定為全域屬性
 app.config.globalProperties.$filters = { currency, date }
 // 註冊元件

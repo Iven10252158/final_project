@@ -1,15 +1,15 @@
-<template>
+<template class="content">
 <NavBar></NavBar>
- <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:600px">
+ <!-- <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:600px">
     <div class="banner-text text-white">
         <h1>CLIMBER</h1>
         <h3>最美的風景，在台灣</h3>
         <h5>那些你值得知道的山林小故事</h5>
     </div>
-  </div>
+  </div> -->
    <router-view></router-view>
 
-    <Footer></Footer>
+    <Footer class="footer"></Footer>
 </template>
 
 <script>
@@ -32,12 +32,18 @@ export default {
      padding-bottom: 3px;
     }
   }
-  .bg-cover{
-    background-size: cover;
-    background-position: center center;
+  // .bg-cover{
+  //   background-size: cover;
+  //   background-position: center center;
+  // }
+  // .banner-text{
+  //     padding: 80px 120px;
+  //     background-color:rgba(0, 0, 0,0.3);
+  // }
+  .content{
+    min-height:  calc(100vh - 50px );
   }
-  .banner-text{
-      padding: 80px 120px;
-      background-color:rgba(0, 0, 0,0.3);
+  .footer{
+    height: 50px;
   }
 </style>
