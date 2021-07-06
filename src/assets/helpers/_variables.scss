@@ -90,6 +90,7 @@ $theme-colors: (
   "white":      #fff,
   'primary-bg' :rgba(0, 0, 0,0.5),
   'grey' :      #363635,//#3d3d3d//#71a970//#629f60,//#90bc8f,//#81b380,//#00cc99,
+  'favorite':   #f08080,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -1445,7 +1446,7 @@ $btn-close-white-filter:     invert(1) grayscale(100%) brightness(200%) !default
 // scss-docs-start offcanvas-variables
 $offcanvas-padding-y:               $modal-inner-padding !default;
 $offcanvas-padding-x:               $modal-inner-padding !default;
-$offcanvas-horizontal-width:        400px !default;
+$offcanvas-horizontal-width:        600px;//400px !default;
 $offcanvas-vertical-height:         30vh !default;
 $offcanvas-transition-duration:     .3s !default;
 $offcanvas-border-color:            $modal-content-border-color !default;

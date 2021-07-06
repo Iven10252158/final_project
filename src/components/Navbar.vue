@@ -23,6 +23,9 @@
             </li>
         </ul>
         <div class="d-flex">
+            <a href="#" class="h4 nav-link"  @click.prevent="openCanvas">
+              <i class="fas fa-bookmark"></i>
+            </a>
             <router-link to="/login" class="h4 nav-link">
                 <i class="fas fa-user-alt"></i>
             </router-link>
@@ -34,6 +37,7 @@
                   {{cart.carts.length}}
                 </span>
               </div>
+              <offcanvas ref="offcanvas"></offcanvas>
               <!-- <div class="position-relative" v-for="item in carts" :key="item">
                 <span class="cartQty rounded-pill position-absolute badge bg-warning text-white" v-if="item">
                   {{item.length}}
@@ -46,8 +50,11 @@
 </template>
 
 <script>
-
+import offcanvas from '@/components/Favorite.vue'
 export default {
+  components: {
+    offcanvas
+  },
   props: ['carts'],
   inject: ['emitter'],
   data () {
@@ -59,6 +66,9 @@ export default {
     }
   },
   methods: {
+    openCanvas () {
+      this.$refs.offcanvas.showOffcanvas()
+    },
     getCartList () {
       this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`

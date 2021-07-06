@@ -192,7 +192,7 @@ export default {
         item.qty -= 1
         this.updateCart(item)
       }
-      console.log(item)
+      // console.log(item)
     },
     // 套用優惠券
     inputCoupon () {

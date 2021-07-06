@@ -49,8 +49,16 @@
                     </div>
                     <div class="card-footer bg-white border-0">
                         <div class="d-flex justify-content-between">
-                        <!-- @click="addToCart(item.id)" -->
-                            <button type="button" class="btn btn-outline-primary w-100" @click="openApplyModal (item)">
+                            <button type="button" class="favoriteBtn btn btn-outline-favorite border-0"
+                            @click="addMyFavorite(item)">
+                            <span v-if="myFavorite.includes(item.id)">
+                              <i class="fas fa-heart"></i>
+                            </span>
+                              <span v-else>
+                                <i class="far fa-heart"></i>
+                              </span>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary w-75" @click="openApplyModal (item)">
                             <i class="fas fa-cart-plus"></i>
                             我要報名
                             </button>
@@ -74,7 +82,20 @@ import pagination from '@/components/Pagination.vue'
 // import NavBar from '@/components/Navbar.vue'
 // import Footer from '@/components/Footer.vue'
 import applyModal from '@/components/ApplyModal.vue'
+// localStorage轉型
+const storageMethods = {
+  setItem (MyFavorite) {
+    const favoriteString = JSON.stringify(MyFavorite)
+    localStorage.setItem('MyFavorite', favoriteString)
+  },
+  getItem () {
+    return JSON.parse(localStorage.getItem('MyFavorite'))
+  }
+}
+// console.log(storageMethods)
+
 export default {
+  inject: ['emitter'],
   data () {
     return {
       num: 1,
@@ -86,16 +107,33 @@ export default {
       productName: [],
       productValue: '',
       isLoading: false,
-      search: ''
+      search: '',
+      // 讀取localStorage的內容
+      // myFavorite有東西的話就讀取，沒東西的話讀空陣列
+      myFavorite: storageMethods.getItem() || []
     }
   },
   methods: {
+    addMyFavorite (item) {
+      if (this.myFavorite.includes(item.id)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
+        storageMethods.setItem(this.myFavorite)
+        this.$swal({ icon: 'warning', title: '已從最愛中移除' })
+        console.log('存過囉！')
+      } else {
+        this.myFavorite.push(item.id)
+        storageMethods.setItem(this.myFavorite)
+        this.emitter.emit('send-favorite', item)
+        this.$swal({ icon: 'success', title: '儲存成功！' })
+      }
+      console.log('this.myFavorite', this.myFavorite)
+    },
     searchProduct (value) {
       this.productValue = 'total'
       console.log(value)
       this.typeProduct = this.products.filter(item => {
         if (item.title.match(value)) {
-          console.log(item)
+          // console.log(item)
           return item
         }
         this.productValue = ''
@@ -107,7 +145,7 @@ export default {
       // }
     },
     changeProduct (item, index) {
-      console.log(item, index)
+      // console.log(item, index)
       this.typeProduct = this.products.filter((element, index) => {
         if (item === element.category) {
           // this.color = !this.color
@@ -130,14 +168,14 @@ export default {
             this.isLoading = false
             const { products, pagination } = res.data
             this.products = products
-            console.log(res)
+            // console.log(res)
             // 為了讓一進到產品列表就有產品資料
             this.typeProduct = this.products
             this.pagination = pagination
             this.products.filter(item => {
               if (this.productName.indexOf(item.category) === -1) {
                 this.productName.push(item.category)
-                console.log(this.productName)
+                // console.log(this.productName)
               }
             })
             // console.log(products)
@@ -166,21 +204,26 @@ export default {
   },
   mounted () {
     // this.$refs.applyModal.showModal()
+    this.emitter.emit('send-favorite', this.myFavorite)
     this.getProducts()
     this.productValue = 'total'
   },
   components: {
     pagination,
-    // NavBar,
-    // Footer,
     applyModal
   }
 }
 </script>
 
 <style lang="scss">
+  .favoriteBtn{
+    font-size: 20px;
+    &:hover{
+      background-color: transparent;
+      color:#E6c35c;
+    }
+  }
   .product-text{
-    // margin-top: 40px;
     padding: 20px 60px;
     background-color:rgba(0, 0, 0,0.3);
   }
