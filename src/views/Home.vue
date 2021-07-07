@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scpoed>
+<style lang="scss">
   .nav-link{
     color: #fff; //#000;
    &:hover{
@@ -24,10 +24,10 @@ export default {
      padding-bottom: 3px;
     }
   }
-  .content{
-    min-height:  calc(100vh - 50px );
-  }
-  .footer{
-    height: 50px;
-  }
+  // .content{
+  //   min-height:  calc(100vh - 50px );
+  // }
+  // .footer{
+  //   height: 50px;
+  // }
 </style>

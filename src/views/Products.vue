@@ -51,12 +51,12 @@
                         <div class="d-flex justify-content-between">
                             <button type="button" class="favoriteBtn btn btn-outline-favorite border-0"
                             @click="addMyFavorite(item)">
-                            <span v-if="myFavorite.includes(item.id)">
-                              <i class="fas fa-heart"></i>
-                            </span>
-                              <span v-else>
-                                <i class="far fa-heart"></i>
+                              <span v-if="myFavorite === item.id">
+                                <i class="fas fa-heart"></i>
                               </span>
+                              <span v-else>
+                              <i class="far fa-heart"></i>
+                            </span>
                             </button>
                             <button type="button" class="btn btn-outline-primary w-75" @click="openApplyModal (item)">
                             <i class="fas fa-cart-plus"></i>
@@ -108,29 +108,30 @@ export default {
       productValue: '',
       isLoading: false,
       search: '',
+      // myFavorite: []
       // 讀取localStorage的內容
       // myFavorite有東西的話就讀取，沒東西的話讀空陣列
       myFavorite: storageMethods.getItem() || []
+
     }
   },
   methods: {
     addMyFavorite (item) {
-      if (this.myFavorite.includes(item.id)) {
+      if (this.myFavorite.includes(item)) {
         this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
         storageMethods.setItem(this.myFavorite)
         this.$swal({ icon: 'warning', title: '已從最愛中移除' })
         console.log('存過囉！')
       } else {
-        this.myFavorite.push(item.id)
+        this.myFavorite.push(item)
         storageMethods.setItem(this.myFavorite)
         this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '儲存成功！' })
       }
-      console.log('this.myFavorite', this.myFavorite)
     },
     searchProduct (value) {
       this.productValue = 'total'
-      console.log(value)
+      // console.log(value)
       this.typeProduct = this.products.filter(item => {
         if (item.title.match(value)) {
           // console.log(item)
@@ -150,7 +151,7 @@ export default {
         if (item === element.category) {
           // this.color = !this.color
           this.productValue = item
-          console.log(this.productValue)
+          // console.log(this.productValue)
           return element
         } else if (item === undefined) {
           // this.color = true
