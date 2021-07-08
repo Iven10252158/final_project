@@ -1,7 +1,7 @@
 
 <template>
 <ToastMessages></ToastMessages>
-<offCanvas></offCanvas>
+<!-- <offCanvas></offCanvas> -->
 <router-view/>
 </template>
 
@@ -9,7 +9,7 @@
 import emitter from '@/methods/mitt'
 import MessageStatus from '@/methods/PushMessageStatus'
 import ToastMessages from '@/components/ToastMessages.vue'
-import offCanvas from '@/components/Navbar.vue'
+// import offCanvas from '@/components/Navbar.vue'
 export default {
   provide () {
     return {
@@ -18,8 +18,8 @@ export default {
     }
   },
   components: {
-    ToastMessages,
-    offCanvas
+    ToastMessages
+    // offCanvas
   }
 }
 </script>

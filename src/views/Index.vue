@@ -1,12 +1,13 @@
 <template>
  <NavBar></NavBar>
- <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:600px">
+ <bannerSwiper></bannerSwiper>
+ <!-- <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5">
     <div class="banner-text text-white">
         <h1>CLIMBER</h1>
         <h3>最美的風景，在台灣</h3>
         <h5>那些你值得知道的山林小故事</h5>
     </div>
-  </div>
+  </div> -->
     <Loading :active= "isLoading">
         <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
         <div></div><div><div></div></div>
@@ -36,7 +37,8 @@
            <div class="col-12 col-lg-6 d-flex align-items-center">
                 <ul class="list-unstyled px-sm-5">
                     <li class="h3">天使的眼淚 -- 嘉明湖</li>
-                    <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam laudantium harum voluptates odio nihil recusandae ut velit facere veritatis? Perspiciatis impedit ab ea numquam et velit temporibus doloribus recusandae adipisci!</li>
+                    <li>有人說嘉明湖是「天使的眼淚」、是「上帝遺留在人間的藍寶石」，布農族人稱它為「月亮的鏡子」。這些浪漫的形容詞是我對嘉明湖的第一印象。
+                        海拔3310公尺，是台灣第二高的高山湖泊，佔地面積1.0公頃</li>
                     <li class="indexBtn btn btn-outline-primary rounded-0 mt-3 px-5">
                         <p class="mb-0">查看更多</p>
                     </li>
@@ -59,11 +61,11 @@
 </template>
 
 <script>
-// import NavBar from '@/components/Navbar.vue'
+import bannerSwiper from '@/components/BannerSwiper.vue'
 export default {
-//   components: {
-//     NavBar
-//   },
+  components: {
+    bannerSwiper
+  },
   data () {
     return {
       isLoading: true

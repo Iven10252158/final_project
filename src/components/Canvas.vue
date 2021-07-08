@@ -5,7 +5,7 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div class="card" v-for="(item,index) in favoItem" :key="index">
+    <div class="card" v-for="(item,index) in filters" :key="index">
       <div class="row g-0">
         <div class="col-md-4">
           <div class="bg-cover"
@@ -37,12 +37,15 @@ const storageMethods = {
   }
 }
 console.log(storageMethods)
+
 export default {
   inject: ['emitter'],
   data () {
     return {
       bsOffcanvas: '',
-      favoItem: storageMethods.getItem()
+      favoItem: storageMethods.getItem(),
+      products: [],
+      filters: []
     }
   },
   methods: {
@@ -50,27 +53,40 @@ export default {
       this.bsOffcanvas.show()
     },
     remove (item, index) {
-      this.favoItem.splice(index, 1)
-      storageMethods.setItem(this.favoItem)
+      this.filters.splice(index, 1)
+      storageMethods.setItem(this.filters)
       console.log(item, index)
     },
     getFavorite () {
       this.favoItem = storageMethods.getItem()
     },
-    mounted () {
-      this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
-      this.emitter.on('send-favorite', () => {
-        // this.getProducts()
-        this.getFavorite()
-      })
+    getProducts () {
+      // /api/:api_path/products
+      this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products/all`)
+        .then(res => {
+          if (res.data.success) {
+            this.products = res.data.products
+            this.products.filter(product => {
+              if (this.favoItem.indexOf(product.id) !== -1) {
+                this.filters.push(product)
+                storageMethods.setItem(this.filters)
+                console.log('this.filters', this.filters)
+              }
+            })
+            console.log(this.products)
+          }
+        })
     }
+  },
+  mounted () {
+    this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
+    this.emitter.on('send-favorite', (data) => {
+      this.filters.push(data)
+      console.log('emitter-on', data)
+    //   this.getFavorite()
+    })
+    this.getFavorite()
+    this.getProducts()
   }
 }
 </script>
-
-<style lang="scss">
-    .bg-cover{
-        background-position: center center;
-        background-size: cover;
-    }
-</style>
