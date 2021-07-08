@@ -61,13 +61,8 @@ export default {
   mounted () {
     this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
     this.emitter.on('send-favorite', (data) => {
-      console.log('emitter-on', data)
-      if (this.favoItem) {
-        this.favoItem.push(data)
-        storageMethods.setItem(this.favoItem)
-      }
+      this.getFavorite()
     })
-    this.getFavorite()
   }
 }
 </script>

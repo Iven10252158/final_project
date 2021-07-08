@@ -51,7 +51,7 @@
                         <div class="d-flex justify-content-between">
                             <button type="button" class="favoriteBtn btn btn-outline-favorite border-0"
                             @click="addMyFavorite(item)">
-                              <span v-if="myFavorite === item.id">
+                              <span v-if="myFavorite.includes(item)">
                                 <i class="fas fa-heart"></i>
                               </span>
                               <span v-else>
@@ -204,7 +204,6 @@ export default {
   },
   mounted () {
     // this.$refs.applyModal.showModal()
-    this.emitter.emit('send-favorite', this.myFavorite)
     this.getProducts()
     this.productValue = 'total'
   },
