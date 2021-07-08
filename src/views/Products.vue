@@ -108,7 +108,6 @@ export default {
       productValue: '',
       isLoading: false,
       search: '',
-      // myFavorite: []
       // 讀取localStorage的內容
       // myFavorite有東西的話就讀取，沒東西的話讀空陣列
       myFavorite: storageMethods.getItem() || []
