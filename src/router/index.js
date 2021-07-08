@@ -7,7 +7,7 @@ const routes = [
     component: Home,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/Index.vue')
       },
       {
@@ -17,29 +17,24 @@ const routes = [
       {
         path: 'products',
         component: () => import('@/views/Products.vue')
+      },
+      {
+        path: '/product/:id',
+        component: () => import('@/views/Product.vue')
+      },
+      {
+        path: '/cart',
+        component: () => import('@/views/Cart.vue')
+      },
+      {
+        path: '/order',
+        component: () => import('@/views/Order.vue')
+      },
+      {
+        path: '/ordercheckout/:order_Id',
+        component: () => import('@/views/OrderCheckout.vue')
       }
     ]
-  },
-
-  {
-    path: '/product/:id',
-    component: () => import('@/views/Product.vue')
-  },
-  {
-    path: '/cart',
-    component: () => import('@/views/Cart.vue')
-  },
-  {
-    path: '/order',
-    component: () => import('@/views/Order.vue')
-  },
-  {
-    path: '/ordercheckout/:order_Id',
-    component: () => import('@/views/OrderCheckout.vue')
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/Login.vue')
   },
   {
     path: '/admin',
@@ -58,6 +53,11 @@ const routes = [
         component: () => import('@/views/admin/Admin_orders.vue')
       }
     ]
+  },
+
+  {
+    path: '/login',
+    component: () => import('@/views/Login.vue')
   }
 ]
 

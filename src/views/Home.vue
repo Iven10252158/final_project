@@ -1,4 +1,5 @@
-<template class="content">
+<template>
+
 <NavBar></NavBar>
 <router-view></router-view>
 <Footer class="footer"></Footer>
@@ -24,10 +25,4 @@ export default {
      padding-bottom: 3px;
     }
   }
-  // .content{
-  //   min-height:  calc(100vh - 50px );
-  // }
-  // .footer{
-  //   height: 50px;
-  // }
 </style>

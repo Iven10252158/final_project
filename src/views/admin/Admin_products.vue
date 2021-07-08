@@ -79,6 +79,7 @@ export default {
   methods: {
     // 取得後台產品列表
     getProducts (page = 1) {
+      // this.checkLogin()
       this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.$http.get(api)
@@ -160,9 +161,28 @@ export default {
           console.log(err)
         })
     }
+    // checkLogin () {
+    //   const api = `${process.env.VUE_APP_URL}api/user/check`
+    //   const token2 = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    //   console.log('卻可api的偷啃', token2)
+    //   this.$http.defaults.headers.common.Authorization = `${token2}`
+    //   this.$http.post(api)
+    //     .then(res => {
+    //       if (res.data.success) {
+    //         // this.MessageStatus(res)
+    //         console.log('卻可api', res)
+    //         // this.$router.push('/admin')
+    //       } else {
+    //         this.MessageStatus(res, '登入')
+    //       }
+    //     }).catch(err => {
+    //       console.log(err)
+    //     })
+    // }
   },
-  created () {
+  mounted () {
     this.getProducts()
+    // this.checkLogin()
     // this.$refs.productModal.showModal()
     // this.$refs.deleteModal.showModal()
   }

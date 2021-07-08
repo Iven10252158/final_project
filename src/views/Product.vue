@@ -4,7 +4,6 @@
     <div></div><div><div></div></div>
     </div></div>
 </Loading>
-<NavBar :carts="cart"></NavBar>
 <div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1560968255-05e3051ac066?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1639&q=80');height:400px">
     <div class="product-text text-white">
         <h1 class="pt-1">產品介紹</h1>
@@ -49,18 +48,11 @@
     <div class="col-6"></div>
   </div>
 </div>
-<Footer></Footer>
 </template>
 
 <script>
-import NavBar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
 import emitter from '@/methods/mitt'
 export default {
-  components: {
-    NavBar,
-    Footer
-  },
   data () {
     return {
       cart: {},

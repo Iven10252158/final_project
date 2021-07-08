@@ -3,7 +3,7 @@
     :class="classList.navBarTop">
         <div class="container">
         <a class="navbar-brand">
-            <router-link to="/index" class="text-white fw-bold">
+            <router-link to="/" class="text-white fw-bold">
             <img src="../assets/Climbing.svg" width="50" alt="">
             </router-link>
         </a>
@@ -12,9 +12,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <router-link to="/index" class="h6 nav-link">首頁</router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <router-link to="/about" class="h6 nav-link">關於我們</router-link>
             </li>
