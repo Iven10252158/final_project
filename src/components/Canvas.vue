@@ -43,13 +43,16 @@ export default {
   data () {
     return {
       bsOffcanvas: '',
-      favoItem: storageMethods.getItem(),
-      products: [],
-      filters: []
+      favoItem: storageMethods.getItem() || [], // 最愛的清單內容
+      allProducts: [], // 所有產品
+      filters: [] // (渲染用)篩選後的最愛清單資料
     }
   },
   methods: {
-    showCanvas () {
+    showCanvas (data) {
+      console.log('data', data)
+      this.favoItem = data
+      this.getProducts()
       this.bsOffcanvas.show()
     },
     remove (item, index) {
@@ -58,22 +61,23 @@ export default {
       console.log(item, index)
     },
     getFavorite () {
-      this.favoItem = storageMethods.getItem()
+    //   console.log('this.favoItem', this.favoItem)
+      this.filters = this.allProducts.filter((item, index) => {
+        if (this.favoItem.includes(item.id)) {
+          console.log('我是最愛', item)
+          return item
+        }
+        // console.log(this.favoItem.includes(item.id))
+      })
     },
     getProducts () {
       // /api/:api_path/products
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products/all`)
         .then(res => {
           if (res.data.success) {
-            this.products = res.data.products
-            this.products.filter(product => {
-              if (this.favoItem.indexOf(product.id) !== -1) {
-                this.filters.push(product)
-                storageMethods.setItem(this.filters)
-                console.log('this.filters', this.filters)
-              }
-            })
-            console.log(this.products)
+            this.allProducts = res.data.products
+            // console.log(this.allProducts)
+            this.getFavorite()
           }
         })
     }
@@ -81,11 +85,9 @@ export default {
   mounted () {
     this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
     this.emitter.on('send-favorite', (data) => {
-      this.filters.push(data)
-      console.log('emitter-on', data)
+    //   console.log('emitter-on', data)
     //   this.getFavorite()
     })
-    this.getFavorite()
     this.getProducts()
   }
 }

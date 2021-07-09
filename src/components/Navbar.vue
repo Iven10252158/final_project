@@ -12,9 +12,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
-            <!-- <li class="nav-item">
-                <router-link to="/index" class="h6 nav-link">首頁</router-link>
-            </li> -->
+            <li class="nav-item">
+                <router-link to="/" class="h6 nav-link">首頁</router-link>
+            </li>
             <li class="nav-item">
                 <router-link to="/about" class="h6 nav-link">關於我們</router-link>
             </li>
@@ -63,12 +63,14 @@ export default {
       cart: {},
       classList: {
         navBarTop: ''
-      }
+      },
+      mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || []
     }
   },
   methods: {
     openCanvas () {
-      this.$refs.canvas.showCanvas()
+      const data = JSON.parse(localStorage.getItem('MyFavorite')) || []
+      this.$refs.canvas.showCanvas(data)
     },
     getCartList () {
       this.isLoading = true

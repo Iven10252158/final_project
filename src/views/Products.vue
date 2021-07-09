@@ -11,8 +11,8 @@
                 <h1 class="pt-1">產品列表</h1>
             </div>
     </div>
-
 <apply-modal ref="applyModal" :apply="applyData" @into-cart="addToCart"></apply-modal>
+<!-- <Canvas :canvas="myFavorite"></Canvas> -->
 <div class="container">
      <div class="row">
         <div class="col-12 col-sm-4">
@@ -79,8 +79,7 @@
 
 <script>
 import pagination from '@/components/Pagination.vue'
-// import NavBar from '@/components/Navbar.vue'
-// import Footer from '@/components/Footer.vue'
+// import Canvas from '@/components/Canvas.vue'
 import applyModal from '@/components/ApplyModal.vue'
 // localStorage轉型
 const storageMethods = {
@@ -119,14 +118,16 @@ export default {
       if (this.myFavorite.includes(item.id)) {
         this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
         storageMethods.setItem(this.myFavorite)
+        this.emitter.emit('send-favorite', this.myFavorite)
         this.$swal({ icon: 'warning', title: '已從最愛中移除' })
         console.log('存過囉！')
       } else {
         this.myFavorite.push(item.id)
         storageMethods.setItem(this.myFavorite)
-        this.emitter.emit('send-favorite', item)
+        // this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '儲存成功！' })
       }
+      console.log(this.myFavorite)
     },
     searchProduct (value) {
       this.productValue = 'total'
@@ -204,12 +205,14 @@ export default {
   },
   mounted () {
     // this.$refs.applyModal.showModal()
+    console.log(this.myFavorite)
     this.getProducts()
     this.productValue = 'total'
   },
   components: {
     pagination,
     applyModal
+    // Canvas
   }
 }
 </script>
