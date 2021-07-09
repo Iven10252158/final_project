@@ -118,7 +118,7 @@ export default {
       if (this.myFavorite.includes(item.id)) {
         this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
         storageMethods.setItem(this.myFavorite)
-        this.emitter.emit('send-favorite', this.myFavorite)
+        // this.emitter.emit('send-favorite', this.myFavorite)
         this.$swal({ icon: 'warning', title: '已從最愛中移除' })
         console.log('存過囉！')
       } else {
@@ -127,7 +127,8 @@ export default {
         // this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '儲存成功！' })
       }
-      console.log(this.myFavorite)
+      this.emitter.emit('favorite-qty', this.myFavorite)
+      // console.log('this.myFavorite', this.myFavorite.length)
     },
     searchProduct (value) {
       this.productValue = 'total'
@@ -205,7 +206,8 @@ export default {
   },
   mounted () {
     // this.$refs.applyModal.showModal()
-    console.log(this.myFavorite)
+    this.emitter.emit('favorite-qty', this.myFavorite)
+    // console.log(this.myFavorite)
     this.getProducts()
     this.productValue = 'total'
   },

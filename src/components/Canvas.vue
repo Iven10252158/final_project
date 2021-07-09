@@ -1,7 +1,7 @@
 <template>
  <div class="offcanvas offcanvas-end" tabindex="-1" ref="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header mb-0">
-    <h5 class="offcanvasRightLabel">Offcanvas right</h5>
+    <h5 class="offcanvasRightLabel">我的最愛</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -84,10 +84,10 @@ export default {
   },
   mounted () {
     this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
-    this.emitter.on('send-favorite', (data) => {
+    // this.emitter.on('send-favorite', (data) => {
     //   console.log('emitter-on', data)
-    //   this.getFavorite()
-    })
+    // //   this.getFavorite()
+    // })
     this.getProducts()
   }
 }

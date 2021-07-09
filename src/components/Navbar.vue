@@ -26,6 +26,11 @@
             <a href="#" class="h4 nav-link" @click.prevent="openCanvas">
               <i class="fas fa-bookmark"></i>
             </a>
+             <div class="position-relative">
+                <span class="favoriteQty rounded-pill position-absolute badge bg-warning text-white" >
+                  {{favoriteNum}}
+                </span>
+            </div>
             <router-link to="/login" class="h4 nav-link">
                 <i class="fas fa-user-alt"></i>
             </router-link>
@@ -38,11 +43,6 @@
                 </span>
               </div>
             <Canvas ref="canvas"></Canvas>
-              <!-- <div class="position-relative" v-for="item in carts" :key="item">
-                <span class="cartQty rounded-pill position-absolute badge bg-warning text-white" v-if="item">
-                  {{item.length}}
-                </span>
-              </div> -->
         </div>
         </div>
         </div>
@@ -64,7 +64,8 @@ export default {
       classList: {
         navBarTop: ''
       },
-      mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || []
+      mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || [],
+      favoriteNum: 0
     }
   },
   methods: {
@@ -102,12 +103,20 @@ export default {
     this.emitter.on('update-qty', () => {
       this.getCartList()
     })
+    this.emitter.on('favorite-qty', (data) => {
+      this.favoriteNum = data.length
+      console.log('favorite-qty', data.length)
+    })
   }
 }
 </script>
 
 <style lang="scss">
   .cartQty{
+    bottom:35px;
+    right:-3px;
+  }
+  .favoriteQty{
     bottom:35px;
     right:-3px;
   }
