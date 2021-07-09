@@ -114,6 +114,10 @@ export default {
     }
   },
   methods: {
+    getFavorite () {
+      this.myFavorite = storageMethods.getItem() || []
+      console.log(this.myFavorite)
+    },
     addMyFavorite (item) {
       if (this.myFavorite.includes(item.id)) {
         this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
@@ -205,6 +209,11 @@ export default {
     }
   },
   mounted () {
+    this.emitter.on('remove-data', (data) => {
+      this.getFavorite()
+      console.log('remove-data', data)
+    })
+    // console.log('productsMountes', this.myFavorite)
     // this.$refs.applyModal.showModal()
     this.emitter.emit('favorite-qty', this.myFavorite)
     // console.log(this.myFavorite)

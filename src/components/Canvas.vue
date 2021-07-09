@@ -50,24 +50,35 @@ export default {
   },
   methods: {
     showCanvas (data) {
-      console.log('data', data)
+      console.log('favoItem', data)
       this.favoItem = data
       this.getProducts()
       this.bsOffcanvas.show()
     },
-    remove (item, index) {
-      this.filters.splice(index, 1)
-      storageMethods.setItem(this.filters)
-      console.log(item, index)
-    },
     getFavorite () {
-    //   console.log('this.favoItem', this.favoItem)
+      //   console.log('this.favoItem', this.favoItem)
       this.filters = this.allProducts.filter((item, index) => {
         if (this.favoItem.includes(item.id)) {
-          console.log('我是最愛', item)
+        //   console.log('我是最愛', item)
           return item
         }
         // console.log(this.favoItem.includes(item.id))
+      })
+    },
+    remove (item) {
+      this.favoItem = storageMethods.getItem() || []
+      //   console.log('favoItem', this.favoItem)
+      //   console.log('filters', this.filters)
+      console.log(item.id)
+      this.filters.forEach((element, index) => {
+        if (element.id === item.id) {
+          this.favoItem.splice(index, 1)
+          storageMethods.setItem(this.favoItem)
+          this.getProducts()
+          console.log(this.favoItem.length)
+          this.emitter.emit('favorite-qty', this.favoItem)
+          this.emitter.emit('remove-data', this.favoItem)
+        }
       })
     },
     getProducts () {
