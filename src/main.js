@@ -1,4 +1,8 @@
 import { createApp } from 'vue'
+import animated from 'animate.css'
+// scroll library套件
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 // sweetAlert套件
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
@@ -42,8 +46,12 @@ const options = {
   toast: true,
   position: 'center',
   showConfirmButton: false,
+  confirmButtonColor: '#7b9d82',
   timer: 3000
 }
+AOS.init({
+  once: true
+})
 const app = createApp(App)
 app.use(VueSweetalert2, options)
 // 2.將“千分號”設定為全域屬性
@@ -53,6 +61,7 @@ app.component('Form', Form)
 app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
 app.component('Loading', VueLoading)
+app.use(animated)
 app.use(VueAxios, axios)
 app.use(router)
 app.mount('#app')

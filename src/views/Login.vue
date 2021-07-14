@@ -34,8 +34,6 @@ export default {
     return {
       account: '',
       password: '',
-      token: '',
-      expired: '',
       isShow: true
     }
   },
@@ -54,21 +52,15 @@ export default {
         .then((res) => {
           if (res.data.success) {
             const { token, expired } = res.data
-            this.token = token
-            this.expired = expired
             this.MessageStatus(res, '登入')
-            console.log(this.token)
-            console.log(this.expired)
             // 把token、expired存到cookie裡
             document.cookie = `week3homeworkTK=${token}; expires=${new Date(expired)}; path=/`
-            this.$router.push('/admin')
+            this.$router.push('/admin/admin_products')
           } else {
             this.MessageStatus(res, '登入')
           }
         })
     }
-  },
-  mounted () {
   }
 }
 </script>

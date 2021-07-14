@@ -11,6 +11,10 @@ const routes = [
         component: () => import('@/views/Index.vue')
       },
       {
+        path: '/index',
+        component: () => import('@/views/Index.vue')
+      },
+      {
         path: 'about',
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
       },
@@ -35,6 +39,10 @@ const routes = [
         component: () => import('@/views/OrderCheckout.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue')
   },
   {
     path: '/admin',

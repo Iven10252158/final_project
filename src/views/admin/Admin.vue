@@ -42,11 +42,6 @@
         </ul>
       </div>
     </nav>
-    <!-- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex mt-4 me-2">
-          <h2>管理後台</h2>
-        </div>
-    </main> -->
   </div>
 </div>
 <router-view></router-view>
@@ -55,17 +50,14 @@
 <script>
 export default {
   inject: ['MessageStatus'],
-  data () {
-    return {
-
-    }
-  },
   methods: {
     logout () {
       const api = `${process.env.VUE_APP_URL}logout`
       this.$http.post(api)
         .then(res => {
+          console.log(res)
           if (res.data.success) {
+            document.cookie = 'week3homeworkTK=; expires=; path=/'
             this.$router.push('/login')
             console.log(res)
           } else {
@@ -85,11 +77,10 @@ export default {
       this.$http.post(api)
         .then(res => {
           if (res.data.success) {
-            // this.MessageStatus(res)
             console.log('卻可api', res)
-            // this.$router.push('/admin')
           } else {
             this.MessageStatus(res, '登入')
+            this.$router.push('/login')
           }
         }).catch(err => {
           console.log(err)

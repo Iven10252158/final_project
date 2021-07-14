@@ -1,32 +1,22 @@
 <template>
  <NavBar></NavBar>
  <bannerSwiper></bannerSwiper>
- <!-- <div class="banner bg-cover d-flex justify-content-end align-items-center pe-5">
-    <div class="banner-text text-white">
-        <h1>CLIMBER</h1>
-        <h3>最美的風景，在台灣</h3>
-        <h5>那些你值得知道的山林小故事</h5>
-    </div>
-  </div> -->
-    <Loading :active= "isLoading">
-        <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
-        <div></div><div><div></div></div>
-        </div></div>
-    </Loading>
     <div class="container">
         <section class="row g-0 flex-column-reverse flex-lg-row mt-0">
              <div class="col-12 col-lg-6 d-flex align-items-center">
-                <ul class="list-unstyled px-sm-5 pt-5">
+                <ul data-aos="fade-right" data-aos-duration="1000" class="list-unstyled px-sm-5 pt-3">
                     <li class="h3">消失的鐵道 -- 眠月線</li>
-                    <li class="pt-2">眠月線，1915年通車，日治時代作為木材運輸路線。是阿里山森林鐵路的支線之一，從阿里山車站至石猴車站，全長大約9.2公里。民國72年發展為光觀產業，使用古老的蒸汽火車載客。
+                    <li class="p-2">眠月線，1915年通車，日治時代作為木材運輸路線。是阿里山森林鐵路的支線之一，從阿里山車站至石猴車站，全長大約9.2公里。民國72年發展為光觀產業，使用古老的蒸汽火車載客。
                         民國88年九二一地震震毀了阿里山的森林鐵路，耗時大量的經費與時間，民國98年修復完成，還沒開始通車就遭遇八八風災，破壞了鐵路的地基，復駛之路遙遙無期。
                         眠月線百年來歷經滄桑，路線停駛後長年封印於塔山。民國109年初解除入山管制，在社群媒體帶動曝光下，眠月線美景再度成為熱門打卡景點。 </li>
-                    <li class="indexBtn btn btn-outline-primary rounded-0 mt-3 px-5">
-                        <p class="mb-0">查看更多</p>
+                    <li>
+                        <router-link to="/products" class="indexBtn btn btn-outline-primary rounded-0 mt-3 px-5">
+                            <p class="mb-0">查看更多</p>
+                        </router-link>
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-lg-6 mt-5 d-flex">
+            <div class="col-12 col-lg-6 mt-5">
                 <img src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1624873579949.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hEnQ5FkUFLT90gqKaB0lDM5BRnsHkQui5lN0zHbq%2FCQs7vsrVoIQO0k0ZpoTX6V%2Fds7EZRCcVsfmjOmq%2BtByLQ8UH%2FwPEmBCh6gXD8yclPF8G9mX%2BMt38MgiLOnPrBEE7Bggf2spL%2BjmlvJMTFzJMX1fgI2CoeRrzvziWaQWliA%2BotmVaiSomf53Qbnx0Q4SLCUidSOyolRvw%2BnjOfFMo32SZKe9EbQnLJgIILHOC4U%2B7nIvOhB6E%2Bt7oPJ%2B%2BchU8OnIGpyPi9V8REeWJO6pNvl2C8CYivXTcaKhUCmj%2F8aqNJS7lN58q81F5tjpkUOu4RGhVX6oFaVZEY2Fg8q1tw%3D%3D" alt="">
             </div>
         </section>
@@ -35,36 +25,44 @@
                 <img src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="">
             </div>
            <div class="col-12 col-lg-6 d-flex align-items-center">
-                <ul class="list-unstyled px-sm-5">
+                <ul data-aos="fade-left" data-aos-duration="1000" class="list-unstyled px-sm-5 pt-3">
                     <li class="h3">天使的眼淚 -- 嘉明湖</li>
-                    <li>有人說嘉明湖是「天使的眼淚」、是「上帝遺留在人間的藍寶石」，布農族人稱它為「月亮的鏡子」。這些浪漫的形容詞是許多人對嘉明湖的第一印象。
+                    <li class="pt-2">有人說嘉明湖是「天使的眼淚」、是「上帝遺留在人間的藍寶石」，布農族人稱它為「月亮的鏡子」。這些浪漫的形容詞是許多人對嘉明湖的第一印象。
                         海拔3310公尺，是台灣第二高的高山湖泊，佔地面積1.9公頃，是近年來著名的台灣深山景點。但鮮為人知的是嘉明湖是冰河所遺留的冰斗地形，這也說明了，台灣曾經經歷過冰河時期，只是也許那時候還沒有台灣而已。</li>
-                    <li class="indexBtn btn btn-outline-primary rounded-0 mt-3 px-5">
-                        <p class="mb-0">查看更多</p>
+                    <li>
+                        <router-link to="/products" class="indexBtn btn btn-outline-primary rounded-0 mt-3 px-5">
+                            <p class="mb-0">查看更多</p>
+                        </router-link>
                     </li>
                 </ul>
             </div>
         </section>
     </div>
     <section>
-        <div class="bg-cover article mt-5 pt-3" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80')">
-        <ul class="lnt list-unstyled rounded p-3 text-center text-white">
-            <li class="h3">為了延續美好的山林，請遵守無痕山林運動</li>
-            <li class="h6">Leave No Trace(LNT)於 2006 年底在台灣正式命名為「無痕山林運動」</li>
-            <li class="h6">顧名思義就是<br>「不留下任何痕跡在山林」</li>
+        <div class="bg-cover article my-5 pt-3 d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:200px">
+        <ul class="list-unstyled rounded text-center text-white p-3">
+            <li class="h3 lh-base">為了延續美好的山林 <span class="d-none d-sm-inline-block">，</span> 請遵守無痕山林運動</li>
+            <li class="h6 lh-base">Leave No Trace(LNT)於 2006 年底在台灣正式命名為「無痕山林運動」</li>
+            <li class="h6 lh-base">顧名思義就是「不留下任何痕跡在山林」</li>
         </ul>
         </div>
     </section>
-    <div class="container">
-        <h3>決定要享受一場山林的沐浴了嗎？</h3>
-    </div>
+    <Knowledge></Knowledge>
+    <CustomFeedback></CustomFeedback>
+    <subscribe></subscribe>
 </template>
 
 <script>
+import Knowledge from '@/components/Knowledge.vue'
+import CustomFeedback from '@/components/CustomFeedback.vue'
 import bannerSwiper from '@/components/BannerSwiper.vue'
+import subscribe from '@/components/Subscribe.vue'
 export default {
   components: {
-    bannerSwiper
+    bannerSwiper,
+    Knowledge,
+    CustomFeedback,
+    subscribe
   },
   data () {
     return {
@@ -122,7 +120,4 @@ export default {
         background-position: center center;
         background-size: cover;
     }
-    // .lnt{
-    //     background-color: rgba(255, 255, 255,0.5);
-    // }
 </style>

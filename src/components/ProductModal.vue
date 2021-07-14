@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-            <span v-if="!isNew">新增產品</span>
+            <span v-if="isNew">新增產品</span>
             <span v-else>編輯產品</span>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -98,11 +98,10 @@ import modalMixin from '@/mixins/modalMixin'
 
 export default {
   mixins: [modalMixin],
-  props: ['product'],
+  props: ['product', 'isNew'],
   data () {
     return {
       bsModal: '',
-      isNew: false,
       tempProduct: {}
     }
   },

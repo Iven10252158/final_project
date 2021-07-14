@@ -8,7 +8,6 @@
        <div class="row">
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-end mt-3">
-                  <!-- <Toast></Toast> -->
                     <button type='button' class="btn btn-primary text-white" @click="openModal('new')">新增產品</button>
                 </div>
                 <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
@@ -43,7 +42,7 @@
                 </table>
                 <div class="d-flex justify-content-center">
                     <pagination :pages="pagination" @change-page="getProducts"></pagination>
-                    <product-modal ref='productModal' :product="tempProduct" @check-save="updateProduct"></product-modal>
+                    <product-modal ref='productModal' :product="tempProduct" :isNew="isNew" @check-save="updateProduct"></product-modal>
                     <delete-modal ref="deleteModal" :delProduct="tempProduct" @check-delete="deleteProduct"></delete-modal>
                 </div>
             </main>
@@ -54,7 +53,7 @@
 <script>
 import pagination from '@/components/Pagination.vue'
 import ProductModal from '@/components/ProductModal.vue'
-import DeleteModal from '@/components/DelProductModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
 // import Toast from '@/components/ToastMessages.vue'
 
 export default {

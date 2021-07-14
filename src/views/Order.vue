@@ -42,17 +42,9 @@
                 </div>
             </Form>
         </div>
-        <div class="col-6">
-          <div class="border p-3 rounded-0">
-            <h4 class="mt-2 border-bottom pb-2 px-2">訂單明細</h4>
-            <div v-for="item in cart.carts" :key="item.id">
-              {{item.product.title}}
-            </div>
-          </div>
         </div>
         </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -107,3 +99,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .bg-cover{
+    background-position: center center;
+    background-size: cover;
+  }
+</style>

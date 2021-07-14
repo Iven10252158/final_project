@@ -6,7 +6,7 @@
     </div></div>
   </Loading>
   <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1592805145006-353114433db5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80');height:400px">
-      <div class="cart-text text-white">
+      <div class="banner-text text-white">
           <h3 class="pt-2">購物車</h3>
       </div>
   </div>
@@ -76,7 +76,8 @@
       <!-- 套用優惠券 -->
       <div class="input-group mb-3">
         <input type="text" class="form-control rounded-0" v-model="coupon_code" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon">套用優惠券</span>
+        <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon"
+        :class="{'disabled':finalPrice }">套用優惠券</span>
       </div>
       <div :class="{ 'text-decoration-line-through':isTrue, 'text-secondary':isTrue, 'p':isTrue}">
         <p class="h5 text-end pe-5">總計:
@@ -248,7 +249,7 @@ export default {
           color:#fff
         }
     }
-    .cart-text{
+    .banner-text{
       padding:20px 60px;
       background-color:rgba(0, 0, 0,0.5);
     }

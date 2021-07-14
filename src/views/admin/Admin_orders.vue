@@ -66,7 +66,7 @@
 <script>
 import pagination from '@/components/Pagination.vue'
 import ordersModal from '@/components/OrdersModal.vue'
-import deleteOrderModal from '@/components/DelProductModal.vue'
+import deleteOrderModal from '@/components/DeleteModal.vue'
 export default {
   components: {
     pagination,

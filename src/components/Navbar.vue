@@ -1,28 +1,30 @@
 <template>
-    <nav class="navbar navbar-expand-lg  navbar-dark py-0 fixed-top"
-    :class="classList.navBarTop">
+    <nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top z-index-3"
+    :class="[classList.navBarTop,{'bg-primary': isPutColor}]">
         <div class="container">
         <a class="navbar-brand">
-            <router-link to="/" class="text-white fw-bold">
+            <router-link to="/" class="text-white fw-bold d-flex align-items-center">
             <img src="../assets/Climbing.svg" width="50" alt="">
+            <span class="h3 text-white ps-2 mb-0">CLIMBER</span>
             </router-link>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="isPutColor = !isPutColor">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
-            <li class="nav-item">
-                <router-link to="/" class="h6 nav-link">首頁</router-link>
+            <li class="nav-item text-center">
+                <router-link to="/index" class="h6 nav-link">首頁</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-center">
                 <router-link to="/about" class="h6 nav-link">關於我們</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-center">
                 <router-link to="/products" class="h6 nav-link">產品列表</router-link>
             </li>
         </ul>
-        <div class="d-flex">
+        <div class="d-flex justify-content-center">
             <a href="#" class="h4 nav-link" @click.prevent="openCanvas">
               <i class="fas fa-bookmark"></i>
             </a>
@@ -60,9 +62,10 @@ export default {
   inject: ['emitter'],
   data () {
     return {
+      isPutColor: false,
       cart: {},
       classList: {
-        navBarTop: ''
+        navBarTop: true
       },
       mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || [],
       favoriteNum: 0
@@ -111,7 +114,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .cartQty{
     bottom:35px;
     right:-3px;
