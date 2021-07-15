@@ -45,11 +45,14 @@ export default {
   },
   methods: {
     sendMsg (item) {
+      this.user.email = ''
+      this.user.msg = ''
       this.$swal({
         icon: 'success',
         title: '訊息發送成功！'
       })
       this.$emit('send-msg', this.tempMsg)
+      this.$refs.modal.resetForm()
     }
   }
 }

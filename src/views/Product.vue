@@ -114,10 +114,10 @@ export default {
   methods: {
     openContentModal () {
       this.$refs.contentModal.showModal()
-      this.$refs.contentModal.resetForm()
     },
     hideContentModal (item) {
       this.$refs.contentModal.hideModal()
+      this.$refs.contentModal.resetForm()
     },
     click (item, index) {
       this.imgUrl = item
