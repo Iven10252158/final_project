@@ -17,12 +17,12 @@
             </ul>
         </div>
         <div class="col-12 col-lg-6 mt-5">
-            <img src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1624873579949.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hEnQ5FkUFLT90gqKaB0lDM5BRnsHkQui5lN0zHbq%2FCQs7vsrVoIQO0k0ZpoTX6V%2Fds7EZRCcVsfmjOmq%2BtByLQ8UH%2FwPEmBCh6gXD8yclPF8G9mX%2BMt38MgiLOnPrBEE7Bggf2spL%2BjmlvJMTFzJMX1fgI2CoeRrzvziWaQWliA%2BotmVaiSomf53Qbnx0Q4SLCUidSOyolRvw%2BnjOfFMo32SZKe9EbQnLJgIILHOC4U%2B7nIvOhB6E%2Bt7oPJ%2B%2BchU8OnIGpyPi9V8REeWJO6pNvl2C8CYivXTcaKhUCmj%2F8aqNJS7lN58q81F5tjpkUOu4RGhVX6oFaVZEY2Fg8q1tw%3D%3D" alt="">
+            <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1624873579949.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hEnQ5FkUFLT90gqKaB0lDM5BRnsHkQui5lN0zHbq%2FCQs7vsrVoIQO0k0ZpoTX6V%2Fds7EZRCcVsfmjOmq%2BtByLQ8UH%2FwPEmBCh6gXD8yclPF8G9mX%2BMt38MgiLOnPrBEE7Bggf2spL%2BjmlvJMTFzJMX1fgI2CoeRrzvziWaQWliA%2BotmVaiSomf53Qbnx0Q4SLCUidSOyolRvw%2BnjOfFMo32SZKe9EbQnLJgIILHOC4U%2B7nIvOhB6E%2Bt7oPJ%2B%2BchU8OnIGpyPi9V8REeWJO6pNvl2C8CYivXTcaKhUCmj%2F8aqNJS7lN58q81F5tjpkUOu4RGhVX6oFaVZEY2Fg8q1tw%3D%3D" alt="">
         </div>
     </section>
-    <section class="row g-0 flex-lg-row">
-        <div class="col-12 col-lg-6 d-flex">
-            <img src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="">
+    <section class="row g-0 flex-column-reverse flex-lg-row mt-0">
+        <div class="col-12 col-lg-6">
+            <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="">
         </div>
         <div class="col-12 col-lg-6 d-flex align-items-center">
             <ul data-aos="fade-left" data-aos-duration="1000" class="list-unstyled px-sm-5 pt-3">
@@ -63,21 +63,14 @@ export default {
     Knowledge,
     CustomFeedback,
     subscribe
-  },
-  data () {
-    return {
-      isLoading: true
-    }
-  },
-  mounted () {
-    this.isLoading = true
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1000)
   }
 }
 </script>
 <style lang="scss">
+.bg-cover{
+    background-position: center center;
+    background-size: cover;
+    }
 .indexBtn {
     cursor: pointer;
     // background-attachment: fixed;ground-color: transparent;
@@ -105,11 +98,6 @@ export default {
         }
     }
 }
-
-    img{
-        max-width: 100%;
-        object-fit: cover;
-    }
     .bg-cover{
         background-position: center center;
         background-size: cover;

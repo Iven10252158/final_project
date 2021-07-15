@@ -11,16 +11,16 @@
     一直到2019年的暑假登上日本富士山的那天，那天在富士山的山腳下，風和日麗、晴空萬里。準備踏上日本人眼中的聖山 -- 富士山。沒有人知道在山頂等著這些登山客的是瞬息萬變的天氣及經驗不足的判斷力。
     準備攻頂富士山看日出的凌晨，因為沒有專業領隊的幫忙，途中颳風下雨幾乎全身淋濕，也沒有撤退的能力，只能不斷向前走。在艱困的時刻，社長內心燃起了對於挑戰的渴求。這是CLIMBER成立的原因，希望帶給其他想走入山林的人，能夠在經驗豐富的領隊帶領之下淬煉出更好的自己。</p>
     <div class="bg-cover mb-3" style="background-image:url('https://images.unsplash.com/photo-1546529249-8de036dd3c9a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');padding-top:49%"></div>
-    <div class="row g-0 g-md-4">
-      <div class="col-12 col-md-4 flex-column flex-md-row">
+    <div class="row g-0 g-md-4 d-flex flex-column flex-md-row">
+      <div class="col-12 col-md-4">
         <div class="bg-cover mb-md-3" style="background-image:url('https://images.unsplash.com/photo-1595248588362-18a894e156d1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');padding-top:55%"></div>
       </div>
-      <div class="col-12 col-md-4 mb-3 bg-warning p-3 flex-column flex-md-row">
+      <div class="col-12 col-md-4 mb-3 bg-warning p-3">
         <h5 class="text-center">專業，為戶外活動注入更多的安全因子</h5>
         <p class="fs-6 mb-0">我們積極招募充滿熱情、活力具備專業知識的夥伴加入我們的團隊。在戶外活動中，安全為首要考量。必須讓每個參與登山的人擁有安全的知識外，也期待他們有招一日能夠用自己的力量踏上這片迷人的山林。
         </p>
       </div>
-      <div class="col-4 d-none d-md-block flex-column flex-md-row">
+      <div class="col-md-4 d-none d-md-inline-block">
         <div class="bg-cover mb-3" style="background-image:url('https://images.unsplash.com/photo-1464198016405-33fd4527b89d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=692&q=80');padding-top:55%"></div>
       </div>
     </div>

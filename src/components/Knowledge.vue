@@ -54,7 +54,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .bg-cover{
         background-position: center center;
         background-size: cover;
@@ -72,7 +72,7 @@
     .image{
         &:hover{
             .mask{
-                cursor: pointer;
+                // cursor: pointer;
                 opacity:1;
             }
         }

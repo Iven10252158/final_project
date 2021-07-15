@@ -83,6 +83,6 @@ export default {
         right:0 ;
     }
     .card{
-        background:#fff; //rgb(230, 230, 230);
+      background:#fff; //rgb(230, 230, 230);
     }
 </style>

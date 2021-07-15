@@ -37,13 +37,13 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .bg-cover{
         background-position: center center;
         background-size: cover;
         height: 300px;
     }
     .e-paper{
-        letter-spacing: 2px;
+      letter-spacing: 2px;
     }
 </style>
