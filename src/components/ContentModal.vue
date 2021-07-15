@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" @click="close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <Form  v-slot="{ errors }" @submit="createOrder">
+        <Form v-slot="{ errors }" ref="form">
           <Field id="email" name="email" type="email" class="form-control mb-3"
           :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入您的電子信箱"
           rules="email|required" v-model="user.email"></Field>
@@ -45,14 +45,12 @@ export default {
   },
   methods: {
     sendMsg (item) {
-      this.user.email = ''
-      this.user.msg = ''
       this.$swal({
         icon: 'success',
         title: '訊息發送成功！'
       })
       this.$emit('send-msg', this.tempMsg)
-      this.$refs.modal.resetForm()
+      this.$refs.form.resetForm()
     }
   }
 }

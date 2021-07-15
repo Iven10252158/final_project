@@ -117,7 +117,6 @@ export default {
     },
     hideContentModal (item) {
       this.$refs.contentModal.hideModal()
-      this.$refs.contentModal.resetForm()
     },
     click (item, index) {
       this.imgUrl = item

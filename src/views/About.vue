@@ -70,10 +70,6 @@ export default {
   .content{
     letter-spacing: 2px;
   }
-  // .about{
-  //   // padding-top: 74px;
-  //   min-height: calc(100vh - 74px);
-  // }
   .banner-text{
     padding: 20px 60px;
     background-color:rgba(0, 0, 0,0.3);

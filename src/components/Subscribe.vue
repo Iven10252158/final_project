@@ -7,7 +7,7 @@
                 <h5>獲得八折優惠券！</h5>
             </div>
             <div class="col-12 col-sm-6">
-                <Form class="input-group" v-slot="{ errors }" @submit="createOrder">
+                <Form class="input-group" v-slot="{ errors }" ref="form">
                     <Field id="email" name="email" type="email" class="form-control"
                     :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email"
                     rules="email|required" v-model="email"></Field>
@@ -31,9 +31,8 @@ export default {
   },
   methods: {
     subscribe () {
-      this.$swal({ icon: 'success', title: '訂閱成功！', titleText: '恭喜獲得折扣碼：climber_01', showConfirmButton: true, timer: 10000 })
-      this.email = ''
-      this.resetForm()
+      this.$swal({ icon: 'success', title: '訂閱成功！恭喜獲得折扣碼：climber_01', showConfirmButton: true, timer: 10000 })
+      this.$refs.form.resetForm()
     }
   }
 }

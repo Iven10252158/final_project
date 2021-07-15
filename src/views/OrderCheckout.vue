@@ -1,5 +1,5 @@
 <template>
-<NavBar></NavBar>
+<!-- <NavBar></NavBar> -->
 <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1592805145006-353114433db5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80');height:400px"></div>
 <div class="container my-4">
   <h4 class="text-primary mb-0 py-2">訂單資料</h4>
@@ -53,11 +53,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/Navbar.vue'
+// import NavBar from '@/components/Navbar.vue'
 export default {
-  components: {
-    NavBar
-  },
+  // components: {
+  //   NavBar
+  // },
   data () {
     return {
       orderID: '',

@@ -1,21 +1,21 @@
 <template>
-    <swiper ref="{swiperRef}" :centeredSlides="true" :spaceBetween="30"
-    :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center w-100">
-        <swiper-slide v-for="(item,index) in banner " :key="index">
-            <div class="bg-cover SwiperBanner" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
-            <div class="banner-box d-flex align-items-center justify-content-center justify-content-lg-start ms-0 ps-lg-7">
-                <div data-aos="flip-up" data-aos-duration="1000" class="banner-text text-white mt-6">
-                    <div class="fs-1 lh-base">連綿的山峰</div>
-                    <div class="fs-5 fs-lg-3 lh-base">是我們最堅固的屏障，也是都市人的世外桃源</div>
-                    <div class="fs-6  lh-base">讓我們一起欣賞台灣最美的風景。</div>
-                    <button type="button" class="btn btn-primary mt-2">
-                      <router-link to="/products" class="h6 text-white">查看登山行程</router-link>
-                    </button>
-                </div>
-            </div>
-            </div>
-        </swiper-slide>
-    </swiper>
+  <swiper ref="{swiperRef}" :centeredSlides="true" :spaceBetween="30"
+  :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center w-100">
+    <swiper-slide v-for="(item,index) in banner " :key="index">
+      <div class="bg-cover SwiperBanner" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
+        <div class="banner-box d-flex align-items-center justify-content-center justify-content-lg-start ms-0 ps-lg-7">
+          <div data-aos="flip-up" data-aos-duration="1000" class="banner-text text-white mt-6">
+            <div class="fs-1 lh-base">連綿的山峰</div>
+            <div class="fs-5 fs-lg-3 lh-base">是我們最堅固的屏障，也是都市人的世外桃源</div>
+            <div class="fs-6  lh-base">讓我們一起欣賞台灣最美的風景。</div>
+            <button type="button" class="btn btn-primary mt-2">
+              <router-link to="/products" class="h6 text-white">查看登山行程</router-link>
+            </button>
+          </div>
+        </div>
+      </div>
+    </swiper-slide>
+  </swiper>
 </template>
 
 <script>
