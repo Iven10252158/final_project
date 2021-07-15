@@ -1,5 +1,5 @@
 <template>
-<NavBar></NavBar>
+<!-- <NavBar></NavBar> -->
 <bannerSwiper></bannerSwiper>
 <div class="container">
     <section class="row g-0 flex-column-reverse flex-lg-row mt-0">
@@ -108,6 +108,7 @@ export default {
 
     img{
         max-width: 100%;
+        object-fit: cover;
     }
     .bg-cover{
         background-position: center center;
