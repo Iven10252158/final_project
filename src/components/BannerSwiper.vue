@@ -1,8 +1,8 @@
 <template>
   <swiper ref="{swiperRef}" :centeredSlides="true" :spaceBetween="30"
-  :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center w-100">
+  :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center">
     <swiper-slide v-for="(item,index) in banner " :key="index">
-      <div class="bg-cover SwiperBanner" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
+        <div class="bg-cover" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
         <div class="banner-box d-flex align-items-center justify-content-center justify-content-lg-start ms-0 ps-lg-7">
           <div data-aos="flip-up" data-aos-duration="1000" class="banner-text text-white mt-6">
             <div class="fs-1 lh-base">連綿的山峰</div>
@@ -60,6 +60,10 @@ export default {
 </script>
 
 <style lang="scss">
+.bg-cover{
+  background-position: center center;
+  background-size: cover;
+}
 .banner-box{
     height: 500px;
   }
@@ -67,7 +71,4 @@ export default {
     padding: 20px 60px;
     background-color:rgba(0, 0, 0,0.5);
   }
-.title {
-  font-size: calc(1.525rem + 3.3vw);
-}
 </style>

@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $banner-text-bg-color:rgba(0, 0, 0,0.3);
   .content{
     letter-spacing: 2px;
