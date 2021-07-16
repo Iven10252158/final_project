@@ -28,9 +28,9 @@
             <a href="#" class="h4 nav-link" @click.prevent="openCanvas">
               <i class="fas fa-bookmark"></i>
             </a>
-             <div class="position-relative">
-                <span class="favoriteQty rounded-pill position-absolute badge bg-warning text-white" >
-                  {{favoriteNum}}
+             <div class="position-relative" v-if="myFavorite">
+                <span class="navBarQty rounded-pill position-absolute badge bg-warning text-white" >
+                  {{ myFavorite.length }}
                 </span>
             </div>
             <router-link to="/login" class="h4 nav-link">
@@ -40,7 +40,7 @@
                 <i class=" fas fa-cart-plus"></i>
             </router-link>
             <div class="position-relative" v-if="cart.carts">
-                <span class="cartQty rounded-pill position-absolute badge bg-warning text-white" >
+                <span class="navBarQty rounded-pill position-absolute badge bg-warning text-white" >
                   {{cart.carts.length}}
                 </span>
               </div>
@@ -68,10 +68,14 @@ export default {
         navBarTop: true
       },
       mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || [],
-      favoriteNum: 0
+      myFavorite: ''
     }
   },
   methods: {
+    getFavorite () {
+      this.myFavorite = JSON.parse(localStorage.getItem('MyFavorite')) || []
+      // console.log('getFavorite', this.myFavorite)
+    },
     openCanvas () {
       const data = JSON.parse(localStorage.getItem('MyFavorite')) || []
       this.$refs.canvas.showCanvas(data)
@@ -87,8 +91,19 @@ export default {
           console.log(this.cart)
         })
     }
+    // payOrder () {
+    //   const url = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/pay/${this.orderID}`
+    //   this.$http.post(url)
+    //     .then(res => {
+    //       console.log(res)
+    //       if (res.data.success) {
+    //         this.getCartList()
+    //       }
+    //     })
+    // }
   },
   mounted () {
+    this.getFavorite()
     this.getCartList()
     window.addEventListener('scroll', () => {
     // console.log(window.scrollY)
@@ -104,22 +119,24 @@ export default {
       }
     })
     this.emitter.on('update-qty', () => {
+      // this.payOrder()
       this.getCartList()
     })
-    this.emitter.on('favorite-qty', (data) => {
-      this.favoriteNum = data.length
-      console.log('favorite-qty', data.length)
+    this.emitter.on('favorite-qty', () => {
+      this.getFavorite()
+      // console.log('getFavorite', this.myFavorite.length)
+      // console.log('favorite-qty', data.length)
     })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .cartQty{
-    bottom:35px;
-    right:-3px;
+  $primary-bg:rgba(0, 0, 0,0.1);
+  .navbar{
+    background-color: $primary-bg;
   }
-  .favoriteQty{
+  .navBarQty{
     bottom:35px;
     right:-3px;
   }

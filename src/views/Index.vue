@@ -41,9 +41,9 @@
 <section>
     <div class="bg-cover article my-5 pt-3 d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:200px">
         <ul class="list-unstyled rounded text-center text-white p-3">
-            <li class="h3 lh-base">為了延續美好的山林 <span class="d-none d-sm-inline-block">，</span> 請遵守無痕山林運動</li>
-            <li class="h6 lh-base">Leave No Trace(LNT)於 2006 年底在台灣正式命名為「無痕山林運動」</li>
-            <li class="h6 lh-base">顧名思義就是「不留下任何痕跡在山林」</li>
+            <li class="article-title lh-base">為了延續美好的山林 <span>，</span> 請遵守無痕山林運動</li>
+            <li class="lh-base">Leave No Trace(LNT)於 2006 年底在台灣正式命名為「無痕山林運動」</li>
+            <li class="lh-base">顧名思義就是「不留下任何痕跡在山林」</li>
         </ul>
     </div>
 </section>
@@ -67,6 +67,8 @@ export default {
 }
 </script>
 <style lang="scss">
+$primary:#7b9d82;
+$text-color:#fff;
 .bg-cover{
     background-position: center center;
     background-size: cover;
@@ -85,28 +87,34 @@ export default {
         width: 0%;
         height: 100%;
         display: block;
-        background-color: #7b9d82;
+        background-color: $primary;
         position: absolute;
         top: 0;
         left: 0;
         transition: all .5s ease;
     }
     &:hover {
-        color: #fff;
+        color: $text-color;
         &::before {
             width: 100%;
         }
     }
 }
-    .bg-cover{
-        background-position: center center;
-        background-size: cover;
+.article{
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+.article-title{
+    font-size: 28px;
+    font-weight: bold;
+    @media(min-width:320px) {
+        font-size:16px ;
     }
-    .article{
-        margin: 0 auto;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center center;
-        background-size: cover;
+    @media(min-width:576px) {
+        font-size: 24px;
     }
+}
 </style>

@@ -18,10 +18,12 @@ export default {
 </script>
 
 <style lang="scss">
+$text-color:#fff;
+$nav-text-bottom-line:#000;
   .nav-link{
-    color: #fff; //#000;
+    color: $text-color;
    &:hover{
-     border-bottom: 3px solid #000;
+     border-bottom: 3px solid $nav-text-bottom-line;
      padding-bottom: 3px;
     }
   }

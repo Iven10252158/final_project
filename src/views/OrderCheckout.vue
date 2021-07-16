@@ -15,6 +15,7 @@
               <p class="text-danger mb-2">{{item.product.program}}</p>
               <p>NT$ {{$filters.currency(item.final_total)}}</p>
             </div>
+
           </div>
       </div>
       <div class="col-12 col-md-6">
@@ -44,7 +45,12 @@
           <div class="col-8 ps-2 text-primary">{{dateAndTime}}</div>
         </div>
         <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary mt-4 mb-1 w-100" @click.prevent="payOrder"
+          <template v-if="orderForm.is_paid">
+            <router-link to="/products" class="btn btn-outline-primary mt-5 w-50 me-3 stepLink">
+              續繼購物
+            </router-link>
+          </template>
+            <button type="button" class="btn btn-primary mt-5 w-50 text-white" @click.prevent="payOrder"
             :class="{'disabled':orderForm.is_paid}">確認付款去</button>
         </div>
       </div>
@@ -53,11 +59,8 @@
 </template>
 
 <script>
-// import NavBar from '@/components/Navbar.vue'
 export default {
-  // components: {
-  //   NavBar
-  // },
+  inject: ['emitter'],
   data () {
     return {
       orderID: '',
@@ -69,15 +72,15 @@ export default {
   methods: {
     getOrder () {
       this.orderID = this.$route.params.order_Id
-      console.log(this.orderID)
+      // console.log(this.orderID)
       const url = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/order/${this.orderID}`
       this.$http.get(url)
         .then(res => {
           this.orderForm = res.data.order
           this.create_at = res.data.order.create_at
           this.dateAndTime = new Date(this.create_at * 1000).toLocaleString()
-          console.log(this.dateAndTime)
-          console.log(res)
+          // console.log(this.dateAndTime)
+          // console.log(res)
         })
     },
     payOrder () {
@@ -87,6 +90,7 @@ export default {
           console.log(res)
           if (res.data.success) {
             this.getOrder()
+            this.emitter.emit('update-qty')
           }
         })
     }
@@ -98,11 +102,17 @@ export default {
 </script>
 
 <style lang="scss">
-//   .orderForm{
-//       height: 100vh;
-//   }
+$text-color:#fff;
+$main-text-color:rgb(90, 147, 88);
   .bg-cover{
-      background-position: center center;
-      background-size: cover;
+    background-position: center center;
+    background-size: cover;
   }
+  .stepLink{
+    margin-top: 80px;
+    color:$main-text-color;
+    &:hover{
+      color:$text-color;
+    }
+    }
 </style>

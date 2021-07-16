@@ -130,7 +130,7 @@ export default {
       this.$http.put(api, { data: cart })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
             this.$swal({
               icon: 'success',
               title: `${res.data.message}`
@@ -217,7 +217,7 @@ export default {
         }).catch(err => {
           if (err.data === undefined) {
             console.log(err, '找不到優惠代碼')
-            console.log('找不到優惠代碼')
+            // console.log('找不到優惠代碼')
           }
         })
     }
@@ -229,6 +229,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$text-color:#fff;
+$main-text-color:rgb(90, 147, 88);
   h6{
       margin-top: 100px;
   }
@@ -238,9 +240,9 @@ export default {
     }
     .stepLink{
         margin-top: 80px;
-        color:rgb(90, 147, 88);
+        color:$main-text-color;
        &:hover{
-          color:#fff
+          color:$text-color;
         }
     }
     .banner-text{

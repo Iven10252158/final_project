@@ -10,8 +10,9 @@
     </div>
 </div>
 <div class="container mb-2">
-  <div class="row mt-3">
+  <div class="row mt-2 mt-md-3">
     <div class="col-12 col-md-6">
+      <Breadcrumb></Breadcrumb>
       <div class="bg-cover mb-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
         <div class="pb-3">
           <a href="#" v-for="(item,index) in imagesUrl" :key="index"  @click.prevent="click(item,index)">
@@ -97,9 +98,11 @@
 <script>
 import emitter from '@/methods/mitt'
 import contentModal from '@/components/ContentModal.vue'
+import Breadcrumb from '@/components/Breadcrumb.vue'
 export default {
   components: {
-    contentModal
+    contentModal,
+    Breadcrumb
   },
   data () {
     return {
@@ -154,7 +157,7 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log(res)
             this.isLoading = false
             this.$swal({
               icon: 'success',
@@ -176,6 +179,7 @@ export default {
 </script>
 
 <style lang="scss">
+  $banner-text-bg-color:rgba(0, 0, 0,0.3);
     img{
     object-fit: cover;
     height: auto;
@@ -202,7 +206,7 @@ export default {
     }
     .banner-text{
     padding: 20px 60px;
-    background-color:rgba(0, 0, 0,0.3);
+    background-color:$banner-text-bg-color;
     }
     .bg-cover{
       background-position: center center;

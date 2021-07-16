@@ -47,7 +47,7 @@
                     </div>
                     <div class="card-footer bg-white border-0">
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="favoriteBtn btn btn-outline-favorite border-0"
+                            <button type="button" class="styleBtn btn btn-outline-favorite border-0"
                             @click="addMyFavorite(item)">
                               <span v-if="myFavorite.includes(item.id)">
                                 <i class="fas fa-heart"></i>
@@ -56,7 +56,7 @@
                               <i class="far fa-heart"></i>
                             </span>
                             </button>
-                            <button type="button" class="cartBtn btn btn-outline-primary border-0" @click="addToCart(item)">
+                            <button type="button" class="styleBtn btn btn-outline-primary border-0" @click="addToCart(item)">
                               <span v-if="productId.includes(item.id)">
                                 <i class="fas fa-shopping-cart"></i>
                               </span>
@@ -132,8 +132,7 @@ export default {
         // this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '儲存成功！' })
       }
-      this.emitter.emit('favorite-qty', this.myFavorite)
-      // console.log('this.myFavorite', this.myFavorite.length)
+      this.emitter.emit('favorite-qty')
     },
     searchProduct (value) {
       this.productValue = 'total'
@@ -236,23 +235,18 @@ export default {
 </script>
 
 <style lang="scss">
-  .favoriteBtn{
-    font-size: 20px;
+  $banner-text-bg-color:rgba(0, 0, 0,0.3);
+  $text-color:#fff;
+  $hover-color:#E6c35c;
+  .styleBtn{
     &:hover{
       background-color: transparent;
-      color:#E6c35c;
-    }
-  }
-  .cartBtn{
-    font-size: 20px;
-    &:hover{
-      // background-color: transparent;
-      color:#fff;
+      color: $hover-color ;
     }
   }
   .banner-text{
     padding: 20px 60px;
-    background-color:rgba(0, 0, 0,0.3);
+    background-color: $banner-text-bg-color;
   }
   .bg-cover{
     background-position: center center;
@@ -264,10 +258,10 @@ export default {
     right: 0;
     bottom: 0;
     margin: auto;
-    background:rgba(0, 0, 0,0.5);     // rgba(101, 101, 101, 0.4);
+    background-color:rgba(0, 0, 0,0.5);     // rgba(101, 101, 101, 0.4);
     // height: 200px;
     line-height: 200px;
-    color: #ffffff;
+    color:  $text-color;
     opacity: 0;
   }
   .product_image{
