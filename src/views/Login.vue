@@ -55,7 +55,7 @@ export default {
             this.MessageStatus(res, '登入')
             // 把token、expired存到cookie裡
             document.cookie = `week3homeworkTK=${token}; expires=${new Date(expired)}; path=/`
-            this.$router.push('/admin/admin_products')
+            this.$router.push('/admin')
           } else {
             this.MessageStatus(res, '登入')
           }

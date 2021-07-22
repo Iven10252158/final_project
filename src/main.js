@@ -53,7 +53,7 @@ AOS.init({
   once: true
 })
 const app = createApp(App)
-app.use(VueSweetalert2, options)
+
 // 2.將“千分號”設定為全域屬性
 app.config.globalProperties.$filters = { currency, date }
 // 註冊元件
@@ -61,6 +61,7 @@ app.component('Form', Form)
 app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
 app.component('Loading', VueLoading)
+app.use(VueSweetalert2, options)
 app.use(animated)
 app.use(VueAxios, axios)
 app.use(router)

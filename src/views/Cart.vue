@@ -9,8 +9,17 @@
           <h3 class="pt-2">購物車</h3>
       </div>
   </div>
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
+  <div class="container" v-if="cart.carts">
+    <!-- 購物車無商品的狀態 -->
+    <div v-if="cart.carts.length===0">
+      <div class="row">
+        <div class="col-12">
+          <h1>沒商品唷</h1>
+        </div>
+      </div>
+    </div>
+    <!-- 購物車有商品的狀態 -->
+    <div class="d-flex justify-content-between align-items-center" v-if="cart.carts.length !==0">
       <h6 class="mb-3 mt-5">購物明細</h6>
       <router-link to="/products" class="stepLink btn btn-outline-primary rounded-pill mb-2 px-3 mt-4">
         <i class="fas fa-caret-left"></i>
@@ -19,7 +28,7 @@
     </div>
         <!-- 購物車 -->
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" v-if="cart.carts.length !==0">
         <thead class="bg-primary text-white">
           <tr>
             <th class="d-none d-sm-block d-sm-table-cell ps-3" width="300">商品名稱</th>
@@ -73,25 +82,27 @@
       </table>
     </div>
       <!-- 套用優惠券 -->
-    <div class="input-group mb-3">
-      <input type="text" class="form-control rounded-0" v-model="coupon_code" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="basic-addon2">
-      <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon"
-      :class="{'disabled':finalPrice }">套用優惠券</span>
-    </div>
-    <div :class="{ 'text-decoration-line-through':isTrue, 'text-secondary':isTrue, 'p':isTrue}">
-      <p class="h5 text-end pe-5">總計:
-        <span>NT {{$filters.currency(cart.total)}}元</span>
+    <template v-if="cart.carts.length !==0">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control rounded-0" v-model="coupon_code" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon"
+        :class="{'disabled':finalPrice }">套用優惠券</span>
+      </div>
+      <div :class="{ 'text-decoration-line-through':isTrue, 'text-secondary':isTrue, 'p':isTrue}">
+        <p class="h5 text-end pe-5">總計:
+          <span>NT {{$filters.currency(cart.total)}}元</span>
+        </p>
+      </div>
+      <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
+        <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
       </p>
-    </div>
-    <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
-      <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
-    </p>
-    <div class="d-flex justify-content-end" v-if="cart.carts">
-      <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3" :class="{'disabled':cart.carts.length===0}">
-        下一步
-        <i class="fas fa-caret-right"></i>
-      </router-link>
-    </div>
+      <div class="d-flex justify-content-end" v-if="cart.carts">
+        <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3" :class="{'disabled':cart.carts.length===0}">
+          下一步
+          <i class="fas fa-caret-right"></i>
+        </router-link>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -116,12 +127,11 @@ export default {
         .then(res => {
           this.isLoading = false
           this.cart = res.data.data
-        // console.log('購物車', res)
-        // console.log(this.cart)
         })
     },
     // 更新購物車
     updateCart (item, qty) {
+      this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       const cart = {
         product_id: item.product.id,
@@ -130,12 +140,12 @@ export default {
       this.$http.put(api, { data: cart })
         .then(res => {
           if (res.data.success) {
-            // console.log(res)
+            this.getCartList()
+            this.isLoading = false
             this.$swal({
               icon: 'success',
               title: `${res.data.message}`
             })
-            this.getCartList()
           } else {
             this.$swal({
               icon: 'error',
@@ -147,19 +157,18 @@ export default {
     },
     // 刪除購物車內的一筆資料
     deleteCartProduct (item) {
-      // this.isLoading = true
+      this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
             this.getCartList()
-            // this.isLoading = false
+            this.isLoading = false
             this.$swal({
               icon: 'success',
               title: `${res.data.message}`
             })
             this.emitter.emit('update-qty')
-            // console.log(res)
           } else {
             console.log(res)
             this.$swal({
@@ -169,7 +178,6 @@ export default {
           }
         }).catch(err => {
           this.getCartList()
-          // this.isLoading = false
           console.log(err)
         })
     },
@@ -187,7 +195,6 @@ export default {
         item.qty -= 1
         this.updateCart(item)
       }
-      // console.log(item)
     },
     // 套用優惠券
     inputCoupon () {
@@ -205,8 +212,6 @@ export default {
               icon: 'success',
               title: `${res.data.message}`
             })
-            // console.log(res)
-            // console.log(res.data.data.final_total)
           } else {
             this.$swal({
               icon: 'error',

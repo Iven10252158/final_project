@@ -1,14 +1,14 @@
 <template> <!-- <router-link to="/admin/Admin_products">產品列表</router-link> -->
 <!-- header -->
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="#">CLIMBER</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href.preventDefault="#">CLIMBER</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-              <a class="nav-link" @click='logout'>Sign out</a>
+              <a href='#' class="nav-link" @click.prevent='logout'>Sign out</a>
             </li>
         </ul>
     </header>
@@ -28,7 +28,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to='/admin/admin_products' class="nav-link text-primary">
+            <router-link to='/admin' class="nav-link text-primary">
               <span data-feather="shopping-cart"></span>
                 產品管理
             </router-link>
@@ -44,12 +44,17 @@
     </nav>
   </div>
 </div>
-<router-view></router-view>
+<router-view v-if="checkSuccess"></router-view>
 </template>
 
 <script>
 export default {
   inject: ['MessageStatus'],
+  data () {
+    return {
+      checkSuccess: false
+    }
+  },
   methods: {
     logout () {
       const api = `${process.env.VUE_APP_URL}logout`
@@ -71,13 +76,14 @@ export default {
     // /api/user/check
     checkLogin () {
       const api = `${process.env.VUE_APP_URL}api/user/check`
-      const token2 = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
-      console.log('卻可api的偷啃', token2)
-      this.$http.defaults.headers.common.Authorization = `${token2}`
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      console.log('卻可api的偷啃', token)
+      this.$http.defaults.headers.common.Authorization = `${token}`
       this.$http.post(api)
         .then(res => {
           if (res.data.success) {
             console.log('卻可api', res)
+            this.checkSuccess = true
           } else {
             this.MessageStatus(res, '登入')
             this.$router.push('/login')

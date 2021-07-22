@@ -2,12 +2,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top z-index-3"
     :class="[classList.navBarTop,{'bg-primary': isPutColor}]">
         <div class="container">
-        <a class="navbar-brand">
-            <router-link to="/" class="text-white fw-bold d-flex align-items-center">
-            <img src="../assets/Climbing.svg" width="50" alt="">
-            <span class="h3 text-white ps-2 mb-0">CLIMBER</span>
-            </router-link>
-        </a>
+            <a href="#" class="navbar-brand">
+              <router-link to="/" class="text-white fw-bold d-flex align-items-center">
+              <h1 class="logo mb-0">
+                <img src="../assets/Climbing.svg" width="50" alt="">
+              </h1>
+              <h3 class="text-white ps-2 mb-0">CLIMBER</h3>
+              </router-link>
+            </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="isPutColor = !isPutColor">
             <span class="navbar-toggler-icon"></span>
@@ -45,6 +47,7 @@
                 </span>
               </div>
             <Canvas ref="canvas"></Canvas>
+            <Dropdown ref="dropdown"></Dropdown>
         </div>
         </div>
         </div>
@@ -52,11 +55,12 @@
 </template>
 
 <script>
-
 import Canvas from '@/components/Canvas.vue'
+import Dropdown from '@/components/CartDropdown.vue'
 export default {
   components: {
-    Canvas
+    Canvas,
+    Dropdown
   },
   props: ['carts'],
   inject: ['emitter'],
@@ -103,6 +107,7 @@ export default {
     // }
   },
   mounted () {
+    this.$refs.dropdown.showDropdown()
     this.getFavorite()
     this.getCartList()
     window.addEventListener('scroll', () => {
@@ -139,5 +144,13 @@ export default {
   .navBarQty{
     bottom:35px;
     right:-3px;
+  }
+  .logo{
+    img{
+      display: block;
+      text-indent: 101%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
 </style>

@@ -19,19 +19,21 @@
                 @input="searchProduct(search)">
             </div>
             <div class="row">
-                <div class="col-12 mt-3">
+                <div class="mt-3">
                     <ul class="list-group pe-auto">
-                    <li class="list-group-item list-group-item-action " @click="changeProduct(item,index)"
-                    :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">全部商品</li>
+                    <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
+                    :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">
+                    全部商品
+                    </li>
                     <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
                         @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{item}}</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-9">
+        <div class="col-sm-9">
             <div class="row">
-                <div class="col-12 col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
+                <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
                     <div class="card h-100">
                         <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
                         <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
@@ -187,6 +189,7 @@ export default {
         })
     },
     addToCart (item, qty = 1) {
+      this.isLoading = true
       const cart = {
         product_id: item.id,
         qty
@@ -194,6 +197,7 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
+            this.isLoading = false
             this.getCartList()
             this.cart = res.data.data
             this.$swal({
@@ -206,15 +210,15 @@ export default {
         })
     },
     getCartList () {
-      this.isLoading = true
+      // this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(api)
         .then(res => {
-          this.isLoading = false
+          // this.isLoading = false
           this.cart = res.data.data
           this.cart.carts.forEach(item => {
             this.productId.push(item.product_id)
-            console.log('this.productId', this.productId)
+            // console.log('this.productId', this.productId)
           })
         })
     }
@@ -277,5 +281,7 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
+  .list-group-item{
+    cursor: pointer;
+  }
 </style>
