@@ -19,11 +19,6 @@ export default {
       dropdown: ''
     }
   },
-  methods: {
-    showDropdown () {
-      this.dropdown.show()
-    }
-  },
   mounted () {
     this.dropdown = new Dropdown(this.$refs.dropdown)
   }

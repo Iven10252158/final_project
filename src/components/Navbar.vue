@@ -47,7 +47,7 @@
                 </span>
               </div>
             <Canvas ref="canvas"></Canvas>
-            <Dropdown ref="dropdown"></Dropdown>
+            <dropdown></dropdown>
         </div>
         </div>
         </div>
@@ -56,11 +56,11 @@
 
 <script>
 import Canvas from '@/components/Canvas.vue'
-import Dropdown from '@/components/CartDropdown.vue'
+import dropdown from '@/components/CartDropdown.vue'
 export default {
   components: {
     Canvas,
-    Dropdown
+    dropdown
   },
   props: ['carts'],
   inject: ['emitter'],
@@ -107,7 +107,6 @@ export default {
     // }
   },
   mounted () {
-    this.$refs.dropdown.showDropdown()
     this.getFavorite()
     this.getCartList()
     window.addEventListener('scroll', () => {
