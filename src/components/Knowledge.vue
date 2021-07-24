@@ -70,6 +70,7 @@ $text-color:#fff;
     background:$Knowladge-background-color;
     color: $text-color;
     opacity: 0;
+    transition: 0.5s ease-in-out;
     }
     .image{
         &:hover{
