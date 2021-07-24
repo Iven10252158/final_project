@@ -38,8 +38,16 @@ export default {
 
 <style lang="scss">
 $text-color:#fff;
+$nav-textActive:#eadfa4;
 .cartDropdown{
     color: $text-color;
+    transition: 0.5s ease-in-out;
+    &:hover{
+    //  border-bottom: 3px solid $nav-textActive;
+      padding-bottom: 3px;
+      color:$nav-textActive;
+      // transform: scale(1.2);
+    }
 }
 .dropdownBtn{
     transition: 0.5s ease-in-out;
@@ -47,4 +55,14 @@ $text-color:#fff;
         transform: scale(1.2);
     }
 }
+// .nav-link{
+//   color: $text-color;
+//   transition: 0.5s ease-in-out;
+//   &:hover{
+//   //  border-bottom: 3px solid $nav-textActive;
+//     padding-bottom: 3px;
+//     color:$nav-textActive;
+//     transform: scale(1.2);
+//   }
+// }
 </style>

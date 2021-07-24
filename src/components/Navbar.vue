@@ -42,15 +42,15 @@
               <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link">
                 <i class=" fas fa-cart-plus"></i>
               </router-link>
-              <div class="h4 nav-link" v-if="cart.carts.length === 0">
+              <a href="#" class="h4 nav-link nav-btn" v-if="cart.carts.length === 0">
                 <dropdown ref="dropdown"></dropdown>
-              </div>
+              </a>
             </div>
             <div class="position-relative" v-if="cart.carts">
-                <span class="navBarQty rounded-pill position-absolute badge bg-warning text-white" >
-                  {{cart.carts.length}}
-                </span>
-              </div>
+              <span class="navBarQty rounded-pill position-absolute badge bg-warning text-white" >
+                {{cart.carts.length}}
+              </span>
+            </div>
             <Canvas ref="canvas"></Canvas>
         </div>
         </div>
