@@ -13,14 +13,14 @@
 </div>
 <div class="container">
      <div class="row">
-        <div class="col-12 col-sm-3">
+        <div class="col-12 col-md-3">
             <div class="col-12 mt-4">
                 <input type="text" class="form-control" placeholder="請輸入關鍵字" v-model="search"
                 @input="searchProduct(search)">
             </div>
-            <div class="row">
+            <div class="row sticky-md-top">
                 <div class="mt-3">
-                    <ul class="list-group pe-auto">
+                    <ul class="list-group pe-auto" :class="[siderBarLeft.beLeft]">
                     <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
                     :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">
                     全部商品
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-md-9">
             <div class="row">
                 <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
                     <div class="card h-100">
@@ -41,7 +41,11 @@
                         </router-link>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title text-hidden">{{item.title}}</h5>
+                        <h5 class="card-title text-hidden">
+                          <router-link class="text-grey" :to="`/product/${item.id}`">
+                            {{item.title}}
+                          </router-link>
+                        </h5>
                         <div class="card-text d-flex justify-content-between">
                           <del class="text-muted">{{$filters.currency(item.origin_price)}}</del>
                           <h6>{{$filters.currency(item.price)}}</h6>
@@ -49,7 +53,7 @@
                     </div>
                     <div class="card-footer bg-white border-0">
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="styleBtn btn btn-outline-favorite border-0"
+                            <button type="button" class="styleBtn btn btn-outline-favorite border-0 "
                             @click="addMyFavorite(item)">
                               <span v-if="myFavorite.includes(item.id)">
                                 <i class="fas fa-heart"></i>
@@ -58,7 +62,8 @@
                               <i class="far fa-heart"></i>
                             </span>
                             </button>
-                            <button type="button" class="styleBtn btn btn-outline-primary border-0" @click="addToCart(item)">
+                            <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0" @click="addToCart(item)"
+                             :class="{'disabled':productId.includes(item.id)}">
                               <span v-if="productId.includes(item.id)">
                                 <i class="fas fa-shopping-cart"></i>
                               </span>
@@ -112,7 +117,10 @@ export default {
       search: '',
       // 讀取localStorage的內容
       // myFavorite有東西的話就讀取，沒東西的話讀空陣列
-      myFavorite: storageMethods.getItem() || []
+      myFavorite: storageMethods.getItem() || [],
+      siderBarLeft: {
+        beLeft: true
+      }
 
     }
   },
@@ -231,6 +239,19 @@ export default {
     this.emitter.emit('favorite-qty', this.myFavorite)
     this.getProducts()
     this.productValue = 'total'
+    window.addEventListener('scroll', () => {
+      // console.log(window.scrollY)
+      const windowY = window.scrollY
+      if (windowY > 395) {
+        this.siderBarLeft = {
+          beLeft: 'pt-6'
+        }
+      } else {
+        this.siderBarLeft = {
+          beLeft: ''
+        }
+      }
+    })
   },
   components: {
     pagination
@@ -243,11 +264,22 @@ export default {
   $text-color:#fff;
   $hover-color:#E6c35c;
   .styleBtn{
+    font-size: 20px;
     &:hover{
       background-color: transparent;
       color: $hover-color ;
     }
   }
+  .cartBtn{
+    font-size: 24px;
+    transition: 1s ease-in-out;
+    &:hover{
+      border-color:transparent;
+      color:$hover-color;
+      background-color:transparent;
+      transform: scale(1.5) rotate(360deg);
+    }
+}
   .banner-text{
     padding: 20px 60px;
     background-color: $banner-text-bg-color;

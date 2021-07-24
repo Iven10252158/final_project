@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top z-index-3"
+    <nav class="navbar navbar-expand-lg py-0 fixed-top z-index-3"
     :class="[classList.navBarTop,{'bg-primary': isPutColor}]">
         <div class="container">
             <a href="#" class="navbar-brand">
@@ -16,18 +16,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
+            <!-- <li class="nav-item text-center">
+                <router-link to="/index" class="h5 nav-link">首頁</router-link>
+            </li> -->
             <li class="nav-item text-center">
-                <router-link to="/index" class="h6 nav-link">首頁</router-link>
+                <router-link to="/about" class="h5 nav-link">關於我們</router-link>
             </li>
             <li class="nav-item text-center">
-                <router-link to="/about" class="h6 nav-link">關於我們</router-link>
-            </li>
-            <li class="nav-item text-center">
-                <router-link to="/products" class="h6 nav-link">產品列表</router-link>
+                <router-link to="/products" class="h5 nav-link">產品列表</router-link>
             </li>
         </ul>
-        <div class="d-flex justify-content-center">
-            <a href="#" class="h4 nav-link" @click.prevent="openCanvas">
+        <div class="d-flex justify-content-center mt-2">
+            <a href="#" class="h4 nav-link nav-btn" @click.prevent="openCanvas">
               <i class="fas fa-bookmark"></i>
             </a>
              <div class="position-relative" v-if="myFavorite">
@@ -35,19 +35,23 @@
                   {{ myFavorite.length }}
                 </span>
             </div>
-            <router-link to="/login" class="h4 nav-link">
+            <!-- <router-link to="/login" class="h4 nav-link">
                 <i class="fas fa-user-alt"></i>
-            </router-link>
-            <router-link to="/cart" class="h4 fw-bold nav-link">
+            </router-link> -->
+            <div v-if="cart.carts">
+              <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link">
                 <i class=" fas fa-cart-plus"></i>
-            </router-link>
+              </router-link>
+              <div class="h4 nav-link" v-if="cart.carts.length === 0">
+                <dropdown ref="dropdown"></dropdown>
+              </div>
+            </div>
             <div class="position-relative" v-if="cart.carts">
                 <span class="navBarQty rounded-pill position-absolute badge bg-warning text-white" >
                   {{cart.carts.length}}
                 </span>
               </div>
             <Canvas ref="canvas"></Canvas>
-            <dropdown></dropdown>
         </div>
         </div>
         </div>
@@ -110,7 +114,7 @@ export default {
     this.getFavorite()
     this.getCartList()
     window.addEventListener('scroll', () => {
-    // console.log(window.scrollY)
+      // console.log(window.scrollY)
       const windowY = window.scrollY
       if (windowY > 1) {
         this.classList = {
@@ -137,6 +141,26 @@ export default {
 
 <style lang="scss" scoped>
   $primary-bg:rgba(0, 0, 0,0.1);
+  $text-color:#fff;
+  $nav-textActive:#eadfa4;
+  // $nav-btn-color:#E6c35c;
+  .nav-link{
+    color: $text-color;
+    transition: 0.5s ease-in-out;
+    &:hover{
+    //  border-bottom: 3px solid $nav-textActive;
+      padding-bottom: 3px;
+      color:$nav-textActive;
+      transform: scale(1.2);
+    }
+  }
+  .nav-btn{
+    color: $text-color;
+    transition: 0.5s ease-in-out;
+    &:hover{
+      transform: scale(1.4);
+    }
+  }
   .navbar{
     background-color: $primary-bg;
   }

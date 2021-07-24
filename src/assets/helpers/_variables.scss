@@ -89,8 +89,9 @@ $theme-colors: (
   "dark":       $dark,
   "white":      #fff,
   'primary-bg' :rgba(0, 0, 0,0.5),
-  'grey' :      #363635,//#3d3d3d//#71a970//#629f60,//#90bc8f,//#81b380,//#00cc99,
+  'grey' :      #2d2d2c,// #363635,//#3d3d3d//#71a970//#629f60,//#90bc8f,//#81b380,//#00cc99,
   'favorite':   #f08080,
+  'navActive':  #eadfa4,
 ) !default;
 // scss-docs-end theme-colors-map
 

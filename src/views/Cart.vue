@@ -10,25 +10,17 @@
       </div>
   </div>
   <div class="container" v-if="cart.carts">
-    <!-- 購物車無商品的狀態 -->
-    <div v-if="cart.carts.length===0">
-      <div class="row">
-        <div class="col-12">
-          <h1>沒商品唷</h1>
-        </div>
-      </div>
-    </div>
     <!-- 購物車有商品的狀態 -->
-    <div class="d-flex justify-content-between align-items-center" v-if="cart.carts.length !==0">
-      <h6 class="mb-3 mt-5">購物明細</h6>
-      <router-link to="/products" class="stepLink btn btn-outline-primary rounded-pill mb-2 px-3 mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h6 class="mb-0 mt-7">購物明細</h6>
+      <router-link to="/products" class="stepLink btn btn-outline-primary rounded-pill mb-0 px-3 mt-6">
         <i class="fas fa-caret-left"></i>
         繼續選購
       </router-link>
     </div>
         <!-- 購物車 -->
     <div class="table-responsive">
-      <table class="table" v-if="cart.carts.length !==0">
+      <table class="table">
         <thead class="bg-primary text-white">
           <tr>
             <th class="d-none d-sm-block d-sm-table-cell ps-3" width="300">商品名稱</th>
@@ -82,7 +74,6 @@
       </table>
     </div>
       <!-- 套用優惠券 -->
-    <template v-if="cart.carts.length !==0">
       <div class="input-group mb-3">
         <input type="text" class="form-control rounded-0" v-model="coupon_code" placeholder="請輸入折扣碼" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <span class="btn btn-outline-primary rounded-0 input-group-text" @click="inputCoupon"
@@ -96,13 +87,12 @@
       <p class="h5 text-end pe-5 text-primary" v-if="finalPrice === cart.final_total">折扣後:
         <span class="text-primary">NT {{$filters.currency(cart.final_total)}}元</span>
       </p>
-      <div class="d-flex justify-content-end" v-if="cart.carts">
-        <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill my-2 px-3" :class="{'disabled':cart.carts.length===0}">
+      <div class="d-flex justify-content-end">
+        <router-link to="/order" class="stepLink btn btn-outline-primary rounded-pill mb-6 mt-3 px-3" :class="{'disabled':cart.carts.length===0}">
           下一步
           <i class="fas fa-caret-right"></i>
         </router-link>
       </div>
-    </template>
   </div>
 </template>
 

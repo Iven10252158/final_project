@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="container mb-2">
-  <div class="row mt-2 mt-md-3">
+  <div class="row mt-2 mt-md-3 justify-content-center">
     <div class="col-12 col-md-6">
       <Breadcrumb></Breadcrumb>
       <div class="bg-cover mb-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
@@ -26,73 +26,95 @@
         <div class="card-body">
           <h5 class="card-title">【方案】</h5>
           <div class="d-flex justify-content-between">
-            <h6 class="card-text bg-primary text-white p-1">{{product.program}}</h6>
-            <p class="card-text text-danger">${{$filters.currency(product.price)}}/團</p>
+            <h6 class="card-text bg-primary text-white px-2 py-1 ms-2">{{product.program}}</h6>
+            <p class="card-text text-danger ps-2 mb-0 fw-bold">${{$filters.currency(product.price)}}/團</p>
           </div>
 
           <h6 class="card-text mb-1 fw-bold">【費用包含】</h6>
-          <small class="card-text">領隊費、登山險、其他行政等作業支出、入山證、山屋申請、餐費</small>
-           <p class="card-text">超過6人請洽客服享額外優惠</p>
+            <p class="card-text mb-0 program-content">
+              <sapn class="fs-5 ps-2"><i class="fas fa-fire"></i></sapn>
+              <sapn class="fs-6 ps-2">最專業、熱情的嚮導</sapn>
+            </p>
+            <p class="card-text mb-0 program-content">
+              <sapn class="fs-5 ps-2"><i class="fas fa-mountain"></i></sapn>
+              <sapn class="fs-6 ps-2">不藏私的分享最多的山知識</sapn>
+            </p>
+            <p class="card-text mb-0 program-content">
+              <sapn class="fs-5 ps-2"><i class="fas fa-dollar-sign"></i></sapn>
+              <sapn class="fs-6 ps-2">領隊費、登山險、其他行政等作業支出、入山證、山屋申請、餐費</sapn>
+            </p>
+            <p class="card-text program-content">
+              <span class="fs-5 ps-2"><i class="fas fa-hiking"></i></span>
+              <sapn class="fs-6 ps-2">超過6人請洽客服享額外優惠</sapn>
+            </p>
         </div>
-        <div class="card-footer bg-white border-0 pb-4 d-flex justify-content-between">
-          <p class="card-text text-danger">小計 ${{$filters.currency(product.price)}}元</p>
-          <button type="button" class="btn btn-primary text-white w-50
-          animate__animated animate__shakeX animate__repeat-1 animate__slower animate__delay-1s"
-          @click="addToCart(product)">按我報名</button>
+        <div class="card-footer bg-white border-0 pb-4 d-flex justify-content-between align-items-center">
+          <p class="card-text text-danger ps-2 mb-0 fw-bold">小計 ${{$filters.currency(product.price)}}元</p>
+          <button type="button" class="btn btn-warning text-white w-50" @click="openContentModal">聯絡我們</button>
         </div>
       </div>
-      <button type="button" class="btn btn-warning w-100 text-white" @click="openContentModal">聯絡我們</button>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary text-white w-75
+          animate__animated animate__shakeX animate__repeat-1 animate__slower animate__delay-1s"
+          @click="addToCart(product)">按我報名
+        </button>
+      </div>
       <contentModal ref="contentModal" @send-msg="hideContentModal"></contentModal>
     </div>
   </div>
   <div class="border-bottom border-3"></div>
-  <div class="row p-3">
-    <div class="col-12 col-sm-3">
-      <h5 class="text-sm-center text-primary">山林地形</h5>
-    </div>
-    <div class="col-12 col-sm-9">
-      <p class="fs-6 mb-0">{{product.description}}</p>
+  <div class="row justify-content-center">
+    <div class="col-sm-10">
+      <div class="row p-3 product-content">
+        <div class="col-12 col-sm-3">
+          <h5 class="text-primary">山林地形</h5>
+        </div>
+        <div class="col-12 col-sm-9">
+          <p class="product-content fs-6 mb-0">{{product.description}}</p>
+        </div>
+      </div>
+      <div class="row p-3 product-content">
+        <div class="col-12 col-sm-3">
+          <h5 class="text-primary">山林小故事</h5>
+        </div>
+        <div class="col-12 col-sm-9">
+          <p class="product-content fs-6 mb-0">{{product.content}}</p>
+        </div>
+      </div>
+      <div class="row p-3 product-content">
+        <div class="col-12 col-sm-3">
+          <h5 class="product-content text-primary">注意事項</h5>
+        </div>
+        <div class="col-12 col-sm-9">
+          <ol class="p-3 pt-0">
+            <li>
+              <p class="fs-6">出發前請留意氣象資訊，山區天氣變化快速，早晚以及叫高海拔處溫差越大，穿著請以洋蔥式穿法。</p>
+            </li>
+            <li>
+              <p class="fs-6">除領隊或嚮導有特別安排，請勿自行脫隊，為了各位的生命安全，請務必待在領隊及嚮導旁及聽從指示。</p>
+            </li>
+            <li>
+              <p class="fs-6">請自備垃圾袋，用過的衛生紙、濕紙巾或是衛生棉請務必自行帶走，請勿隨意亂丟，破壞自然生態。</p>
+            </li>
+            <li>
+              <p class="fs-6">白天因天氣炎熱時請多補充水分，入夜氣溫下降快速，請記得做好保暖，避免身體不適。</p>
+            </li>
+            <li>
+              <p class="fs-6">所有行程安全為第一考量，落實無痕山林，一起當個友愛大自然的孩子吧！</p>
+            </li>
+            <li>
+              <p class="fs-6">請在出發前就多自主訓練，訓練方向請針對心肺和肌力，跑步、游泳、重訓、深蹲。</p>
+            </li>
+            <li>
+              <p class="fs-6">行程中有任何問題，請隨時告知領隊，我們會盡最大的努力提供最好的服務。</p>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row p-3">
-    <div class="col-12 col-sm-3">
-      <h5 class="text-sm-center text-primary">山林小故事</h5>
-    </div>
-    <div class="col-12 col-sm-9">
-      <p class="fs-6 mb-0">{{product.content}}</p>
-    </div>
+
   </div>
-  <div class="row p-3">
-    <div class="col-12 col-sm-3">
-      <h5 class="text-sm-center text-primary">注意事項</h5>
-    </div>
-    <div class="col-12 col-sm-9">
-      <ol class="p-3 pt-0">
-        <li>
-          <p class="fs-6">出發前請留意氣象資訊，山區天氣變化快速，早晚以及叫高海拔處溫差越大，穿著請以洋蔥式穿法。</p>
-        </li>
-        <li>
-          <p class="fs-6">白天因天氣炎熱時請多補充水分，入夜氣溫下降快速，請記得做好保暖，避免身體不適。</p>
-        </li>
-        <li>
-          <p class="fs-6">除領隊或嚮導有特別安排，請勿自行脫隊，為了各位的生命安全，請務必待在領隊及嚮導旁及聽從指示。</p>
-        </li>
-        <li>
-          <p class="fs-6">請自備垃圾袋，用過的衛生紙、濕紙巾或是衛生棉請務必自行帶走，請勿隨意亂丟，破壞自然生態。</p>
-        </li>
-        <li>
-          <p class="fs-6">所有行程安全為第一考量，落實無痕山林，一起當個友愛大自然的孩子吧！</p>
-        </li>
-        <li>
-          <p class="fs-6">請在出發前就多自主訓練，訓練方向請針對心肺和肌力，跑步、游泳、重訓、深蹲。</p>
-        </li>
-        <li>
-          <p class="fs-6">行程中有任何問題，請隨時告知領隊，我們會盡最大的努力提供最好的服務。</p>
-        </li>
-      </ol>
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
@@ -211,5 +233,11 @@ export default {
     .bg-cover{
       background-position: center center;
       background-size: cover;
+    }
+    .product-content{
+      letter-spacing: 3px;
+    }
+    .program-content{
+      letter-spacing: 1.5px;
     }
 </style>

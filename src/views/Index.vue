@@ -3,8 +3,8 @@
 <!-- <div class="bg-cover" style="background-image:url('https://images.unsplash.com/photo-1619061809240-c11761c603a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:400px"></div> -->
     <div class="container">
         <div class="row g-0 flex-column-reverse flex-lg-row mb-0">
-            <div class="col-12 col-lg-6 d-flex align-items-center">
-                <ul data-aos="fade-right" data-aos-duration="1000" class="list-unstyled px-lg-3 pt-3">
+            <div class="col-12 col-lg-6 content d-flex align-items-center">
+                <ul data-aos="fade-right" data-aos-duration="1000" class="list-unstyled px-lg-5 pt-3">
                     <li class="h3">消失的鐵道 -- 眠月線</li>
                     <li>眠月線，1915年通車，日治時代作為木材運輸路線。是阿里山森林鐵路的支線之一，從阿里山車站至石猴車站，全長大約9.2公里。民國72年發展為光觀產業，使用古老的蒸汽火車載客。
                         民國88年九二一地震震毀了阿里山的森林鐵路，耗時大量的經費與時間，民國98年修復完成，還沒開始通車就遭遇八八風災，破壞了鐵路的地基，復駛之路遙遙無期。
@@ -25,8 +25,8 @@
             <div class="col-12 col-lg-6 mt-0">
                 <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="">
             </div>
-            <div class="col-12 col-lg-6 d-flex align-items-center">
-                <ul data-aos="fade-right" data-aos-duration="1000" class="list-unstyled px-lg-3 pt-3">
+            <div class="col-12 col-lg-6 content d-flex align-items-center">
+                <ul data-aos="fade-right" data-aos-duration="1000" class="list-unstyled px-lg-5 pt-3">
                     <li class="h3">天使的眼淚 -- 嘉明湖</li>
                     <li>有人說嘉明湖是「天使的眼淚」、是「上帝遺留在人間的藍寶石」，布農族人稱它為「月亮的鏡子」。這些浪漫的形容詞是許多人對嘉明湖的第一印象。
                         海拔3310公尺，是台灣第二高的高山湖泊，佔地面積1.9公頃，是近年來著名的台灣深山景點。但鮮為人知的是嘉明湖是冰河所遺留的冰斗地形，這也說明了，台灣曾經經歷過冰河時期，只是也許那時候還沒有台灣而已。</li>
@@ -115,5 +115,8 @@ $text-color:#fff;
     @media(min-width:576px) {
         font-size: 24px;
     }
+}
+.content{
+    letter-spacing: 2px;
 }
 </style>

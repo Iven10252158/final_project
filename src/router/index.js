@@ -72,7 +72,7 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  linkActiveClass: 'text-grey'
+  linkActiveClass: 'text-navActive'
 })
 
 export default router

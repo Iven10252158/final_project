@@ -1,8 +1,18 @@
 <template>
  <div class="offcanvas offcanvas-end" tabindex="-1" ref="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header mb-0">
-    <h5 class="offcanvasRightLabel">我的最愛</h5>
+  <div class="offcanvas-header pb-0">
+    <h5 class="offcanvasRightLabel mb-0">我的最愛</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div v-if="filters.length === 0" class="offcanvas-body">
+    <div class="d-flex">
+      <p class="fs-6 text-muted mb-0 mt-1">還沒有喜歡的商品嗎？</p>
+      <button class="btn btn-primary btn-sm" type="button">
+        <router-link to="/products">
+            <p class="text-white mb-0">快來收藏吧！</p>
+        </router-link>
+      </button>
+    </div>
   </div>
   <div class="offcanvas-body">
     <div class="card" v-for="(item,index) in filters" :key="index">
