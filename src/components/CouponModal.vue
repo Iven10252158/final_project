@@ -18,7 +18,7 @@
         <label for="coupon_Date">到期日</label>
         <input type="date" class="form-control mb-3" id="coupon_Date" v-model="due_date">
         <label for="coupon_Percent">折扣百分比</label>
-        <input type="text" class="form-control mb-3" id="coupon_Percent" v-model.number="tempCoupon.percent">
+        <input type.number="number" min="0" class="form-control mb-3" id="coupon_Percent" v-model.number="tempCoupon.percent">
         <input type="checkbox" class="form-check-input me-1" id="coupon_Enabled"
         :true-value="1"
         :false-value="0"
@@ -62,18 +62,9 @@ export default {
     }
   },
   methods: {
-    // showModal () {
-    //   this.couponModal.show()
-    // },
-    // hideModal () {
-    //   this.couponModal.hide()
-    // },
     saveCoupon () {
       this.$emit('saveCoupon', this.tempCoupon)
     }
-  },
-  mounted () {
-    // this.couponModal = new Modal(this.$refs.couponModal)
   }
 }
 </script>

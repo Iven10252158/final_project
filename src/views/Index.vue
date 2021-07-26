@@ -1,6 +1,5 @@
 <template>
-<bannerSwiper></bannerSwiper>
-<!-- <div class="bg-cover" style="background-image:url('https://images.unsplash.com/photo-1619061809240-c11761c603a2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');height:400px"></div> -->
+<BannerSwiper></BannerSwiper>
     <div class="container">
         <div class="row g-0 flex-column-reverse flex-lg-row mb-0">
             <div class="col-12 col-lg-6 content d-flex align-items-center">
@@ -48,19 +47,20 @@
     </div>
     <Knowledge></Knowledge>
     <CustomFeedback></CustomFeedback>
-    <subscribe></subscribe>
+    <Subscribe></Subscribe>
 </template>
+
 <script>
-import bannerSwiper from '@/components/BannerSwiper.vue'
+import BannerSwiper from '@/components/BannerSwiper.vue'
 import Knowledge from '@/components/Knowledge.vue'
 import CustomFeedback from '@/components/CustomFeedback.vue'
-import subscribe from '@/components/Subscribe.vue'
+import Subscribe from '@/components/Subscribe.vue'
 export default {
   components: {
-    bannerSwiper,
+    BannerSwiper,
     Knowledge,
     CustomFeedback,
-    subscribe
+    Subscribe
   }
 }
 </script>
@@ -74,7 +74,6 @@ $text-color:#fff;
 }
 .indexBtn {
     cursor: pointer;
-    // background-attachment: fixed;ground-color: transparent;
     position: relative;
     transition: all .3s linear;
     p {

@@ -13,13 +13,13 @@
   <div class="row mt-2 mt-md-3 justify-content-center">
     <div class="col-12 col-md-6">
       <Breadcrumb></Breadcrumb>
-      <div class="bg-cover mb-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
-        <div class="pb-3">
+      <div class="bg-cover mb-4 mb-lg-3" :style="{backgroundImage:'url('+imgUrl+')',height:'350px'}"></div>
+        <div class="pb-lg-3">
           <a href="#" v-for="(item,index) in imagesUrl" :key="index"  @click.prevent="click(item,index)">
             <img class="picture pe-1 pb-2" :src="item" alt="">
           </a>
         </div>
-        </div>
+      </div>
     <div class="col-12 col-md-6" >
       <h3 class="mb-3">{{product.title}}</h3>
       <div class="card mb-4">
@@ -54,15 +54,15 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-primary text-white w-75
+        <button type="button" class="btn btn-primary text-white w-100 w-lg-75
           animate__animated animate__shakeX animate__repeat-1 animate__slower animate__delay-1s"
           @click="addToCart(product)">按我報名
         </button>
       </div>
-      <contentModal ref="contentModal" @send-msg="hideContentModal"></contentModal>
+      <ContentModal ref="contentModal" @send-msg="hideContentModal"></ContentModal>
     </div>
   </div>
-  <div class="border-bottom border-3"></div>
+  <div class="border-bottom border-3 pb-3 pb-lg-0"></div>
   <div class="row justify-content-center">
     <div class="col-sm-10">
       <div class="row p-3 product-content">
@@ -113,17 +113,16 @@
       </div>
     </div>
   </div>
-
-  </div>
+</div>
 </template>
 
 <script>
 import emitter from '@/methods/mitt'
-import contentModal from '@/components/ContentModal.vue'
+import ContentModal from '@/components/ContentModal.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 export default {
   components: {
-    contentModal,
+    ContentModal,
     Breadcrumb
   },
   data () {
@@ -149,7 +148,6 @@ export default {
     getProduct () {
       this.id = this.$route.params.id
       this.isLoading = true
-      //   console.log(this.id)
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/product/${this.id}`)
         .then(res => {
           if (res.data.success) {
@@ -168,6 +166,7 @@ export default {
         .then(res => {
           this.isLoading = false
           this.cart = res.data.data
+          console.log('getCartList', res)
         })
     },
     addToCart (item, qty = 1) {
@@ -179,65 +178,61 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`, { data: cart })
         .then(res => {
           if (res.data.success) {
-            // console.log(res)
             this.isLoading = false
             this.$swal({
               icon: 'success',
               title: `${res.data.data.product.title} <br/>${res.data.message}`
             })
-            // console.log(res.data.data.product.title)
             emitter.emit('update-qty')
-            // this.getCartList()
           }
         })
     }
   },
   mounted () {
     this.getProduct()
-    // this.getCartList()
-    // console.log(this.$route)
+    this.getCartList()
   }
 }
 </script>
 
 <style lang="scss">
-  $banner-text-bg-color:rgba(0, 0, 0,0.3);
-    img{
-    object-fit: cover;
-    height: auto;
-    max-width:100%;
+$banner-text-bg-color:rgba(0, 0, 0,0.3);
+  img{
+  object-fit: cover;
+  height: auto;
+  max-width:100%;
+  }
+  .main_item{
+    width:540px;
+    height:440px;
+  }
+  .picture{
+    object-fit:cover;
+    width: 100px;
+    height: 100px;
+    @media(min-width:320px){
+        object-fit:cover;
+        width: 80px;
+        height: 80px;
     }
-    .main_item{
-      width:540px;
-      height:440px;
-    }
-    .picture{
-      object-fit:cover;
-      width: 100px;
-      height: 100px;
-      @media(min-width:320px){
-          object-fit:cover;
-          width: 80px;
-          height: 80px;
+    @media(min-width:992px){
+        object-fit:cover;
+        width: 100px;
+        height: 100px;
       }
-      @media(min-width:992px){
-          object-fit:cover;
-          width: 100px;
-          height: 100px;
-        }
-    }
-    .banner-text{
-    padding: 20px 60px;
-    background-color:$banner-text-bg-color;
-    }
-    .bg-cover{
-      background-position: center center;
-      background-size: cover;
-    }
-    .product-content{
-      letter-spacing: 3px;
-    }
-    .program-content{
-      letter-spacing: 1.5px;
-    }
+  }
+  .banner-text{
+  padding: 20px 60px;
+  background-color:$banner-text-bg-color;
+  }
+  .bg-cover{
+    background-position: center center;
+    background-size: cover;
+  }
+  .product-content{
+    letter-spacing: 3px;
+  }
+  .program-content{
+    letter-spacing: 1.5px;
+  }
 </style>

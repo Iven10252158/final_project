@@ -1,9 +1,8 @@
 <template>
-  <!-- <NavBar></NavBar> -->
   <div class="banner bg-cover d-flex justify-content-center align-items-center pe-5" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:400px">
-      <div class="product-text text-white">
-          <h1 class="pt-1">訂單資訊</h1>
-      </div>
+    <div class="product-text text-white">
+        <h1 class="pt-1">訂單資訊</h1>
+    </div>
   </div>
   <div class="container">
     <div class="pt-3 mb-3">
@@ -42,17 +41,13 @@
                 </div>
             </Form>
         </div>
-        </div>
-        </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
-// import NavBar from '@/components/Navbar.vue'
 export default {
-  // components: {
-  //   NavBar
-  // },
   data () {
     return {
       orderId: '',
@@ -72,14 +67,14 @@ export default {
     createOrder () {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
-      console.log(order)
-      console.log(api)
       this.$http.post(api, { data: order })
         .then(res => {
-          console.log(res)
-          this.orderId = res.data.orderId
-          console.log(this.orderId)
-          this.$router.push(`/ordercheckout/${this.orderId}`)
+          if (res.data.success) {
+            this.orderId = res.data.orderId
+            this.$router.push(`/ordercheckout/${this.orderId}`)
+          }
+        }).catch(err => {
+          console.log(err)
         })
     },
     getCartList () {
@@ -87,10 +82,12 @@ export default {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(api)
         .then(res => {
-          this.isLoading = false
-          this.cart = res.data.data
-          // console.log('購物車', res)
-          // console.log(this.cart)
+          if (res.data.success) {
+            this.isLoading = false
+            this.cart = res.data.data
+          }
+        }).catch(err => {
+          console.log(err)
         })
     }
   },

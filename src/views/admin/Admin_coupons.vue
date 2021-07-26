@@ -142,7 +142,6 @@ export default {
   },
   mounted () {
     this.getCouponsList()
-    // this.$refs.deleteCouponModal.showModal()
   }
 }
 </script>

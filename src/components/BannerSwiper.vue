@@ -3,15 +3,16 @@
   :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center">
     <swiper-slide v-for="(item,index) in bannerFirst " :key="index">
         <div class="bg-cover" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
-        <div class="banner-box d-flex align-items-center justify-content-center justify-content-lg-start ms-0 ps-lg-7">
+        <div class=" banner-box d-flex align-items-center justify-content-center justify-content-lg-start ms-0 ps-lg-7">
           <div v-if="index < 2" data-aos="flip-up" data-aos-duration="1000" class="banner-text text-white mt-6">
-            <div class="fs-1 lh-base">連綿的山峰</div>
-            <div class="fs-5 fs-lg-3 lh-base">是我們最堅固的屏障，也是都市人的世外桃源</div>
-            <div class="fs-6  lh-base">讓我們一起欣賞台灣最美的風景。</div>
-            <button type="button" class="btn btn-primary mt-2">
-              <router-link to="/products" class="h6 text-white see-mountain">查看登山行程</router-link>
-            </button>
+              <div class="fs-1 lh-base">連綿的山峰</div>
+              <div class="fs-5 fs-lg-3 lh-base">是我們最堅固的屏障，也是都市人的世外桃源</div>
+              <div class="fs-6  lh-base">讓我們一起欣賞台灣最美的風景。</div>
+              <button type="button" class="btn btn-primary mt-2">
+                <router-link to="/products" class="h6 text-white see-mountain">查看登山行程</router-link>
+              </button>
           </div>
+
           <div class="banner-text text-white mt-6" v-if="index > 1">
             <div class="fs-1 lh-base">山就是老師</div>
             <div class="fs-5 fs-lg-3 lh-base">走入大自然，就是學習的一種方式</div>

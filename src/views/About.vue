@@ -19,7 +19,6 @@
           </div>
           <div class="col-12 col-md-4 mb-3 bg-warning pt-3 mt-md-3 mt-lg-4">
             <h6 class="text-center mb-0 pt-lg-2 content">專業，為戶外注入更多安全因子</h6>
-            <!-- <h6 class="text-center mt-lg-2">為戶外注入更多安全因子</h6> -->
             <p class="mb-0 pt-3 px-lg-2 content">我們積極招募充滿熱情、活力具備專業知識的夥伴加入我們的團隊。在戶外活動中，安全為首要考量。必須讓每個參與登山的人擁有安全的知識外，也期待他們有招一日能夠用自己的力量踏上這片迷人的山林。
             </p>
           </div>

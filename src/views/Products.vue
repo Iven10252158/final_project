@@ -12,82 +12,81 @@
   </div>
 </div>
 <div class="container">
-     <div class="row">
-        <div class="col-12 col-md-3">
-            <div class="col-12 mt-4">
-                <input type="text" class="form-control" placeholder="請輸入關鍵字" v-model="search"
-                @input="searchProduct(search)">
-            </div>
-            <div class="row sticky-md-top">
-                <div class="mt-3">
-                    <ul class="list-group pe-auto" :class="[siderBarLeft.beLeft]">
-                    <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
-                    :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">
-                    全部商品
-                    </li>
-                    <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
-                        @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{item}}</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="mt-4">
+        <input type="text" class="form-control" placeholder="請輸入關鍵字" v-model="search"
+        @input="searchProduct(search)">
+      </div>
+      <div class="row sticky-md-top">
+        <div class="mt-3">
+          <ul class="list-group pe-auto siderBarLeft" :class="siderBarLeft.beLeft">
+          <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
+          :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">
+          全部商品
+          </li>
+          <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
+              @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{item}}</li>
+          </ul>
         </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
-                    <div class="card h-100">
-                        <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
-                        <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
-                            查看更多
-                        </router-link>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title text-hidden">
-                          <router-link class="text-grey" :to="`/product/${item.id}`">
-                            {{item.title}}
-                          </router-link>
-                        </h5>
-                        <div class="card-text d-flex justify-content-between">
-                          <del class="text-muted">{{$filters.currency(item.origin_price)}}</del>
-                          <h6>{{$filters.currency(item.price)}}</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white border-0">
-                        <div class="d-flex justify-content-between">
-                            <button type="button" class="styleBtn btn btn-outline-favorite border-0 "
-                            @click="addMyFavorite(item)">
-                              <span v-if="myFavorite.includes(item.id)">
-                                <i class="fas fa-heart"></i>
-                              </span>
-                              <span v-else>
-                              <i class="far fa-heart"></i>
-                            </span>
-                            </button>
-                            <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0" @click="addToCart(item)"
-                             :class="{'disabled':productId.includes(item.id)}">
-                              <span v-if="productId.includes(item.id)">
-                                <i class="fas fa-shopping-cart"></i>
-                              </span>
-                              <span v-else>
-                                <i class="fas fa-cart-plus"></i>
-                              </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
+      </div>
     </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
+          <div class="card h-100">
+            <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
+              <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
+                  查看更多
+              </router-link>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-hidden">
+                <router-link class="text-grey" :to="`/product/${item.id}`">
+                  {{item.title}}
+                </router-link>
+              </h5>
+              <div class="card-text d-flex justify-content-between">
+                <del class="text-muted">{{$filters.currency(item.origin_price)}}</del>
+                <h6>{{$filters.currency(item.price)}}</h6>
+              </div>
+            </div>
+            <div class="card-footer bg-white border-0">
+              <div class="d-flex justify-content-between">
+                <button type="button" class="styleBtn btn btn-outline-favorite border-0 "
+                  @click="addMyFavorite(item)">
+                  <span v-if="myFavorite.includes(item.id)">
+                    <i class="fas fa-heart"></i>
+                  </span>
+                  <span v-else>
+                    <i class="far fa-heart"></i>
+                  </span>
+                </button>
+                <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0" @click="addToCart(item)"
+                  :class="{'disabled':productId.includes(item.id)}">
+                  <span v-if="productId.includes(item.id)">
+                    <i class="fas fa-shopping-cart"></i>
+                  </span>
+                  <span v-else>
+                    <i class="fas fa-cart-plus"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="d-flex justify-content-center">
-      <pagination :pages="pagination" @change-page="getProducts"></pagination>
+    <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
   </div>
 </div>
-<!-- <Footer></Footer> -->
 <router-view></router-view>
 </template>
 
 <script>
-import pagination from '@/components/Pagination.vue'
+import Pagination from '@/components/Pagination.vue'
 
 // localStorage轉型
 const storageMethods = {
@@ -99,13 +98,16 @@ const storageMethods = {
     return JSON.parse(localStorage.getItem('MyFavorite'))
   }
 }
-// console.log(storageMethods)
 
 export default {
   inject: ['emitter'],
+  components: {
+    Pagination
+  },
   data () {
     return {
       num: 1,
+      allProducts: [],
       products: [],
       productId: [],
       pagination: {},
@@ -133,23 +135,30 @@ export default {
       if (this.myFavorite.includes(item.id)) {
         this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1)
         storageMethods.setItem(this.myFavorite)
-        // this.emitter.emit('send-favorite', this.myFavorite)
         this.$swal({ icon: 'warning', title: '已從最愛中移除' })
-        console.log('存過囉！')
       } else {
         this.myFavorite.push(item.id)
         storageMethods.setItem(this.myFavorite)
-        // this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '儲存成功！' })
       }
       this.emitter.emit('favorite-qty')
     },
+    getAllProducts () {
+      this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products/all`)
+        .then(res => {
+          if (res.data.success) {
+            this.allProducts = res.data.products
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+    },
     searchProduct (value) {
       this.productValue = 'total'
-      // console.log(value)
-      this.typeProduct = this.products.filter(item => {
+      // console.log('value', value)
+      this.typeProduct = this.allProducts.filter(item => {
         if (item.title.match(value)) {
-          // console.log(item)
+          // console.log('item', item)
           return item
         }
         this.productValue = ''
@@ -158,9 +167,8 @@ export default {
         //   return this.products
         // }
       })
-      // }
     },
-    changeProduct (item, index) {
+    changeProduct (item) {
       // console.log(item, index)
       this.typeProduct = this.products.filter((element, index) => {
         if (item === element.category) {
@@ -177,14 +185,12 @@ export default {
     },
     getProducts (page = 1) {
       this.isLoading = true
-      // /api/:api_path/products
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products?page=${page}`)
         .then(res => {
           if (res.data.success) {
             this.isLoading = false
             const { products, pagination } = res.data
             this.products = products
-            // console.log(res)
             // 為了讓一進到產品列表就有產品資料
             this.typeProduct = this.products
             this.pagination = pagination
@@ -226,12 +232,18 @@ export default {
           this.cart = res.data.data
           this.cart.carts.forEach(item => {
             this.productId.push(item.product_id)
-            // console.log('this.productId', this.productId)
           })
         })
     }
   },
+  unmounted () {
+    // 有使用emitter.on接收資料時，就要在unmounted使用emitter.off關閉資料接收
+    this.emitter.off('remove-data', (data) => {
+      this.getFavorite()
+    })
+  },
   mounted () {
+    this.getAllProducts()
     this.getCartList()
     this.emitter.on('remove-data', (data) => {
       this.getFavorite()
@@ -252,9 +264,6 @@ export default {
         }
       }
     })
-  },
-  components: {
-    pagination
   }
 }
 </script>
@@ -265,16 +274,19 @@ export default {
   $hover-color:#E6c35c;
   .styleBtn{
     font-size: 20px;
+    border:transparent;
     &:hover{
       background-color: transparent;
       color: $hover-color ;
+      border:transparent;
     }
   }
   .cartBtn{
+    border:transparent;
     font-size: 24px;
     transition: 1s ease-in-out;
     &:hover{
-      border-color:transparent;
+      border:transparent;
       color:$hover-color;
       background-color:transparent;
       transform: scale(1.5) rotate(360deg);
@@ -294,11 +306,12 @@ export default {
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color:rgba(0, 0, 0,0.5);     // rgba(101, 101, 101, 0.4);
+    background-color:rgba(0, 0, 0,0.5);
     // height: 200px;
     line-height: 200px;
     color:  $text-color;
     opacity: 0;
+    transition: 0.5s ease-in-out;
   }
   .product_image{
     &:hover{
@@ -315,5 +328,8 @@ export default {
   }
   .list-group-item{
     cursor: pointer;
+  }
+  .siderBarLeft{
+    transition: 0.5s ease-in-out;
   }
 </style>
