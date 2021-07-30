@@ -12,7 +12,8 @@ import '@fortawesome/fontawesome-free/js/all.js'
 // vue loading overlay套件
 import VueLoading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-
+// 引入編輯器 CKEditor
+import CKEditor from '@ckeditor/ckeditor5-vue'
 // 引入主套件
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 // 引入規則
@@ -61,6 +62,8 @@ app.component('Form', Form)
 app.component('Field', Field)
 app.component('ErrorMessage', ErrorMessage)
 app.component('Loading', VueLoading)
+// app.use
+app.use(CKEditor)
 app.use(VueSweetalert2, options)
 app.use(animated)
 app.use(VueAxios, axios)

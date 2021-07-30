@@ -1,10 +1,10 @@
 <template>
-<div class="bg-cover bg-height" style="background-image:url('https://images.unsplash.com/photo-1460526620382-de41fd0d55bd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');"></div>
+<div class="bg-cover bg-height" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627614863633.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ZxZQW80pH1Q83aLkJq82qneXjKAVY3b6ihw2iKJOuGnf%2BXVw0GhhtoKE7P668T50HtqDqiJ%2BxYDJv3O65sKkx35O5kurouhv7L9WiP1wLdgUNF0YnZ%2Fua%2FEQRkvguJVkKImHni7xZvut1zD3utVWjUDj7EZTLJXtfSnhH26OcKn6rP93O8cnOC8zKfzo%2FKvz8%2FT%2B7x8pkHxe4bjE1qsd%2FedJn25v%2F65UIWEfZuM5M9CCjH%2Bs4CUFR3vNAFFR9DkwcOZScLumMzv5CaypE%2BRj4k1qKF%2FGygxlNI1gVsOHxopSuBHlSWXYsNmPr6MriVGOZ%2Br0j3EFl9BZu5pnBPYzsg%3D%3D');"></div>
   <div class="login container d-flex justify-content-center align-items-center">
     <div class="card mt-3  py-3" style="width:400px">
       <div class="card-body">
         <h5 class="card-title text-center mb-3">登入</h5>
-        <Form v-slot="{ errors }" ref="form">
+        <Form v-slot="{ errors }" ref="form" @submit="signIn">
           <label for="email">帳號</label>
           <Field id="email" name="email" type="email" class="form-control"
           :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入電子信箱"
@@ -27,8 +27,8 @@
               <small>{{isShow?'顯示密碼':'隱藏密碼'}}</small>
               </label>
             </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3 text-white">登入</button>
         </Form>
-        <button type="button" class="btn btn-primary w-100 mt-3 text-white" @click.prevent="signIn">登入</button>
       </div>
     </div>
 </div>
@@ -63,6 +63,7 @@ export default {
             this.$router.push('/admin')
           } else {
             this.MessageStatus(res, '登入')
+            console.log(res)
           }
         }).catch(err => {
           console.log(err)

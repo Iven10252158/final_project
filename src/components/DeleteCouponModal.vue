@@ -20,7 +20,6 @@
 </template>
 
 <script>
-// import Modal from 'bootstrap/js/dist/modal'
 import mixinModal from '@/mixins/modalMixin.js'
 export default {
   mixins: [mixinModal],
@@ -30,19 +29,11 @@ export default {
       deleteModal: ''
     }
   },
+  emits: ['deleteCoupon'],
   methods: {
-    // showModal () {
-    //   this.deleteModal.show()
-    // },
-    // hideModal () {
-    //   this.deleteModal.hide()
-    // },
     deleteCoupon () {
       this.$emit('deleteCoupon')
     }
-  },
-  mounted () {
-    // this.deleteModal = new Modal(this.$refs.innerDeleteModal)
   }
 }
 </script>

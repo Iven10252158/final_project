@@ -43,7 +43,7 @@
                 <div class="d-flex justify-content-center">
                     <pagination :pages="pagination" @change-page="getProducts"></pagination>
                     <product-modal ref='productModal' :product="tempProduct" :isNew="isNew" @check-save="updateProduct"></product-modal>
-                    <delete-modal ref="deleteModal" :delProduct="tempProduct" @check-delete="deleteProduct"></delete-modal>
+                    <delete-modal ref="deleteModal" :delete-modal="tempProduct" @check-delete="deleteProduct"></delete-modal>
                 </div>
             </main>
        </div>
@@ -54,7 +54,6 @@
 import pagination from '@/components/Pagination.vue'
 import ProductModal from '@/components/ProductModal.vue'
 import DeleteModal from '@/components/DeleteModal.vue'
-// import Toast from '@/components/ToastMessages.vue'
 
 export default {
   inject: ['MessageStatus'],
@@ -62,7 +61,6 @@ export default {
     pagination,
     ProductModal,
     DeleteModal
-    // Toast
   },
   data () {
     return {
@@ -78,12 +76,10 @@ export default {
   methods: {
     // 取得後台產品列表
     getProducts (page = 1) {
-      // this.checkLogin()
       this.isLoading = true
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.$http.get(api)
         .then(res => {
-          console.log('getProducts', res)
           if (res.data.success) {
             this.isLoading = false
             this.allProducts = res.data.products
@@ -99,6 +95,7 @@ export default {
       switch (isNew) {
         case 'new':
           this.$refs.productModal.showModal()
+          // console.log(item)
           // 暫存資料區要清空，才能新增資料
           this.tempProduct = {}
           this.isNew = true
@@ -107,12 +104,12 @@ export default {
           this.$refs.productModal.showModal()
           // 因為edit是要修改資料，所以要把原本的資料傳進去
           this.tempProduct = { ...item }
+          console.log(isNew, this.tempProduct)
           this.isNew = false
           break
         case 'delete':
           this.$refs.deleteModal.showModal()
           this.tempProduct = { ...item }
-        //   console.log(this.tempProduct)
       }
     },
     // 新增/編輯產品
@@ -132,12 +129,12 @@ export default {
           if (res.data.success) {
             this.MessageStatus(res, status)
             this.getProducts()
-            console.log('updateProduct', res)
+            // console.log('updateProduct S', res)
+            this.$refs.productModal.hideModal()
           } else {
             this.MessageStatus(res, status)
-            console.log(res)
+            console.log('updateProduct E', res)
           }
-          this.$refs.productModal.hideModal()
         }).catch(err => {
           console.log(err)
         })
@@ -151,7 +148,6 @@ export default {
             this.MessageStatus(res, '刪除產品')
             this.$refs.deleteModal.hideModal()
             this.getProducts()
-            console.log(res)
           } else {
             this.MessageStatus(res, '刪除產品')
             console.log(res)
@@ -160,30 +156,9 @@ export default {
           console.log(err)
         })
     }
-    // checkLogin () {
-    //   const api = `${process.env.VUE_APP_URL}api/user/check`
-    //   const token2 = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
-    //   console.log('卻可api的偷啃', token2)
-    //   this.$http.defaults.headers.common.Authorization = `${token2}`
-    //   this.$http.post(api)
-    //     .then(res => {
-    //       if (res.data.success) {
-    //         // this.MessageStatus(res)
-    //         console.log('卻可api', res)
-    //         // this.$router.push('/admin')
-    //       } else {
-    //         this.MessageStatus(res, '登入')
-    //       }
-    //     }).catch(err => {
-    //       console.log(err)
-    //     })
-    // }
   },
   mounted () {
     this.getProducts()
-    // this.checkLogin()
-    // this.$refs.productModal.showModal()
-    // this.$refs.deleteModal.showModal()
   }
 }
 

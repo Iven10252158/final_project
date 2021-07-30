@@ -1,5 +1,5 @@
 <template>
-<div class="bg-cover py-5 d-flex align-items-center" style="background-image:url('https://images.unsplash.com/photo-1573126617899-41f1dffb196c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');height:300px">
+<div class="bg-cover py-5 d-flex align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627613883977.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=W1txdZxc4s0hmNXCsvtHtxVQG4QALLJpUb6gNov44r%2FtiX8Bp9TXIJt4LKsjNEQjEn3e0MfD7UX2w%2Bx9QsvrUl5TuwYo4f%2BghZHkj0b37NOg%2Fuyy6uPP1HnCZbRcwUsrtD7AS9FOpvXonAjY8P5jJJ5uoAUrDPXWqiCqsKCPFmiDAv7XlHTjLlXaSycjRXMoHf6rZKQn5bkOwdSKqRCBa2Q05kuR2Dw%2FzxXJ3nikvppo2MqNxmqCQIzTpadqzvd%2FsEn6BKh%2BSTpH3oYNHN%2BJJjcf5bKMHrLzeE7USHG2ZsgMIYRK8%2BUWW9rip1gnY%2Bz6wfQuRblTKrJs8bkqDg934w%3D%3D');height:300px">
     <div class="container">
         <div class="row">
             <div class="col-12 e-paper text-light">
@@ -17,7 +17,6 @@
                 </Form>
             </div>
         </div>
-        <!-- <div class="d-flex juatify-content-center align-items-center"></div> -->
     </div>
 </div>
 </template>

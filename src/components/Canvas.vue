@@ -46,7 +46,6 @@ const storageMethods = {
     return JSON.parse(localStorage.getItem('MyFavorite'))
   }
 }
-console.log(storageMethods)
 
 export default {
   inject: ['emitter'],
@@ -60,16 +59,13 @@ export default {
   },
   methods: {
     showCanvas (data) {
-      console.log('favoItem', data)
       this.favoItem = data
       this.getProducts()
       this.bsOffcanvas.show()
     },
     getFavorite () {
-      //   console.log('this.favoItem', this.favoItem)
       this.filters = this.allProducts.filter((item, index) => {
         if (this.favoItem.includes(item.id)) {
-        //   console.log('我是最愛', item)
           return item
         }
         // console.log(this.favoItem.includes(item.id))
@@ -77,27 +73,23 @@ export default {
     },
     remove (item) {
       this.favoItem = storageMethods.getItem() || []
-      //   console.log('favoItem', this.favoItem)
-      //   console.log('filters', this.filters)
-      console.log(item.id)
+      // console.log(item.id)
       this.filters.forEach((element, index) => {
         if (element.id === item.id) {
           this.favoItem.splice(index, 1)
           storageMethods.setItem(this.favoItem)
           this.getProducts()
-          console.log(this.favoItem.length)
+          // console.log(this.favoItem.length)
           this.emitter.emit('favorite-qty', this.favoItem)
           this.emitter.emit('remove-data', this.favoItem)
         }
       })
     },
     getProducts () {
-      // /api/:api_path/products
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products/all`)
         .then(res => {
           if (res.data.success) {
             this.allProducts = res.data.products
-            // console.log(this.allProducts)
             this.getFavorite()
           }
         })
@@ -105,10 +97,6 @@ export default {
   },
   mounted () {
     this.bsOffcanvas = new Offcanvas(this.$refs.offcanvasRight)
-    // this.emitter.on('send-favorite', (data) => {
-    //   console.log('emitter-on', data)
-    // //   this.getFavorite()
-    // })
     this.getProducts()
   }
 }

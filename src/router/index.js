@@ -8,41 +8,53 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('@/views/Index.vue')
+        component: () => import('@/views/front/Index.vue')
       },
       {
         path: '/index',
-        component: () => import('@/views/Index.vue')
+        component: () => import('@/views/front/Index.vue')
       },
       {
         path: 'about',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/front/About.vue')
       },
       {
         path: 'products',
-        component: () => import('@/views/Products.vue')
+        component: () => import('@/views/front/Products.vue')
       },
       {
-        path: '/product/:id',
-        component: () => import('@/views/Product.vue')
+        path: 'product/:id',
+        component: () => import('@/views/front/Product.vue')
       },
       {
-        path: '/cart',
-        component: () => import('@/views/Cart.vue')
+        path: 'cart',
+        component: () => import('@/views/front/Cart.vue')
       },
       {
-        path: '/order',
-        component: () => import('@/views/Order.vue')
+        path: 'order',
+        component: () => import('@/views/front/Order.vue')
       },
       {
-        path: '/ordercheckout/:order_Id',
-        component: () => import('@/views/OrderCheckout.vue')
+        path: 'ordercheckout/:order_Id',
+        component: () => import('@/views/front/OrderCheckout.vue')
+      },
+      {
+        path: 'articles',
+        component: () => import('@/views/front/Articles.vue')
+      },
+      {
+        path: 'article/:id',
+        component: () => import('@/views/front/Article.vue')
       }
     ]
   },
   {
     path: '/:pathMatch(.*)*',
     component: () => import('../views/NotFound.vue')
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/Login.vue')
   },
   {
     path: '/admin',
@@ -63,14 +75,14 @@ const routes = [
       {
         path: 'admin_orders',
         component: () => import('@/views/admin/Admin_orders.vue')
+      },
+      {
+        path: 'admin_article',
+        component: () => import('@/views/admin/Admin_article.vue')
       }
     ]
-  },
-
-  {
-    path: '/login',
-    component: () => import('@/views/Login.vue')
   }
+
 ]
 
 const router = createRouter({

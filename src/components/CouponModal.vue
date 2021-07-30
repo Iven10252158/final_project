@@ -51,16 +51,20 @@ export default {
   watch: {
     content () {
       this.tempCoupon = this.content
-      // 將時間格式改為 YYYY-MM-DD
+      // console.log('this.tempCoupon', this.tempCoupon) => 外層透過props傳進來的tempCoupon
+      // 將時間格式改為 YYYY-MM-DD 字串
       const dateAndTime = new Date(this.tempCoupon.due_date * 1000)
         .toISOString().split('T');
         // [this.due_date] = dateAndTime 這邊就只是單純把 this.due_date 的值，改為陣列格式喔。
       [this.due_date] = dateAndTime
     },
+    // due_date函式，不是為了做有效日期，而是要把建立日期以Unix TimeStamp傳送給後端
     due_date () {
+      // Math.floor(new Date('YYYY-MM-DD') / 1000) => 轉乘Unix TimeStamp
       this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000)
     }
   },
+  emits: ['saveCoupon'],
   methods: {
     saveCoupon () {
       this.$emit('saveCoupon', this.tempCoupon)

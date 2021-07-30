@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="row" v-for="item in allCoupons" :key="item.id">
+                <tr class="row align-items-center" v-for="item in allCoupons" :key="item.id">
                     <td class="col-2">{{item.title}}</td>
                     <td class="col-2">{{item.percent}}%</td>
                     <td class="col-3 text-center">{{$filters.date(item.due_date)}}</td>
@@ -30,7 +30,7 @@
                         <span v-else>未啟用</span>
                     </td>
                     <td class="col-3 text-end">
-                      <div class="btn-group">
+                      <div class="btn-group  btns">
                         <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="openCouponModal('edit',item)">編輯</button>
                         <button type="button" class="btn btn-outline-danger btn-sm" @click="openCouponModal('delete',item)">刪除</button>
                       </div>
@@ -81,7 +81,6 @@ export default {
     // 取得優惠券列表
     getCouponsList () {
       this.isLoading = true
-      // /api/:api_path/admin/coupons?page=:page
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupons`
       this.$http.get(api)
         .then(res => {
@@ -89,13 +88,11 @@ export default {
             this.isLoading = false
             const { coupons } = res.data
             this.allCoupons = coupons
-            console.log(res)
           }
         })
     },
     // 新增、編輯優惠券
     updateCoupon (item) {
-    //   console.log(item)
     // 新增的api、方法
       let api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupon`
       let httpMethods = 'post'
@@ -109,7 +106,6 @@ export default {
       this.$http[httpMethods](api, { data: item })
         .then(res => {
           if (res.data.success) {
-            // console.log(res)
             this.MessageStatus(res, status)
             this.getCouponsList()
             this.$refs.discountModal.hideModal()
@@ -122,18 +118,15 @@ export default {
     },
     // 刪除優惠券
     deleteCoupon () {
-    // /api/:api_path/admin/coupon/:coupon_id
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
       this.$http.delete(api)
         .then(res => {
           if (res.data.success) {
             this.MessageStatus(res, '刪除優惠券')
-            console.log(res)
             this.getCouponsList()
             this.$refs.deleteCouponModal.hideModal()
           } else {
             this.MessageStatus(res, '刪除優惠券')
-            console.log(res)
           }
         }).catch(err => {
           console.log(err)
@@ -151,5 +144,9 @@ export default {
     &:hover{
       color:#fff;
     }
+  }
+  .btns{
+    margin-top: -15px;
+    margin-bottom: -12px;
   }
 </style>

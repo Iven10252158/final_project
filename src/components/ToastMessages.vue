@@ -29,14 +29,23 @@ export default {
     },
     clearToast (index) {
       this.messages.splice(index, 1)
-      console.log(index)
+      // console.log(index)
     }
   },
   inject: ['emitter'],
   mounted () {
     this.emitter.on('push-message', (message) => {
       const { title, style, content } = message
-      console.log('emitter.on', message)
+      // console.log('emitter.on', message)
+      this.messages.push({ title, style, content })
+      // console.log(this.messages)
+      this.toastShow()
+    })
+  },
+  unmounted () {
+    this.emitter.off('push-message', (message) => {
+      const { title, style, content } = message
+      // console.log('emitter.on', message)
       this.messages.push({ title, style, content })
       console.log(this.messages)
       this.toastShow()

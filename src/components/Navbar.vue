@@ -22,6 +22,9 @@
           <li class="nav-item text-center">
               <router-link to="/products" class="h5 nav-link">產品列表</router-link>
           </li>
+          <li class="nav-item text-center">
+              <router-link to="/articles" class="h5 nav-link">登山小知識</router-link>
+          </li>
         </ul>
         <div class="d-flex justify-content-center mt-2">
           <a href="#" class="h4 nav-link nav-btn" @click.prevent="openCanvas">
@@ -91,17 +94,8 @@ export default {
         .then(res => {
           this.isLoading = false
           this.cart = res.data.data
-          console.log(this.cart)
         })
     }
-  },
-  numounted () {
-    this.emitter.off('update-qty', () => {
-      this.getCartList()
-    })
-    this.emitter.off('favorite-qty', () => {
-      this.getFavorite()
-    })
   },
   mounted () {
     this.getFavorite()
@@ -123,6 +117,14 @@ export default {
       this.getCartList()
     })
     this.emitter.on('favorite-qty', () => {
+      this.getFavorite()
+    })
+  },
+  numounted () {
+    this.emitter.off('update-qty', () => {
+      this.getCartList()
+    })
+    this.emitter.off('favorite-qty', () => {
       this.getFavorite()
     })
   }

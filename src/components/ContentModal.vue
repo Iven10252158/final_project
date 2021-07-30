@@ -31,7 +31,6 @@
 
 <script>
 import modalMixin from '@/mixins/modalMixin'
-// import Modal from 'bootstrap/js/dist/modal'
 export default {
   mixins: [modalMixin],
   props: ['contentMsg'],
@@ -43,6 +42,7 @@ export default {
       }
     }
   },
+  emits: ['send-msg'],
   methods: {
     sendMsg (item) {
       this.$swal({

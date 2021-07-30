@@ -40,14 +40,12 @@ export default {
 $text-color:#fff;
 $nav-textActive:#eadfa4;
 .cartDropdown{
-    color: $text-color;
-    transition: 0.5s ease-in-out;
-    &:hover{
-    //  border-bottom: 3px solid $nav-textActive;
-      padding-bottom: 3px;
-      color:$nav-textActive;
-      // transform: scale(1.2);
-    }
+  color: $text-color;
+  transition: 0.5s ease-in-out;
+  &:hover{
+    padding-bottom: 3px;
+    color:$nav-textActive;
+  }
 }
 .dropdownBtn{
     transition: 0.5s ease-in-out;
@@ -55,14 +53,4 @@ $nav-textActive:#eadfa4;
         transform: scale(1.2);
     }
 }
-// .nav-link{
-//   color: $text-color;
-//   transition: 0.5s ease-in-out;
-//   &:hover{
-//   //  border-bottom: 3px solid $nav-textActive;
-//     padding-bottom: 3px;
-//     color:$nav-textActive;
-//     transform: scale(1.2);
-//   }
-// }
 </style>

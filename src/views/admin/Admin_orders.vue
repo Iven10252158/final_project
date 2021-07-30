@@ -8,7 +8,7 @@
         <div class="row">
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <ordersModal ref="ordersModal" :order-detail="tempOrder" @update="updateOrder"></ordersModal>
-                <deleteOrderModal ref="deleteOrdersModal" :delProduct="tempOrder" @check-delete="deleteOrder"></deleteOrderModal>
+                <deleteOrderModal ref="deleteOrdersModal" :delete-modal="tempOrder" @check-delete="deleteOrder"></deleteOrderModal>
                 <table class="table mt-4 table-hover table-responsive">
                     <thead>
                         <tr>
@@ -129,7 +129,7 @@ export default {
           break
         case 'delete':
           this.tempOrder = { ...item }
-          console.log(this.tempOrder)
+          console.log('delete', this.tempOrder)
           this.$refs.deleteOrdersModal.showModal()
       }
     }

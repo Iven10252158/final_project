@@ -19,6 +19,12 @@
       <h5 class="text-center text-primary">管理後台</h5>
       <ul class="nav flex-column align-items-end">
         <li class="nav-item">
+          <router-link to='/' class="nav-link text-primary">
+            <span data-feather="shopping-cart"></span>
+              回到前台
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link to='/admin/admin_orders' class="nav-link text-primary">
             <span data-feather="shopping-cart"></span>
               訂單管理
@@ -34,6 +40,12 @@
           <router-link to="/admin/admin_coupons" class="nav-link text-primary">
             <span data-feather="users"></span>
             優惠券管理
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/admin/admin_article" class="nav-link text-primary">
+            <span data-feather="users"></span>
+            文章管理
           </router-link>
         </li>
       </ul>
@@ -69,21 +81,24 @@ export default {
     },
     // 做checkapi
     checkLogin () {
-      const api = `${process.env.VUE_APP_URL}api/user/check`
+      // const api = `${process.env.VUE_APP_URL}api/user/check`
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)week3homeworkTK\s*=\s*([^;]*).*$)|^.*$/, '$1')
-      // console.log('卻可api的偷啃', token)
-      this.$http.defaults.headers.common.Authorization = `${token}`
-      this.$http.post(api)
-        .then(res => {
-          if (res.data.success) {
-            this.checkSuccess = true
-          } else {
-            this.MessageStatus(res, '登入')
-            this.$router.push('/login')
-          }
-        }).catch(err => {
-          console.log(err)
-        })
+      if (token) {
+        this.$http.defaults.headers.common.Authorization = `${token}`
+
+        this.$http.post(`${process.env.VUE_APP_URL}api/user/check`)
+          .then(res => {
+            if (res.data.success) {
+              this.checkSuccess = true
+            } else {
+              console.log('checkLoginRes', res)
+              this.MessageStatus(res, '登入')
+              this.$router.push('/login')
+            }
+          }).catch(err => {
+            console.log('checkLoginErr', err)
+          })
+      }
     }
   },
   created () {
