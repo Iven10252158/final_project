@@ -44,44 +44,76 @@
             <div class="col-8">
                 <div class="row form-group">
                     <div class="col-12">
+
+                      <Form v-slot="{ errors }" @submit="checkSave" ref="form">
+                        <!--標題  -->
                         <label for="title" class="mb-1">標題</label>
-                        <input type="text" id="title" class="form-control" placeholder="請輸入標題" v-model="tempProduct.title">
+                        <Field id="title" name="title" type="text" class="form-control mb-3"
+                        :class="{ 'is-invalid': errors['title'] }" placeholder="請輸入標題"
+                        rules="required" v-model="tempProduct.title"></Field>
+                        <ErrorMessage name="title" class="invalid-feedback"></ErrorMessage>
+
                         <div class="row form-group">
+                          <!-- 類別 -->
                           <div class="col-6">
                             <label for="category">類別</label>
-                            <input type="text" id="category" class="form-control" placeholder="請輸入類別" v-model="tempProduct.category">
+                            <Field id="category" name="category" type="text" class="form-control mb-3"
+                              :class="{ 'is-invalid': errors['category'] }" placeholder="請輸入類別"
+                              rules="required" v-model="tempProduct.category"></Field>
+                            <ErrorMessage name="category" class="invalid-feedback"></ErrorMessage>
                           </div>
+                          <!-- 單位 -->
                           <div class="col-6">
                             <label for="unit">單位</label>
-                            <input type="text" id="unit" class="form-control" placeholder="請輸入單位" v-model="tempProduct.unit">
+                            <Field id="unit" name="unit" type="text" class="form-control mb-3"
+                              :class="{ 'is-invalid': errors['unit'] }" placeholder="請輸入單位"
+                              rules="required" v-model="tempProduct.unit"></Field>
+                            <ErrorMessage name="unit" class="invalid-feedback"></ErrorMessage>
                           </div>
+
+                          <!-- 原價 -->
                           <div class="col-6">
                             <label for="origin_price">原價</label>
-                            <input type="number" min='0' id="origin_price" class="form-control" placeholder="請輸入原價" v-model.number="tempProduct.origin_price">
+                            <Field id="origin_price" name="origin_price" type="number" min='0' class="form-control mb-3"
+                              :class="{ 'is-invalid': errors['origin_price'] }" placeholder="請輸入原價"
+                              rules="required" v-model.number="tempProduct.origin_price"></Field>
+                            <ErrorMessage name="origin_price" class="invalid-feedback"></ErrorMessage>
                           </div>
+                          <!-- 售價 -->
                           <div class="col-6">
                             <label for="price">售價</label>
-                            <input type="number" min='0' id="price" class="form-control" placeholder="請輸入售價" v-model.number="tempProduct.price">
+                            <Field id="price" name="price" type="number" min='0' class="form-control mb-3"
+                              :class="{ 'is-invalid': errors['price'] }" placeholder="請輸入售價"
+                              rules="required" v-model.number="tempProduct.price"></Field>
+                            <ErrorMessage name="price" class="invalid-feedback"></ErrorMessage>
                           </div>
 
-                          <div class="col-12 mt-3">
+                          <!-- 請選擇方案 -->
+                           <div class="col-12 mt-3">
                             <label for="program">請選擇方案</label>
-
-                            <select name="" id="program" class="form-control" v-model="tempProduct.program">
+                            <Field id="program" name="program" class="form-control mb-3"
+                              :class="{ 'is-invalid': errors['program'] }" as="select"
+                              rules="required" v-model="tempProduct.program">
                               <option value="">請選擇方案</option>
                               <option value="4人成團，搭配響導1名">4人成團，搭配響導1名</option>
                               <option value="6人成團，搭配響導2名">6人成團，搭配響導2名</option>
-                            </select>
+                              </Field>
+                            <ErrorMessage name="program" class="invalid-feedback"></ErrorMessage>
 
-                            <label for="description">產品描述</label>
-                            <textarea type="text" id="description" rows="6" class="form-control" placeholder="產品描述" v-model="tempProduct.description">
-                            </textarea>
+                            <!-- 產品描述 -->
+                            <label for="description" class="mb-1">產品描述</label>
+                            <Field id="description" name="description" type="text" as="textarea" rows="6" class="form-control mb-3"
+                              v-model="tempProduct.description" placeholder="產品描述"></Field>
 
-                            <label for="content">內容說明</label>
-                            <textarea type="text" id="content" rows="6" class="form-control" placeholder="內容說明" v-model="tempProduct.content"></textarea>
+                            <!-- 內容說明 -->
+                            <label for="content" class="mb-1">內容說明</label>
+                            <Field id="content" name="content" type="text" as="textarea" rows="6" class="form-control mb-3"
+                              v-model="tempProduct.content" placeholder="內容說明"></Field>
 
-                            <label for="content2">內容說明2</label>
-                            <textarea type="text" id="content2" rows="6" class="form-control" placeholder="內容說明" v-model="tempProduct.content2"></textarea>
+                            <!-- 內容說明2 -->
+                            <label for="content2" class="mb-1">內容說明2</label>
+                            <Field id="content2" name="content2" type="text" as="textarea" rows="6" class="form-control mb-3"
+                              v-model="tempProduct.content2" placeholder="內容說明"></Field>
 
                             <input type="checkbox" class="form-check-input" id="is_enabled" v-model='tempProduct.is_enabled'>
                             <label class="form-check-label" for="is_enabled" :true-value="1" :false-value="0">是否啟用</label>
@@ -90,9 +122,9 @@
 
                         <div class="modal-footer border-0">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" @click="checkSave">確定</button>
+                          <button type="submit" class="btn btn-primary">確定</button>
                         </div>
-
+                      </Form>
                     </div>
                 </div>
             </div>
@@ -127,8 +159,11 @@ export default {
   },
   emits: ['check-save'],
   methods: {
+    resetForm () {
+      this.$refs.form.resetForm()
+    },
     checkSave () {
-      this.$emit('check-save')
+      this.$emit('check-save', this.tempProduct)
     },
     uploadFile () {
       // console.dir(fileInput.files[0]);

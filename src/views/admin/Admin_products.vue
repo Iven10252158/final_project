@@ -95,9 +95,10 @@ export default {
       switch (isNew) {
         case 'new':
           this.$refs.productModal.showModal()
+          this.$refs.productModal.resetForm()
           // console.log(item)
           // 暫存資料區要清空，才能新增資料
-          this.tempProduct = {}
+          // this.tempProduct = {}
           this.isNew = true
           break
         case 'edit':
@@ -127,11 +128,13 @@ export default {
       this.$http[httpMethods](api, { data: this.tempProduct })
         .then(res => {
           if (res.data.success) {
+            console.log(tempProduct)
             this.MessageStatus(res, status)
             this.getProducts()
-            // console.log('updateProduct S', res)
+            console.log('updateProduct S', res)
             this.$refs.productModal.hideModal()
           } else {
+            console.log(tempProduct)
             this.MessageStatus(res, status)
             console.log('updateProduct E', res)
           }
