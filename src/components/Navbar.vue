@@ -10,20 +10,20 @@
         <h3 class="text-white ps-2 mb-0">CLIMBER</h3>
         </router-link>
       </a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="isPutColor = !isPutColor">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="openNav">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-collapse collapse" :class="[ toggleNav ? 'show' :'' ] " id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
           <li class="nav-item text-center">
-              <router-link to="/about" class="h5 nav-link">關於我們</router-link>
+              <router-link to="/about" class="h5 nav-link" @click="closeNav">關於我們</router-link>
           </li>
           <li class="nav-item text-center">
-              <router-link to="/products" class="h5 nav-link">產品列表</router-link>
+              <router-link to="/products" class="h5 nav-link" @click="closeNav">產品列表</router-link>
           </li>
           <li class="nav-item text-center">
-              <router-link to="/articles" class="h5 nav-link">登山小知識</router-link>
+              <router-link to="/articles" class="h5 nav-link" @click="closeNav">登山小知識</router-link>
           </li>
         </ul>
         <div class="d-flex justify-content-center mt-2">
@@ -76,10 +76,19 @@ export default {
         navBarTop: true
       },
       mainFavoritsList: JSON.parse(localStorage.getItem('MyFavorite')) || [],
-      myFavorite: ''
+      myFavorite: '',
+      toggleNav: false
     }
   },
   methods: {
+    openNav () {
+      this.isPutColor = !this.isPutColor
+      this.toggleNav = !this.toggleNav
+    },
+    closeNav () {
+      this.isPutColor = !this.isPutColor
+      this.toggleNav = false
+    },
     getFavorite () {
       this.myFavorite = JSON.parse(localStorage.getItem('MyFavorite')) || []
     },
@@ -143,15 +152,10 @@ $nav-textActive:#eadfa4;
       transform: scale(1.2);
     }
   }
-  .nav-btn{
-    color: $text-color;
-    transition: 0.5s ease-in-out;
-    &:hover{
-      padding-bottom: 3px;
-      color:$nav-textActive;
-      transform: scale(1.4);
-    }
+  .navbar-collapse{
+    transition: 0.3s ease-in-out;
   }
+
   .navbar{
     background-color: $primary-bg;
   }

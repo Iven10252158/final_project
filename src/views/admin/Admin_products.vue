@@ -95,10 +95,10 @@ export default {
       switch (isNew) {
         case 'new':
           this.$refs.productModal.showModal()
-          this.$refs.productModal.resetForm()
-          // console.log(item)
+          // this.$refs.productModal.resetForm()->用reset沒用，只好到ProductModal裡面讓生命週期重跑
+          console.log(isNew, item)
           // 暫存資料區要清空，才能新增資料
-          // this.tempProduct = {}
+          this.tempProduct = {}
           this.isNew = true
           break
         case 'edit':
