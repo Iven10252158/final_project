@@ -27,7 +27,7 @@
           </li>
         </ul>
         <div class="d-flex justify-content-center mt-2">
-          <a href="#" class="h4 nav-link nav-btn" @click.prevent="openCanvas">
+          <a href="#" class="h4 nav-link" @click.prevent="openCanvas">
             <i class="fas fa-bookmark"></i>
           </a>
           <div class="position-relative" v-if="myFavorite">
@@ -39,11 +39,11 @@
               <i class="fas fa-user-alt"></i>
           </router-link> -->
           <div v-if="cart.carts">
-            <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link nav-btn">
+            <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link">
               <i class=" fas fa-cart-plus"></i>
             </router-link>
-            <a href="#" class="h4 nav-link" v-if="cart.carts.length === 0">
-              <Dropdown ref="dropdown"></Dropdown>
+            <a href="#" class="h4" v-if="cart.carts.length === 0">
+              <Dropdown ref="dropdown" class="nav-btn"></Dropdown>
             </a>
           </div>
           <div class="position-relative" v-if="cart.carts">
@@ -149,6 +149,14 @@ $nav-textActive:#eadfa4;
     transition: 0.5s ease-in-out;
     &:hover{
       padding-bottom: 3px;
+      transform: scale(1.2);
+    }
+  }
+  .nav-btn{
+    transition: 0.5s ease-in-out;
+    padding: 8px 16px;
+    &:hover{
+      // padding-bottom: 3px;
       transform: scale(1.2);
     }
   }
