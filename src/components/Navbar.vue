@@ -42,8 +42,8 @@
             <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link">
               <i class=" fas fa-cart-plus"></i>
             </router-link>
-            <a href="#" class="h4" v-if="cart.carts.length === 0">
-              <Dropdown ref="dropdown" class="nav-btn"></Dropdown>
+            <a href="#" v-if="cart.carts.length === 0">
+              <Dropdown ref="dropdown" class="h4 nav-btn"></Dropdown>
             </a>
           </div>
           <div class="position-relative" v-if="cart.carts">
@@ -154,7 +154,7 @@ $nav-textActive:#eadfa4;
   }
   .nav-btn{
     transition: 0.5s ease-in-out;
-    padding: 8px 16px;
+    background-color:transparent;
     &:hover{
       // padding-bottom: 3px;
       transform: scale(1.2);
