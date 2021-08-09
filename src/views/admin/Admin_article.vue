@@ -1,52 +1,52 @@
 <template>
-  <Loading :active="isLoading">
-      <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
-      <div></div><div><div></div></div>
-      </div></div>
-  </Loading>
-  <div class="container">
-      <div class="row">
+    <Loading :active="isLoading">
+        <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+        <div></div><div><div></div></div>
+        </div></div>
+    </Loading>
+    <div class="container">
+        <div class="row">
           <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
               <div class="d-flex justify-content-end mt-3">
-                  <button type="button" class="btn btn-primary text-white" @click="openModal(true)">新增貼文</button>
+                <button type="button" class="btn btn-primary text-white" @click="openModal(true)">新增貼文</button>
               </div>
               <ArticleModal ref="articleModal" :inner-article-info="tempArticle" :is-new="isNew" @update-article="updateArticle"></ArticleModal>
               <DeleteArticleModal ref="deleteArticle" :delete-modal="tempArticle" @check-delete="removeArticle"></DeleteArticleModal>
               <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
-                  <thead class="col-12">
-                      <tr class="row">
-                          <th class="col-2">標題</th>
-                          <th class="col-2 text-center">作者</th>
-                          <th class="col-2 text-center">描述</th>
-                          <th class="col-2 text-center">建立時間</th>
-                          <th class="col-2 text-center">是否公開</th>
-                          <th class="col-2  text-end">編輯</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class="row" v-for="item in allArticles" :key="item.id">
-                          <td class="col-2">{{item.title}}</td>
-                          <td class="col-2 text-center">{{item.author}}</td>
-                          <td class="col-2 text-center">{{item.description}}</td>
-                          <td class="col-2 text-center">
-                              {{$filters.date(item.create_at)}}
-                          </td>
-                          <td class="col-2 text-center">
-                              <span v-if="item.isPublic" class="text-success">公開</span>
-                              <span v-else>不公開</span>
-                          </td>
-                          <td class="col-2 text-end">
-                          <div class="btn-group">
-                              <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="getArticle(item)">編輯</button>
-                              <button type="button" class="btn btn-outline-danger btn-sm" @click="openRemoveArticleModal(item)">刪除</button>
-                          </div>
-                          </td>
-                      </tr>
-                  </tbody>
+                <thead class="col-12">
+                  <tr class="row">
+                      <th class="col-2">標題</th>
+                      <th class="col-2 text-center">作者</th>
+                      <th class="col-2 text-center">描述</th>
+                      <th class="col-2 text-center">建立時間</th>
+                      <th class="col-2 text-center">是否公開</th>
+                      <th class="col-2  text-end">編輯</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row" v-for="item in allArticles" :key="item.id">
+                    <td class="col-2">{{ item.title }}</td>
+                    <td class="col-2 text-center">{{ item.author }}</td>
+                    <td class="col-2 text-center">{{ item.description }}</td>
+                    <td class="col-2 text-center">
+                        {{ $filters.date(item.create_at) }}
+                    </td>
+                    <td class="col-2 text-center">
+                        <span v-if="item.isPublic" class="text-success">公開</span>
+                        <span v-else>不公開</span>
+                    </td>
+                    <td class="col-2 text-end">
+                      <div class="btn-group">
+                          <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="getArticle(item)">編輯</button>
+                          <button type="button" class="btn btn-outline-danger btn-sm" @click="openRemoveArticleModal(item)">刪除</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
           </main>
-      </div>
-  </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -100,7 +100,6 @@ export default {
           if (res.data.success) {
             this.isLoading = false
             this.allArticles = res.data.articles
-            // console.log('allArticles', res)
           }
           this.$refs.articleModal.hideModal()
         }).catch(err => {
@@ -111,7 +110,6 @@ export default {
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/article/${item.id}`)
         .then(res => {
           if (res.data.success) {
-            // this.article = res.data.article
             this.openModal(false, res.data.article)
           }
         }).catch(err => {
@@ -125,18 +123,17 @@ export default {
         // 當新增貼文的modal打開時，會取得本地的時間戳記
         // 因為要傳進內層轉換成日期格式，所以要 / 1000
           create_at: Math.floor(new Date().getTime() / 1000),
-          tag: []
+          tag: [],
+          isPublic: false
         //   console.log('打開Modal當下的時間戳', this.tempArticle.create_at)
         }
         this.$refs.articleModal.showModal()
       } else {
-        // console.log(isNew, item)
         this.isNew = false
         this.tempArticle = {
           ...item,
           create_at: Math.floor(new Date().getTime() / 1000)
         }
-        // console.log('edit tempArticle', this.tempArticle)
         this.$refs.articleModal.showModal()
       }
     },
@@ -145,10 +142,11 @@ export default {
       this.tempArticle = { ...item }
     },
     removeArticle () {
-      // console.log('remove', this.tempArticle)
       this.$http.delete(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`)
         .then(res => {
-          this.getArticles()
+          if (res.data.success) {
+            this.getArticles()
+          }
         }).catch(err => {
           console.log(err)
         })

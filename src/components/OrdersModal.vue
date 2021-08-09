@@ -102,6 +102,7 @@ import modalMixin from '@/mixins/modalMixin'
 export default {
   props: ['orderDetail'],
   mixins: [modalMixin],
+  emits: ['update'],
   watch: {
     orderDetail () {
       this.tempOrder = this.orderDetail
@@ -112,7 +113,6 @@ export default {
       tempOrder: {}
     }
   },
-  emits: ['update'],
   methods: {
     update (tempOrder) {
       this.$emit('update', tempOrder)

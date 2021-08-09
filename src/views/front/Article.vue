@@ -20,13 +20,13 @@
         </nav>
         <div class="row innerHeight justify-content-center">
             <div class="col-md-10 col-lg-8">
-                <h5>{{article.title}}</h5>
+                <h5>{{ article.title }}</h5>
                 <div class="d-flex">
-                    <p class="text-muted">作者：{{article.author}} - </p>
-                    <p class="text-muted">發表時間 {{$filters.date(article.create_at)}}</p>
+                    <p class="text-muted">作者：{{ article.author }} - </p>
+                    <p class="text-muted">發表時間 {{ $filters.date(article.create_at) }}</p>
                 </div>
                 <span v-for="item in article.tag" :key="item">
-                    <span class="badge rounded-pill bg-secondary me-2 mb-2">{{item}}</span>
+                    <span class="badge rounded-pill bg-secondary me-2 mb-2">{{ item }}</span>
                 </span>
                 <div class="d-flex justify-content-center flex-wrap">
                     <div class="article-img" v-html="article.content"></div>

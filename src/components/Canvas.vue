@@ -1,38 +1,37 @@
 <template>
  <div class="offcanvas offcanvas-end" tabindex="-1" ref="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header pb-0">
-    <h5 class="offcanvasRightLabel mb-0">我的最愛</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div v-if="filters.length === 0" class="offcanvas-body">
-    <div class="d-flex">
-      <p class="fs-6 text-muted mb-0 mt-1">還沒有喜歡的商品嗎？</p>
-      <button class="btn btn-primary btn-sm" type="button">
-        <router-link to="/products">
-            <p class="text-white mb-0">快來收藏吧！</p>
-        </router-link>
-      </button>
+    <div class="offcanvas-header pb-0">
+      <h5 class="offcanvasRightLabel mb-0">我的最愛</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-  </div>
-  <div class="offcanvas-body">
-    <div class="card" v-for="(item,index) in filters" :key="index">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <div class="bg-cover"
-          :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'100px' }"></div>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body d-flex">
-            <p class="card-text">{{item.title}}</p>
-            <small class="card-text text-muted" @click="remove(item,index)">
-              <i class="fas fa-times"></i>
-            </small>
+    <div v-if="filters.length === 0" class="offcanvas-body">
+      <div class="d-flex">
+        <p class="fs-6 text-muted mb-0 mt-1">還沒有喜歡的商品嗎？</p>
+        <button class="btn btn-primary btn-sm" type="button">
+          <router-link to="/products">
+              <p class="text-white mb-0">快來收藏吧！</p>
+          </router-link>
+        </button>
+      </div>
+    </div>
+    <div class="offcanvas-body">
+      <div class="card" v-for="(item,index) in filters" :key="index">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <div class="bg-cover" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'80px' }"></div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body d-flex align-items-center">
+              <p class="pe-3 mb-0">{{item.title}}</p>
+                <button class="cardBtn btn btn-outline-secondary btn-sm border-0" @click="remove(item,index)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -58,22 +57,26 @@ export default {
     }
   },
   methods: {
+    // 打開畫布時取得的資料
     showCanvas (data) {
+      // 當畫布打開的時候取得localStorage裡的資料
       this.favoItem = data
       this.getProducts()
       this.bsOffcanvas.show()
     },
+    // 取得我的最愛列表
     getFavorite () {
+      // 把所有的產品資料拿來做filter篩選
       this.filters = this.allProducts.filter((item, index) => {
+        // 如果在localStorage裡有一樣的產品id
         if (this.favoItem.includes(item.id)) {
+          // 就回傳一樣的產品到最愛清單上filters
           return item
         }
-        // console.log(this.favoItem.includes(item.id))
       })
     },
     remove (item) {
       this.favoItem = storageMethods.getItem() || []
-      // console.log(item.id)
       this.filters.forEach((element, index) => {
         if (element.id === item.id) {
           this.favoItem.splice(index, 1)
@@ -92,6 +95,8 @@ export default {
             this.allProducts = res.data.products
             this.getFavorite()
           }
+        }).catch(err => {
+          console.log(err)
         })
     }
   },
@@ -101,3 +106,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scpoed>
+    .cardBtn{
+      margin-top: -15px;
+    }
+</style>
