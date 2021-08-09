@@ -6,7 +6,7 @@
     </Loading>
     <CartNavbar></CartNavbar>
     <div class="cart-banner">
-      <div class="bg-bottom d-flex justify-content-center align-items-center" style="background-image:url('https://images.unsplash.com/photo-1500397999458-7fc39bf7a814?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=924&q=80');height:330px">
+      <div class="bg-bottom d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1628480946620.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Uk8gQYWB9JbaXwysaCt3LsP05ErOOROXs7kFc3SvEMw14m3e9c97kqKPMgqu1NgfgdTIqyXwslvTlFP3PiovGk9JpiugomLIFsOM3jbNxPp6qLxopVDOpTYWX5oOL8gFP9EeejJpXyFE4EiR8N0Hxp7vysWYXZ5gBO1XBLkjS%2BMtsTgSfOB8dEF%2F4f8lpwFwJ26r1%2B2Z5T14S1HQ1KH7EJWWDieQLXF8fYUwA4uSJDaUlJ7j8Dw3TmZxUI7JwjCqbGdU1%2Bzde5P2reOlnJZ%2BHt53dObrVUXn9FibQkTXUigXj7CsCxZXdxxIqkQpsgOWBwhbxKtOSdvN9dGpw35dsw%3D%3D');height:330px">
         <div class="banner-text text-white">
             <h3 class="pt-2">購物車</h3>
         </div>

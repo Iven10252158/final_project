@@ -241,7 +241,7 @@ export default {
     this.emitter.off('remove-data', (data) => {
       this.getFavorite()
     })
-    window.reomveEventListener('scroll', () => {
+    window.removeEventListener('scroll', () => {
       // console.log(window.scrollY)
       const windowY = window.scrollY
       if (windowY > 395) {
