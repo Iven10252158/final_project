@@ -189,7 +189,10 @@ export default {
             this.tempProduct.imageUrl = res.data.imageUrl
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     createdImages () {

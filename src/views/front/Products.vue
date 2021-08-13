@@ -131,7 +131,7 @@ export default {
   methods: {
     getFavorite () {
       this.myFavorite = storageMethods.getItem() || []
-      console.log(this.myFavorite)
+      // console.log(this.myFavorite)
     },
     addMyFavorite (item) {
       if (this.myFavorite.includes(item.id)) {
@@ -152,7 +152,10 @@ export default {
             this.allProducts = res.data.products
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     searchProduct (value) {
@@ -175,7 +178,6 @@ export default {
           this.productValue = item
           return element
         } else if (item === undefined) {
-          // this.color = true
           this.productValue = 'total'
           return this.products
         }
@@ -199,7 +201,10 @@ export default {
             })
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     addToCart (item, qty = 1) {
@@ -218,9 +223,14 @@ export default {
               icon: 'success',
               title: `${res.data.data.product.title} <br/>${res.data.message}`
             })
-            console.log('加入購物車', this.cart)
+            // console.log('加入購物車', this.cart)
             this.emitter.emit('update-qty')
           }
+        }).catch(err => {
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     getCartList () {
@@ -232,7 +242,10 @@ export default {
             this.productId.push(item.product_id)
           })
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },
@@ -320,7 +333,6 @@ $hover-color:#E6c35c;
       }
     }
     .styleBtn{
-      // font-size: 20px;
       border:transparent;
       &:hover{
         background-color: transparent;

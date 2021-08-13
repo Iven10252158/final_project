@@ -54,7 +54,10 @@ export default {
           this.isLoading = false
           this.allArticles = res.data.articles
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

@@ -58,6 +58,11 @@ export default {
         .then(res => {
           this.isLoading = false
           this.article = res.data.article
+        }).catch(err => {
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

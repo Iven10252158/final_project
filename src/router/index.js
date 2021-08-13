@@ -88,7 +88,19 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  linkActiveClass: 'text-navActive'
+  linkExactActiveClass: 'text-navActive', // linkExactActiveClass精準比對link
+  // linkActiveClass: 'text-navActive' // linkActiveClass屬於模糊比對link
+
+  scrollBehavior (to, from, savedPosition) {
+    // return desired position
+    // console.log('to', to, 'from', from, 'savedPosition', savedPosition)
+    if (to.fullPath.match('/')) {
+      return {
+        top: 0
+      }
+    }
+    return {}
+  }
 })
 
 export default router

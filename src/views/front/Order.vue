@@ -87,7 +87,10 @@ export default {
             this.$router.push(`/ordercheckout/${this.orderId}`)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     getCartList () {
@@ -100,7 +103,10 @@ export default {
             this.cart = res.data.data
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

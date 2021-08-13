@@ -91,7 +91,10 @@ export default {
           this.create_at = res.data.order.create_at
           this.dateAndTime = new Date(this.create_at * 1000).toLocaleString()
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     payOrder () {
@@ -105,7 +108,10 @@ export default {
             this.emitter.emit('update-qty')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

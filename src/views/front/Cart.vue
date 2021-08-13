@@ -144,7 +144,10 @@ export default {
           this.isLoading = false
           this.cart = res.data.data
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 更新購物車
@@ -171,7 +174,10 @@ export default {
             })
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 刪除購物車內的一筆資料
@@ -196,7 +202,10 @@ export default {
           }
         }).catch(err => {
           this.getCartList()
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 刪除所有購物車資料
@@ -241,7 +250,10 @@ export default {
             })
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

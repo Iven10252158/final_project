@@ -163,7 +163,10 @@ export default {
             this.imagesUrl = res.data.product.imagesUrl
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     getCartList () {
@@ -174,7 +177,10 @@ export default {
           this.isLoading = false
           this.cart = res.data.data
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     addToCart (item, qty = 1) {
@@ -194,7 +200,10 @@ export default {
             emitter.emit('update-qty')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

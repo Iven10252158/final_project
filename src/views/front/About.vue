@@ -48,10 +48,13 @@
           <div class="row justify-content-center align-items-center">
           <div class="col-lg-12 text-center py-5">
             <h1 class="content fw-bolder">CLIMBER</h1>
-            <h3 class="py-2">聯絡我們</h3>
-            <p class="pe-2 fw-bolder">電話：<span>02-12345678</span></p>
-            <p class="pe-2 fw-bolder">營業時間：<span>09:00 - 21:00</span></p>
-            <p class="pe-2 fw-bolder">地址：<span>新北市新店區中華路117巷</span></p>
+            <h3 class="py-1">聯絡我們</h3>
+              <div class="mb-3">
+                <span class="pe-2 fw-bolder">電話：</span>
+                <a class="pe-2 fw-bolder" href="tel:+886-2-12345678">02-12345678</a>
+              </div>
+              <p class="pe-2 fw-bolder">營業時間：<span>09:00 - 21:00</span></p>
+              <p class="pe-2 fw-bolder">地址：<span>新北市新店區中華路117巷</span></p>
           </div>
         </div>
         </div>

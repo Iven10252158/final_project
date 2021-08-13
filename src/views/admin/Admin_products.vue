@@ -88,7 +88,10 @@ export default {
             this.pagination = res.data.pagination
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // click執行openModal函式時，會帶入2個參數
@@ -105,8 +108,9 @@ export default {
         case 'edit':
           this.$refs.productModal.showModal()
           // 因為edit是要修改資料，所以要把原本的資料傳進去
-          this.tempProduct = { ...item }
-          // console.log(isNew, this.tempProduct)
+          this.tempProduct = JSON.parse(JSON.stringify(item))
+          // this.tempProduct = { ...item }
+          // console.log(this.tempProduct)
           this.isNew = false
           break
         case 'delete':
@@ -129,16 +133,17 @@ export default {
       this.$http[httpMethods](api, { data: this.tempProduct })
         .then(res => {
           if (res.data.success) {
-            // console.log(tempProduct)
             this.MessageStatus(res, status)
             this.getProducts()
             this.$refs.productModal.hideModal()
           } else {
-            // console.log(tempProduct)
             this.MessageStatus(res, status)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 刪除產品
@@ -154,7 +159,10 @@ export default {
             this.MessageStatus(res, '刪除產品')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

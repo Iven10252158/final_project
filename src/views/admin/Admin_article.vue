@@ -72,11 +72,11 @@ export default {
     updateArticle (item) {
       let api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/article`
       let httpMethod = 'post'
-      let status = '新增產品'
+      let status = '新增文章'
       if (!this.isNew) {
         api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/article/${item.id}`
         httpMethod = 'put'
-        status = '編輯產品'
+        status = '編輯文章'
       }
 
       this.$http[httpMethod](api, { data: this.tempArticle })
@@ -84,13 +84,15 @@ export default {
           if (res.data.success) {
             this.MessageStatus(res, status)
             this.getArticles()
-            console.log('item', item)
           } else {
             this.MessageStatus(res, status)
-            console.log(res)
+            // console.log(res)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     getArticles (page = 1) {
@@ -103,7 +105,10 @@ export default {
           }
           this.$refs.articleModal.hideModal()
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     getArticle (item) {
@@ -113,7 +118,10 @@ export default {
             this.openModal(false, res.data.article)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     openModal (isNew, item) {
@@ -146,9 +154,15 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.getArticles()
+            this.MessageStatus(res, '刪除文章')
+          } else {
+            this.MessageStatus(res, '刪除文章')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
       this.$refs.deleteArticle.hideModal()
     }

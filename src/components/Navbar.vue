@@ -80,11 +80,15 @@ export default {
   },
   methods: {
     openNav () {
-      this.isPutColor = !this.isPutColor
+      if (window.innerWidth < 992) {
+        this.isPutColor = !this.isPutColor
+      }
       this.toggleNav = !this.toggleNav
     },
     closeNav () {
-      this.isPutColor = !this.isPutColor
+      if (window.innerWidth < 992) {
+        this.isPutColor = !this.isPutColor
+      }
       this.toggleNav = false
     },
     getFavorite () {
@@ -104,7 +108,10 @@ export default {
             this.cart = res.data.data
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

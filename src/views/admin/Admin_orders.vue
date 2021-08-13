@@ -93,7 +93,10 @@ export default {
             this.pagination = res.data.pagination
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     updateOrder (item) {
@@ -107,7 +110,10 @@ export default {
             this.getOrders()
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     deleteOrder (tempOrder) {
@@ -119,7 +125,10 @@ export default {
           this.$refs.deleteOrdersModal.hideModal()
           this.getOrders()
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     openOrderModal (isEdit, item) {

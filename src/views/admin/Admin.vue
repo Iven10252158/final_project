@@ -76,7 +76,10 @@ export default {
             console.log(res)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 做checkapi
@@ -96,7 +99,10 @@ export default {
               this.$router.push('/login')
             }
           }).catch(err => {
-            console.log('checkLoginErr', err)
+            this.$swal({
+              icon: 'error',
+              title: `${err.data.message}`
+            })
           })
       } else {
         this.$router.push('/login')

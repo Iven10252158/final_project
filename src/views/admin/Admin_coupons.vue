@@ -91,7 +91,10 @@ export default {
             this.allCoupons = coupons
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 新增、編輯優惠券
@@ -113,11 +116,14 @@ export default {
             this.getCouponsList()
             this.$refs.discountModal.hideModal()
           } else {
-            console.log(res)
+            // console.log(res)
             this.MessageStatus(res, status)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     },
     // 刪除優惠券
@@ -133,7 +139,10 @@ export default {
             this.MessageStatus(res, '刪除優惠券')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

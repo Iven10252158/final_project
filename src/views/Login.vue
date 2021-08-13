@@ -26,8 +26,8 @@
                 <label for="showPsw" class="text-dark">
                 <small>{{isShow?'顯示密碼':'隱藏密碼'}}</small>
                 </label>
-              </div>
-              <button type="submit" class="btn btn-primary w-100 mt-3 text-white">登入</button>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3 text-white">登入</button>
           </Form>
         </div>
       </div>
@@ -65,7 +65,10 @@ export default {
             this.MessageStatus(res, '登入')
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   }

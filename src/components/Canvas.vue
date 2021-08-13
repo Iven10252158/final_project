@@ -96,7 +96,10 @@ export default {
             this.getFavorite()
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

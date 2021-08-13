@@ -110,10 +110,8 @@ export default {
       this.innertempArticle = this.innerArticleInfo
       this.innertempArticle.tag = this.innertempArticle.tag || []
       this.innertempArticle.isPublic = this.innertempArticle.isPublic || false
-      // console.log('innertempArticleModal', this.innertempArticle)
       const dateAndTime = new Date(this.innertempArticle.create_at * 1000)
         .toISOString().split('T');
-      // console.log('innertempArticle.create_at', dateAndTime);
       [this.create_at] = dateAndTime
       // 可以在input type = date取得電腦上的日期 ， 所以[this.innertempArticle.create_at] = dateAndTime 一定要寫
       this.isOpen = false
@@ -161,7 +159,10 @@ export default {
             // console.log(res.data.imageUrl)
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   }

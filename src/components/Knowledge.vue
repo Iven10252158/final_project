@@ -48,7 +48,10 @@ export default {
             this.article = res.data.article
           }
         }).catch(err => {
-          console.log(err)
+          this.$swal({
+            icon: 'error',
+            title: `${err.data.message}`
+          })
         })
     }
   },

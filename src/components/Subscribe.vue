@@ -6,7 +6,7 @@
                     <h3>訂閱CLIMBER電子報</h3>
                     <h5>獲得八折優惠券！</h5>
                 </div>
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-sm-6" v-if="isOpen">
                     <Form class="input-group" v-slot="{ errors }" ref="form">
                         <Field id="email" name="email" type="email" class="form-control"
                         :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email"
@@ -25,13 +25,19 @@
 export default {
   data () {
     return {
-      email: ''
+      email: '',
+      isOpen: true
     }
   },
   methods: {
     subscribe () {
       this.$swal({ icon: 'success', title: '訂閱成功！恭喜獲得折扣碼：climber_01', showConfirmButton: true, timer: 10000 })
-      this.$refs.form.resetForm()
+      this.email = ''
+      this.isOpen = false
+      this.$nextTick(() => {
+        this.isOpen = true
+      })
+      // this.$refs.form.resetForm()
     }
   }
 }
