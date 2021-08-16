@@ -18,8 +18,8 @@
                 <div class="bg-cover-top mb-md-3 mh-100" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627614198255.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=naP%2Ft9Nx6OrCnyBJ6HtMC94ObGO6r2TAQgIElEQWpsRm3jt8YE4Yjwnwylv%2F4W0BY5Ez%2F%2BG3%2BvIRNKcrORM%2B6Gmnp8FrT0rhZ0JgrW89DwnpH6d4klxunnG5LWX3O%2BoaKX0lFfr2Jy%2FfgvkMSS4VcKlG5%2BEENHmVbu6i0cqEpBi%2F9r%2F%2Fh0rfL3LXkovg712%2Bb7YhV4su1rcs99CtRt1PenZS294oc1GJcuFG9KTwYPNEul6tXiOsDRMfuaKRelsDBz2QOGeLSEzkO5IgjB2DZoZ8EY33w9f7wlmZYhu%2BzpOSeF%2BaKvewEAlDLuyg5fDwb1p8fb6lzFheCkSa3GTBsw%3D%3D');height:200px"></div>
               </div>
               <div class="col-12 col-md-4 mb-3 bg-warning pt-3 mt-md-3 mt-lg-4">
-                <h6 class="text-center mb-0 pt-lg-2 content">專業，為戶外注入更多安全因子</h6>
-                <p class="mb-0 pt-3 px-lg-2 content">我們積極招募充滿熱情、活力具備專業知識的夥伴加入我們的團隊。在戶外活動中，安全為首要考量。必須讓每個參與登山的人擁有安全的知識外，也期待他們有招一日能夠用自己的力量踏上這片迷人的山林。
+                <h6 class="text-center mb-0 pt-lg-2 content">專業，注入更多安全因子</h6>
+                <p class="mb-0 p-2 p-xl-3 content">我們積極招募充滿熱情、活力具備專業知識的夥伴加入。戶外活動中，安全為首要考量。必須讓每個登山的人擁有安全的知識，期待他們有招一日能夠用自己的力量踏上這片迷人的山林。
                 </p>
               </div>
               <div class="col-md-4 d-none d-md-inline-block">
@@ -32,9 +32,8 @@
               </div>
               <div class="col-12 col-md-5 mb-lg-3 bg-warning pt-3 flex-column justify-content-center flex-md-row mh-100">
                 <h6 class="text-center mb-0 pt-lg-2 content">故事，讓登山活動增添趣味</h6>
-                <p class="mb-0 pt-3 px-lg-2 content">台灣的山林，擁有豐富的地理環境與許多歷史故事。我們的領隊擁有這些專業的知識，在登山時分享相關的環境、氣候、地形與歷史故事，讓參與此趟活動的登山客能夠對山林有更多的了解。
-                  或許能夠從中記取到一些相關的歷史教訓、也或許能夠學習到相關的知識。我們也期待我們的領隊能夠成為這些參與登者的啟蒙導師，讓他們愛上山林而更熱愛台灣這片土地。俗話說「知己知彼，百戰百勝」只有更了解山林，才會更熱愛山林。也因此才會更懂的珍惜。
-                  珍惜著這些曾被我們視為理所當然的風景、文化...等等。落實無痕山林，才能讓山林的美永續發展。
+                <p class="mb-0 p-2 p-xl-4 content">台灣的山林，擁有豐富的地理環境與許多歷史故事。能在登山時分享相關的環境、氣候、地形與歷史故事，讓參與此趟活動的登山客能夠對山林有更多的了解。
+                  我們也期待我們的領隊能夠成為這些參與登者的啟蒙導師，讓他們愛上山林而更熱愛台灣這片土地。只有更了解山林，才會更熱愛山林。也因此才會更懂的珍惜。珍惜著這些曾被我們視為理所當然的風景、文化...等等。落實無痕山林，才能讓山林的美永續發展。
                 </p>
               </div>
             </div>
