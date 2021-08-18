@@ -4,56 +4,56 @@
           <div></div><div><div></div></div>
           </div></div>
     </Loading>
-    <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627614939907.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=mwULIef2opjmedm%2BoR4L6oG00P2sYzGtXaKlFG91YmK4dcmEpHxlUznJAhdfrNUWXKqSZeJ9cRjORUFTbOgK8tzFMdlqWSEJgac0TxIe4t92ABJs9R5yFsEMVAMbzuWr46kkIBdJqXUholcVpogCovYJiJoq%2FYSwEy22R0%2FWCzkgX1g%2FTTjG7qdE2zUxqvEGn4SgsCDuyXHsKtLFqr1bgQgMsVMws4Jh8F8lhlcGV7VS%2B4EUH%2FDyRNK%2BqIjtXjsiZ5OXhf%2FB5xh6dJHzTmpDQxSW8s%2BWIsGGDXfQeciBFFR89tiSFB18g6bKQOj2NdjzlczhFsXTpgNRQuGWPom6Sw%3D%3D');height:500px">
-      <div class="banner-text text-white">
-          <h3 class="pt-1">訂單資訊</h3>
-      </div>
+    <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1629254451302.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hfxAm%2BkhMPrbyhJg5oHb9vD07HbCQMCpYJxLx3%2BuvQMAbcjz5iLj2z7UlJf%2BQUru2KA5yFGle86WRMCBcxy92CnrQ6LX8DKYW1jRiSynweCEYvDg8xa43TSuq0nxf%2F7MCizTmBEOEPIz71D6lPUAX9IrZDxfNe8d04baYm42jZKgwieQ65r7SQosbPuCByRBnwMGcghNc%2FnNEVCgd4BQVEzPHFe2ntC1yhk9w6E3XJiFlmqy7PNdqMQbmYQpuDFonsw6PpAXxOnl%2BUfzixeBKKW68r7e2caCLr4yReA%2FiNdOfS70xLRtNtg6Z2%2FNNSaSfUqDiMFbXJUecOBs0HHqtg%3D%3D');height:500px">
+        <div class="banner-text text-white">
+            <div class="fs-1">訂單資訊</div>
+        </div>
     </div>
     <div class="container">
-      <div class="pt-3 mb-3">
-        <div class="row innerHeight justify-content-center align-items-center">
-          <div class="col-md-8">
-            <div class="h3 text-center mb-3">訂購人資料</div>
-              <Form  v-slot="{ errors }" @submit="createOrder">
-                  <label for="email" class="mb-1">帳號</label>
-                  <Field id="email" name="email" type="email" class="form-control mb-3"
-                  :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email"
-                  rules="email|required" v-model="form.user.email"></Field>
-                  <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
+        <div class="pt-3 mb-3">
+            <div class="row innerHeight justify-content-center align-items-center">
+                <div class="col-md-8">
+                    <div class="h3 text-center mb-3">訂購人資料</div>
+                    <Form  v-slot="{ errors }" @submit="createOrder">
+                        <label for="email" class="mb-1">帳號</label>
+                        <Field id="email" name="email" type="email" class="form-control mb-3"
+                        :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email"
+                        rules="email|required" v-model="form.user.email"></Field>
+                        <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
 
-                  <label for="name" class="mb-1">訂購人姓名</label>
-                  <Field id="name" name="姓名" type="text" class="form-control mb-3"
-                  :class="{ 'is-invalid': errors['姓名'] }" placeholder="請輸入訂購人姓名"
-                  rules="required" v-model="form.user.name"></Field>
-                  <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
+                        <label for="name" class="mb-1">訂購人姓名</label>
+                        <Field id="name" name="姓名" type="text" class="form-control mb-3"
+                        :class="{ 'is-invalid': errors['姓名'] }" placeholder="請輸入訂購人姓名"
+                        rules="required" v-model="form.user.name"></Field>
+                        <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
 
-                  <label for="address" class="mb-1">收件地址</label>
-                  <Field id="address" name="地址" type="text" class="form-control mb-3"
-                  :class="{ 'is-invalid': errors['地址'] }" placeholder="請輸入收件地址"
-                  rules="required" v-model="form.user.address"></Field>
-                  <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
+                        <label for="address" class="mb-1">收件地址</label>
+                        <Field id="address" name="地址" type="text" class="form-control mb-3"
+                        :class="{ 'is-invalid': errors['地址'] }" placeholder="請輸入收件地址"
+                        rules="required" v-model="form.user.address"></Field>
+                        <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
 
-                  <label for="tel" class="mb-1">收件人電話</label>
-                  <Field id="tel" name="電話號碼" class="form-control mb-3" type="tel"
-                  :class="{ 'is-invalid': errors['電話號碼'] }" placeholder="請輸入訂購人電話"
-                  rules="min:7|required" v-model="form.user.tel"></Field>
-                  <ErrorMessage name="電話號碼" class="invalid-feedback"></ErrorMessage>
-                  <label for="message" class="mb-1">留言</label>
-                  <Field id="message" name="message" type="text" as="textarea" rows="6" class="form-control mb-3"
-                    v-model="form.message"></Field>
-                  <div class="d-flex justify-content-end">
-                      <button type="submit" class="btn btn-primary my-3 text-white">確認送出</button>
-                  </div>
-              </Form>
-          </div>
+                        <label for="tel" class="mb-1">收件人電話</label>
+                        <Field id="tel" name="電話號碼" class="form-control mb-3" type="tel"
+                        :class="{ 'is-invalid': errors['電話號碼'] }" placeholder="請輸入訂購人電話"
+                        rules="min:7|required" v-model="form.user.tel"></Field>
+                        <ErrorMessage name="電話號碼" class="invalid-feedback"></ErrorMessage>
+                        <label for="message" class="mb-1">留言</label>
+                        <Field id="message" name="message" type="text" as="textarea" rows="6" class="form-control mb-3"
+                          v-model="form.message"></Field>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary my-3 text-white">確認送出</button>
+                        </div>
+                    </Form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <Footer class="footer"></Footer>
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
+import Footer from '@/components/front_components/Footer.vue'
 export default {
   components: {
     Footer

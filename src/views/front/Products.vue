@@ -1,93 +1,93 @@
 <template>
-  <Loading :active="isLoading">
-      <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
-      <div></div><div><div></div></div>
-      </div></div>
-  </Loading>
-<!-- header -->
-  <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627615134814.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=PMQQk6pbNyAtESd828Cny9woEZ6Z3b2zWk5CvL04q9Ymf4cS9dK6abpugaCOA4l0rrSlBL2lARn5myoJdFoNEaqo5FUrgu8FybI1I%2FRsfMQiy%2FpnZDbslgso0nyiz1Tbxh3sgD6rDHYj68ihIjjja4BxJWG%2F%2BgNreqRBRF0KTOwThcMyLCK5JrypKIwRbi7tM%2BUdX435WTxZM65fwRq3ak2DX%2BmDHTL8k3TPEvQtK6Qg3Sp3egqI3MgFqikG%2F8WDkm%2B3wcXFgtmBaS671l36XPehn%2BMFWLr%2F3ewlVio0G2pge6WDcL8HM70SOYHvJsBsErNxUCephQkDQaw9eVCUIw%3D%3D');height:500px">
-    <div class="banner-text text-white">
-        <h1 class="pt-1">產品列表</h1>
+    <Loading :active="isLoading">
+        <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+        <div></div><div><div></div></div>
+        </div></div>
+    </Loading>
+    <!-- header -->
+    <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627615134814.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=PMQQk6pbNyAtESd828Cny9woEZ6Z3b2zWk5CvL04q9Ymf4cS9dK6abpugaCOA4l0rrSlBL2lARn5myoJdFoNEaqo5FUrgu8FybI1I%2FRsfMQiy%2FpnZDbslgso0nyiz1Tbxh3sgD6rDHYj68ihIjjja4BxJWG%2F%2BgNreqRBRF0KTOwThcMyLCK5JrypKIwRbi7tM%2BUdX435WTxZM65fwRq3ak2DX%2BmDHTL8k3TPEvQtK6Qg3Sp3egqI3MgFqikG%2F8WDkm%2B3wcXFgtmBaS671l36XPehn%2BMFWLr%2F3ewlVio0G2pge6WDcL8HM70SOYHvJsBsErNxUCephQkDQaw9eVCUIw%3D%3D');height:500px">
+        <div class="banner-text text-white">
+            <div class="fs-1">產品列表</div>
+        </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="mt-4">
-          <input type="text" class="form-control rounded-1" placeholder="請輸入關鍵字" v-model="search"
-          @input="searchProduct(search)">
-        </div>
-        <div class="row sticky-md-top">
-          <div class="mt-3">
-            <ul class="list-group pe-auto siderBarLeft rounded-1" :class="siderBarLeft.beLeft">
-            <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
-            :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue }">
-            全部商品
-            </li>
-            <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
-                @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{item}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-9">
+    <div class="container">
         <div class="row">
-          <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
-            <div class="card h-100">
-              <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
-                <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${item.id}`">
-                    查看更多
-                </router-link>
-              </div>
-              <div class="card-body pb-2">
-                <h6 class="card-title text-hidden">
-                  <router-link class="text-grey products_title" :to="`/product/${item.id}`">
-                    {{item.title}}
-                  </router-link>
-                </h6>
-                <div class="card-text d-flex justify-content-between" >
-                  <div v-if="item.origin_price !== item.price">
-                    <del class="text-primary">NT{{$filters.currency(item.origin_price)}}</del>
-                  </div>
-                    <h6 class="text-color">NT {{$filters.currency(item.price)}}</h6>
+            <div class="col-md-3">
+                <div class="mt-4">
+                    <input type="text" class="form-control rounded-1" placeholder="請輸入關鍵字" v-model="search"
+                    @input="searchProduct(search)">
                 </div>
-                <div class="d-flex justify-content-between mt-3">
-                  <button type="button" class="styleBtn favoBtn btn btn-outline-favorite border-0 ps-0"
-                    @click="addMyFavorite(item)">
-                    <span v-if="myFavorite.includes(item.id)">
-                      <i class="fas fa-heart"></i>
-                    </span>
-                    <span v-else>
-                      <i class="far fa-heart"></i>
-                    </span>
-                  </button>
-                  <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0"
-                    @click="addToCart(item)" :class="{'disabled':productId.includes(item.id)}">
-                    <span v-if="productId.includes(item.id)">
-                      <i class="fas fa-shopping-cart"></i>
-                    </span>
-                    <span v-else>
-                      <i class="fas fa-cart-plus"></i>
-                    </span>
-                  </button>
+                <div class="row sticky-md-top">
+                    <div class="mt-3">
+                        <ul class="list-group pe-auto siderBarLeft rounded-1" :class="siderBarLeft.beLeft">
+                            <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
+                            :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue}">
+                            全部商品
+                            </li>
+                            <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
+                            @click="changeProduct(item)" :class="{'bg-primary':item === productValue, 'text-white':item === productValue }">{{ item }}</li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
+                    <div class="card h-100">
+                      <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
+                        <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${ item.id }`">
+                            查看更多
+                        </router-link>
+                      </div>
+                      <div class="card-body pb-2">
+                        <h6 class="card-title text-hidden">
+                          <router-link class="text-grey products_title" :to="`/product/${item.id}`">
+                            {{ item.title }}
+                          </router-link>
+                        </h6>
+                        <div class="card-text d-flex justify-content-between" >
+                          <div v-if="item.origin_price !== item.price">
+                            <del class="text-primary">NT{{ $filters.currency(item.origin_price) }}</del>
+                          </div>
+                            <h6 class="text-color">NT {{ $filters.currency(item.price) }}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                          <button type="button" class="styleBtn favoBtn btn btn-outline-favorite border-0 ps-0"
+                            @click="addMyFavorite(item)">
+                            <span v-if="myFavorite.includes(item.id)">
+                              <i class="fas fa-heart"></i>
+                            </span>
+                            <span v-else>
+                              <i class="far fa-heart"></i>
+                            </span>
+                          </button>
+                          <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0"
+                            @click="addToCart(item)" :class="{'disabled':productId.includes(item.id)}">
+                            <span v-if="productId.includes(item.id)">
+                              <i class="fas fa-shopping-cart"></i>
+                            </span>
+                            <span v-else>
+                              <i class="fas fa-cart-plus"></i>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="d-flex justify-content-center">
+            <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
+        </div>
     </div>
-    <div class="d-flex justify-content-center">
-      <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
-    </div>
-  </div>
-  <Footer></Footer>
-  <router-view></router-view>
+    <Footer/>
+    <router-view></router-view>
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue'
-import Footer from '@/components/Footer.vue'
+import Footer from '@/components/front_components/Footer.vue'
 
 // localStorage轉型
 const storageMethods = {
@@ -131,7 +131,6 @@ export default {
   methods: {
     getFavorite () {
       this.myFavorite = storageMethods.getItem() || []
-      // console.log(this.myFavorite)
     },
     addMyFavorite (item) {
       if (this.myFavorite.includes(item.id)) {
@@ -160,16 +159,11 @@ export default {
     },
     searchProduct (value) {
       this.productValue = 'total'
-      // console.log('value', value)
       this.typeProduct = this.allProducts.filter(item => {
         if (item.title.match(value)) {
           return item
         }
         this.productValue = ''
-        // else if可以不用寫
-        // } else if (value === '') {
-        //   return this.products
-        // }
       })
     },
     changeProduct (item) {
@@ -223,7 +217,6 @@ export default {
               icon: 'success',
               title: `${res.data.data.product.title} <br/>${res.data.message}`
             })
-            // console.log('加入購物車', this.cart)
             this.emitter.emit('update-qty')
           }
         }).catch(err => {
@@ -237,10 +230,12 @@ export default {
       const api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/cart`
       this.$http.get(api)
         .then(res => {
-          this.cart = res.data.data
-          this.cart.carts.forEach(item => {
-            this.productId.push(item.product_id)
-          })
+          if (res.data.success) {
+            this.cart = res.data.data
+            this.cart.carts.forEach(item => {
+              this.productId.push(item.product_id)
+            })
+          }
         }).catch(err => {
           this.$swal({
             icon: 'error',
@@ -255,7 +250,6 @@ export default {
       this.getFavorite()
     })
     window.removeEventListener('scroll', () => {
-      // console.log(window.scrollY)
       const windowY = window.scrollY
       if (windowY > 395) {
         this.siderBarLeft = {
@@ -299,23 +293,27 @@ $banner-text-bg-color:rgba(0, 0, 0,0.3);
 $Maintext-color:#fff;
 $text-color:#e35d6a;
 $hover-color:#E6c35c;
-    @keyframe {
-      swing {
-        20% {
-          transform: translateX(10px);
-        }
-        40% {
-          transform: translateX(-10px);
-        }
-        60% {
-          transform: translateX(10px);
-        }
-        80% {
-          transform: translateX(-10px);
-        }
-        100% {
-          transform: translateX(0px);
-        }
+    @keyframes shake{
+      15%{
+      transform: translateY(-10px);
+      }
+      30% {
+      transform: translateY(0px);
+      }
+      45% {
+      transform: translateY(-10px);
+      }
+      60% {
+      transform: translateY(0px);
+      }
+      75% {
+      transform: translateY(-5px);
+      }
+      90% {
+      transform: translateY(-2px);
+      }
+      100% {
+      transform: translateY(0px);
       }
     }
     .text-color{
@@ -329,7 +327,7 @@ $hover-color:#E6c35c;
     .favoBtn{
       font-size: 24px;
       &:hover{
-        animation:swing 1s  infinite;
+        animation:shake 1s ;
       }
     }
     .styleBtn{

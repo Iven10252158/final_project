@@ -6,52 +6,52 @@
     </Loading>
     <div class="container">
         <div class="row">
-          <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-              <div class="d-flex justify-content-end mt-3">
-                <button type="button" class="btn btn-primary text-white" @click="openModal(true)">新增貼文</button>
-              </div>
-              <ArticleModal ref="articleModal" :inner-article-info="tempArticle" :is-new="isNew" @update-article="updateArticle"></ArticleModal>
-              <DeleteArticleModal ref="deleteArticle" :delete-modal="tempArticle" @check-delete="removeArticle"></DeleteArticleModal>
-              <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
-                <thead class="col-12">
-                  <tr class="row">
-                      <th class="col-2">標題</th>
-                      <th class="col-2 text-center">作者</th>
-                      <th class="col-2 text-center">描述</th>
-                      <th class="col-2 text-center">建立時間</th>
-                      <th class="col-2 text-center">是否公開</th>
-                      <th class="col-2  text-end">編輯</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="row" v-for="item in allArticles" :key="item.id">
-                    <td class="col-2">{{ item.title }}</td>
-                    <td class="col-2 text-center">{{ item.author }}</td>
-                    <td class="col-2 text-center">{{ item.description }}</td>
-                    <td class="col-2 text-center">
-                        {{ $filters.date(item.create_at) }}
-                    </td>
-                    <td class="col-2 text-center">
-                        <span v-if="item.isPublic" class="text-success">公開</span>
-                        <span v-else>不公開</span>
-                    </td>
-                    <td class="col-2 text-end">
-                      <div class="btn-group">
-                          <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="getArticle(item)">編輯</button>
-                          <button type="button" class="btn btn-outline-danger btn-sm" @click="openRemoveArticleModal(item)">刪除</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </main>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-end mt-3">
+                  <button type="button" class="btn btn-primary text-white" @click="openModal(true)">新增貼文</button>
+                </div>
+                <ArticleModal ref="articleModal" :inner-article-info="tempArticle" :is-new="isNew" @update-article="updateArticle"></ArticleModal>
+                <DeleteArticleModal ref="deleteArticle" :delete-modal="tempArticle" @check-delete="removeArticle"></DeleteArticleModal>
+                <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
+                    <thead class="col-12">
+                        <tr class="row">
+                            <th class="col-2">標題</th>
+                            <th class="col-2 text-center">作者</th>
+                            <th class="col-2 text-center">描述</th>
+                            <th class="col-2 text-center">建立時間</th>
+                            <th class="col-2 text-center">是否公開</th>
+                            <th class="col-2  text-end">編輯</th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        <tr class="row" v-for="item in allArticles" :key="item.id">
+                            <td class="col-2">{{ item.title }}</td>
+                            <td class="col-2 text-center">{{ item.author }}</td>
+                            <td class="col-2 text-center">{{ item.description }}</td>
+                            <td class="col-2 text-center">
+                                {{ $filters.date(item.create_at) }}
+                            </td>
+                            <td class="col-2 text-center">
+                                <span v-if="item.isPublic" class="text-success">公開</span>
+                                <span v-else>不公開</span>
+                            </td>
+                            <td class="col-2 text-end">
+                                <div class="btn-group">
+                                    <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="getArticle(item)">編輯</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" @click="openRemoveArticleModal(item)">刪除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
         </div>
     </div>
 </template>
 
 <script>
-import ArticleModal from '@/components/ArticleModal.vue'
-import DeleteArticleModal from '@/components/DeleteModal.vue'
+import ArticleModal from '@/components/admin_components/ArticleModal.vue'
+import DeleteArticleModal from '@/components/admin_components/DeleteModal.vue'
 export default {
   components: {
     ArticleModal,
@@ -78,7 +78,6 @@ export default {
         httpMethod = 'put'
         status = '編輯文章'
       }
-
       this.$http[httpMethod](api, { data: this.tempArticle })
         .then(res => {
           if (res.data.success) {
@@ -86,7 +85,6 @@ export default {
             this.getArticles()
           } else {
             this.MessageStatus(res, status)
-            // console.log(res)
           }
         }).catch(err => {
           this.$swal({

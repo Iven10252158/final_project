@@ -1,12 +1,12 @@
 <template>
-<ToastMessages></ToastMessages>
-<router-view/>
+    <ToastMessages/>
+    <router-view/>
 </template>
 
 <script>
 import emitter from '@/methods/mitt'
 import MessageStatus from '@/methods/PushMessageStatus'
-import ToastMessages from '@/components/ToastMessages.vue'
+import ToastMessages from '@/components/admin_components/ToastMessages.vue'
 export default {
   provide () {
     return {
@@ -22,5 +22,4 @@ export default {
 
 <style lang="scss">
   @import "./assets/all";
-
 </style>

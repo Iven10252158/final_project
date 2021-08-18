@@ -1,49 +1,49 @@
 <template>
-  <Loading :active= "isLoading">
-    <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
-    <div></div><div><div></div></div>
-    </div></div>
-  </Loading>
-  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-end mt-4 me-2">
-          <button type="button" class="btn btn-primary text-white" @click="openCouponModal('new')">建立新優惠券</button>
-      </div>
-      <CouponModal ref="discountModal" :content="tempCoupon" @save-coupon="updateCoupon"></couponModal>
-      <DeleteCouponModal ref="deleteCouponModal" :conpon-title="tempCoupon" @delete-coupon="deleteCoupon"></deleteCouponModal>
-      <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
-        <thead class="col-12">
-          <tr class="row">
-              <th class="col-2">名稱</th>
-              <th class="col-2">折扣百分比</th>
-              <th class="col-3 text-center">到期日</th>
-              <th class="col-2 text-end">啟用</th>
-              <th class="col-3 text-end pe-6">編輯</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row align-items-center" v-for="item in allCoupons" :key="item.id">
-              <td class="col-2">{{ item.title }}</td>
-              <td class="col-2">{{ item.percent }}%</td>
-              <td class="col-3 text-center">{{ $filters.date(item.due_date) }}</td>
-              <td class="col-2 text-end">
-                  <span v-if="item.is_enabled===1" class="text-success">啟用</span>
-                  <span v-else class="text-muted">未啟用</span>
-              </td>
-              <td class="col-3 text-end">
-                <div class="btn-group  btns">
-                  <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="openCouponModal('edit',item)">編輯</button>
-                  <button type="button" class="btn btn-outline-danger btn-sm" @click="openCouponModal('delete',item)">刪除</button>
-                </div>
-              </td>
-          </tr>
-        </tbody>
-      </table>
-  </main>
+    <Loading :active= "isLoading">
+      <div class="loadingio-spinner-dual-ring-7s087i3q3b3"><div class="ldio-us6frdv3wm">
+      <div></div><div><div></div></div>
+      </div></div>
+    </Loading>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-end mt-4 me-2">
+            <button type="button" class="btn btn-primary text-white" @click="openCouponModal('new')">建立新優惠券</button>
+        </div>
+        <CouponModal ref="discountModal" :content="tempCoupon" @save-coupon="updateCoupon"></couponModal>
+        <DeleteCouponModal ref="deleteCouponModal" :conpon-title="tempCoupon" @delete-coupon="deleteCoupon"></deleteCouponModal>
+        <table class="table table-hover mt-3 row table-responsive" data-toggle="table">
+            <thead class="col-12">
+                <tr class="row">
+                    <th class="col-2">名稱</th>
+                    <th class="col-2">折扣百分比</th>
+                    <th class="col-3 text-center">到期日</th>
+                    <th class="col-2 text-end">啟用</th>
+                    <th class="col-3 text-end pe-6">編輯</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row align-items-center" v-for="item in allCoupons" :key="item.id">
+                    <td class="col-2">{{ item.title }}</td>
+                    <td class="col-2">{{ item.percent }}%</td>
+                    <td class="col-3 text-center">{{ $filters.date(item.due_date) }}</td>
+                    <td class="col-2 text-end">
+                        <span v-if="item.is_enabled===1" class="text-success">啟用</span>
+                        <span v-else class="text-muted">未啟用</span>
+                    </td>
+                    <td class="col-3 text-end">
+                      <div class="btn-group  btns">
+                        <button type="button" class="editBtn btn btn-outline-primary btn-sm"  @click="openCouponModal('edit',item)">編輯</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" @click="openCouponModal('delete',item)">刪除</button>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue'
-import DeleteCouponModal from '@/components/DeleteCouponModal.vue'
+import CouponModal from '@/components/admin_components/CouponModal.vue'
+import DeleteCouponModal from '@/components/admin_components/DeleteCouponModal.vue'
 export default {
   components: {
     CouponModal,
@@ -99,7 +99,7 @@ export default {
     },
     // 新增、編輯優惠券
     updateCoupon (item) {
-    // 新增的api、方法
+      // 新增的api、方法
       let api = `${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/coupon`
       let httpMethods = 'post'
       let status = '新增優惠券'
@@ -116,7 +116,6 @@ export default {
             this.getCouponsList()
             this.$refs.discountModal.hideModal()
           } else {
-            // console.log(res)
             this.MessageStatus(res, status)
           }
         }).catch(err => {

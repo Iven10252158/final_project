@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div class="col-lg-6 mt-5">
-                <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1624873579949.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hEnQ5FkUFLT90gqKaB0lDM5BRnsHkQui5lN0zHbq%2FCQs7vsrVoIQO0k0ZpoTX6V%2Fds7EZRCcVsfmjOmq%2BtByLQ8UH%2FwPEmBCh6gXD8yclPF8G9mX%2BMt38MgiLOnPrBEE7Bggf2spL%2BjmlvJMTFzJMX1fgI2CoeRrzvziWaQWliA%2BotmVaiSomf53Qbnx0Q4SLCUidSOyolRvw%2BnjOfFMo32SZKe9EbQnLJgIILHOC4U%2B7nIvOhB6E%2Bt7oPJ%2B%2BchU8OnIGpyPi9V8REeWJO6pNvl2C8CYivXTcaKhUCmj%2F8aqNJS7lN58q81F5tjpkUOu4RGhVX6oFaVZEY2Fg8q1tw%3D%3D" alt="">
+                <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1624873579949.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hEnQ5FkUFLT90gqKaB0lDM5BRnsHkQui5lN0zHbq%2FCQs7vsrVoIQO0k0ZpoTX6V%2Fds7EZRCcVsfmjOmq%2BtByLQ8UH%2FwPEmBCh6gXD8yclPF8G9mX%2BMt38MgiLOnPrBEE7Bggf2spL%2BjmlvJMTFzJMX1fgI2CoeRrzvziWaQWliA%2BotmVaiSomf53Qbnx0Q4SLCUidSOyolRvw%2BnjOfFMo32SZKe9EbQnLJgIILHOC4U%2B7nIvOhB6E%2Bt7oPJ%2B%2BchU8OnIGpyPi9V8REeWJO6pNvl2C8CYivXTcaKhUCmj%2F8aqNJS7lN58q81F5tjpkUOu4RGhVX6oFaVZEY2Fg8q1tw%3D%3D" alt="眠月線">
             </div>
         </div>
 
         <div class="row g-0 flex-column flex-lg-row mt-3 mt-lg-0 mb-0">
             <div class="col-lg-6 mt-0">
-                <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="">
+                <img class="img-fluid" src="https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1625496453609.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=D%2FW6nEE%2FR65BTlJ0YduZc7tYA9vk59aM3sS%2Fbqj%2FdBem6%2F8o3WNCrAWDMTk9HBSX%2BvBQNK%2B%2BgyRmT1sS9TO%2BM8v2%2B24AgWdOetltux4f8aj68uNk4FFMKl4ppWzLkc1AII5LCjk7i%2FBCzF9hCI5BCbtHkhZxYUIwWFMobHaNIKcFiyaNw66%2FkR8eZceSDxb25AB2m7tE%2FOqe3%2FYKcgCxR4id3H7CDQ1uyEVWIKz2k3x%2Bf7fdGFfwDM6L%2BhMoC8WrqG4STmvvIrnkDKZm2C1XOzS6Pcl8KEAVgNzTBfpnTooBd0nQdv4PZp%2BlKeeQXNB4z%2FTCWOkIbjeWaFM28drgow%3D%3D" alt="嘉明湖">
             </div>
             <div class="col-lg-6 d-flex align-items-center">
                 <div data-aos="fade-right" data-aos-duration="1500" class="px-3 ps-lg-4 pt-3">
@@ -39,18 +39,19 @@
             <li class="lh-base">顧名思義就是「不留下任何痕跡在山林」</li>
         </ul>
     </div>
-    <Knowledge></Knowledge>
-    <CustomFeedback></CustomFeedback>
-    <Subscribe></Subscribe>
-    <Footer></Footer>
+
+    <Knowledge/>
+    <CustomFeedback/>
+    <Subscribe/>
+    <Footer/>
 </template>
 
 <script>
-import BannerSwiper from '@/components/BannerSwiper.vue'
-import Knowledge from '@/components/Knowledge.vue'
-import CustomFeedback from '@/components/CustomFeedback.vue'
-import Subscribe from '@/components/Subscribe.vue'
-import Footer from '@/components/Footer.vue'
+import BannerSwiper from '@/components/front_components/BannerSwiper.vue'
+import Knowledge from '@/components/front_components/Knowledge.vue'
+import CustomFeedback from '@/components/front_components/CustomFeedback.vue'
+import Subscribe from '@/components/front_components/Subscribe.vue'
+import Footer from '@/components/front_components/Footer.vue'
 export default {
   components: {
     BannerSwiper,

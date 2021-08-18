@@ -6,7 +6,7 @@
     </Loading>
     <div class="banner bg-cover d-flex justify-content-center align-items-center" style="background-image:url('https://storage.googleapis.com/vue-course-api.appspot.com/iven_vue3_course/1627614521477.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=q27Qitew1D8z8gpED3%2FI4yYjrFDLQcxC7PCOYTss63GPl3wvhXOk0LztoIlHty4V6kjXlLFu22Fy9RaaskZrV3quq3JGeeOoq33miufS%2BK8FLH5ZqWyN2e5xXAyjm8RN3cPxwPjeu%2B564REcRuJVPiSxKWhUFHibnh2jDspJG4qoJPaze%2FsWzji9KjXN9Bz%2B4BsXIbVGX56xyTTAssnYKYVQrewvOx0jtCLRlBELr532Tez3%2BwVxTqmNZJKg8S94R5%2BwkTM6ww4vPyYR90BorZWVFaZibYfdzyqJsGoZS2EHOwZpUO%2BSqh4nI268yOy3bLZ%2F%2BltaY1ggG0X9b6ur0Q%3D%3D');height:500px">
         <div class="banner-text text-white">
-            <h3 class="pt-1">文章列表</h3>
+            <div class="fs-1">文章列表</div>
         </div>
     </div>
     <div class="container">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
+import Footer from '@/components/front_components/Footer.vue'
 export default {
   components: {
     Footer
@@ -56,8 +56,10 @@ export default {
       this.id = this.$route.params.id
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/article/${this.id}`)
         .then(res => {
-          this.isLoading = false
-          this.article = res.data.article
+          if (res.data.success) {
+            this.isLoading = false
+            this.article = res.data.article
+          }
         }).catch(err => {
           this.$swal({
             icon: 'error',
@@ -89,7 +91,7 @@ $background-color:rgba(0, 0, 0,0.5);
       height: 72px;
     }
     .article-img{
-    img{
+      img{
       height: auto;
       max-width: 100%;
       width: 100%;
