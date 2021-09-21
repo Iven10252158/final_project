@@ -82,9 +82,8 @@ export default {
     },
     closeNav () {
       if (window.innerWidth < 992) {
-        this.isPutColor = !this.isPutColor
+        this.toggleNav = false
       }
-      this.toggleNav = false
     },
     getFavorite () {
       this.myFavorite = JSON.parse(localStorage.getItem('MyFavorite')) || []
@@ -157,6 +156,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary-pc-bg:#4d695d;
 $primary-bg:rgba(0, 0, 0,0.1);
 $text-color:#fff;
 $nav-textActive:#ede2a6;
@@ -202,7 +202,7 @@ $nav-textActive:#ede2a6;
     .navbar{
       background-color: $primary-bg;
       @media (max-width: 992px) {
-        background-color: #4d695d;
+        background-color: $primary-pc-bg;
       }
     }
     .navBarQty{
