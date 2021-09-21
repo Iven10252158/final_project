@@ -3,7 +3,7 @@
       :class="[{'bg-primary':classList.navBarTop}]">
         <div class="container">
             <h1 class="logo navbar-brand mb-0">
-                <router-link to="/" class="mb-0 text-white fw-bold d-flex align-items-center">
+                <router-link to="/" class="mb-0 text-white fw-bold d-flex align-items-center" @click="closeNav">
                     <img src="@/assets/Climbing.svg" width="50" alt="CLIMBERLogo">
                     <h3 class="text-white ps-2 mb-0">CLIMBER</h3>
                 </router-link>

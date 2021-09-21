@@ -52,10 +52,13 @@
                       <button type="button" class="btn btn-warning text-white w-50" @click="openContentModal">聯絡我們</button>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div v-if="cart_id.includes(product.id)">
+                    <Tooltip></Tooltip>
+                </div>
+                <div class="d-flex justify-content-center" v-else>
                     <button type="button" class="btn btn-primary text-white w-100 w-lg-75
                       animate__animated animate__shakeX animate__repeat-1 animate__slower animate__delay-1s"
-                      @click="addToCart(product)">按我報名
+                      :class="{'disabled': cart_id.includes(product.id) }" @click="addToCart(product)">按我報名
                     </button>
                 </div>
                 <ContentModal ref="contentModal" :content-msg="tempMsg" @send-msg="hideContentModal"></ContentModal>
@@ -121,18 +124,22 @@ import emitter from '@/methods/mitt'
 import ContentModal from '@/components/front_components/ContentModal.vue'
 import Breadcrumb from '@/components/front_components/Breadcrumb.vue'
 import Footer from '@/components/front_components/Footer.vue'
+import Tooltip from '@/components/front_components/ToolTips.vue'
+
 export default {
   components: {
     ContentModal,
     Breadcrumb,
-    Footer
+    Footer,
+    Tooltip
   },
   data () {
     return {
-      cart: {},
+      cart: [],
+      cart_id: [],
+      product: {},
       imgUrl: '',
       imagesUrl: [],
-      product: {},
       id: '',
       isLoading: false,
       tempMsg: {}
@@ -177,6 +184,9 @@ export default {
             this.isLoading = false
             this.cart = res.data.data
           }
+          this.cart.carts.forEach(item => {
+            this.cart_id.push(item.product_id)
+          })
         }).catch(err => {
           this.$swal({
             icon: 'error',
@@ -194,6 +204,7 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.isLoading = false
+            this.getCartList()
             this.$swal({
               icon: 'success',
               title: `${res.data.data.product.title} <br/>${res.data.message}`

@@ -61,14 +61,12 @@
                               <i class="far fa-heart"></i>
                             </span>
                           </button>
-                          <button type="button" class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0"
+                          <div v-if="productId.includes(item.id)">
+                            <CartTooltip></CartTooltip>
+                          </div>
+                          <button v-else class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0"
                             @click="addToCart(item)" :class="{'disabled':productId.includes(item.id)}">
-                            <span v-if="productId.includes(item.id)">
-                              <i class="fas fa-shopping-cart"></i>
-                            </span>
-                            <span v-else>
-                              <i class="fas fa-cart-plus"></i>
-                            </span>
+                            <i class="fas fa-cart-plus"></i>
                           </button>
                         </div>
                       </div>
@@ -80,6 +78,7 @@
         <div class="d-flex justify-content-center">
             <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
         </div>
+        <!-- <CartTooltip></CartTooltip> -->
     </div>
     <Footer/>
     <router-view></router-view>
@@ -88,6 +87,7 @@
 <script>
 import Pagination from '@/components/Pagination.vue'
 import Footer from '@/components/front_components/Footer.vue'
+import CartTooltip from '@/components/front_components/CartToolTip.vue'
 
 // localStorage轉型
 const storageMethods = {
@@ -104,7 +104,8 @@ export default {
   inject: ['emitter'],
   components: {
     Pagination,
-    Footer
+    Footer,
+    CartTooltip
   },
   data () {
     return {
