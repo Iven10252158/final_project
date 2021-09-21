@@ -1,5 +1,5 @@
 <template>
-    <span tabindex="0" data-bs-toggle="tooltip" ref="toolTip" title="已加入購物車，超過人數請與客服聯繫">
+    <span class="d-block" data-bs-toggle="tooltip" ref="toolTip" data-bs-original-title="已加入購物車，超過人數請與客服聯繫">
         <button class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0" type="button" disabled>
             <i class="fas fa-shopping-cart"></i>
         </button>

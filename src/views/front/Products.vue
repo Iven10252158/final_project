@@ -78,7 +78,7 @@
         <div class="d-flex justify-content-center">
             <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
         </div>
-        <!-- <CartTooltip></CartTooltip> -->
+        <CartTooltip></CartTooltip>
     </div>
     <Footer/>
     <router-view></router-view>
