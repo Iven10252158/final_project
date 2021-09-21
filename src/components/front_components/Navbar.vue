@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg py-0 navbar-dark fixed-top z-index-3"
-      :class="[{'bg-primary':classList.navBarTop},{'bg-primary': isPutColor}]">
+      :class="[{'bg-primary':classList.navBarTop}]">
         <div class="container">
             <h1 class="logo navbar-brand mb-0">
                 <router-link to="/" class="mb-0 text-white fw-bold d-flex align-items-center">
@@ -12,7 +12,7 @@
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" @click="openNav">
                   <span class="navbar-toggler-icon"></span>
             </button>
-          <div class="navbar-collapse collapse" :class="[ toggleNav ? 'show' :'' ] " id="navbarSupportedContent">
+          <div class="navbar-collapse" :class="{ active : toggleNav }">
               <ul class="navbar-nav me-auto mb-0 mb-lg-0 pt-2">
                   <li class="nav-item text-center">
                       <router-link to="/about" class="h5 nav-link" @click="closeNav">關於我們</router-link>
@@ -34,7 +34,7 @@
                       </span>
                   </div>
                   <div v-if="cart.carts">
-                      <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link">
+                      <router-link v-if="cart.carts.length !== 0" to="/cart" class="h4 nav-link" @click="closeNav">
                           <i class=" fas fa-cart-plus"></i>
                       </router-link>
                       <a href="#" v-if="cart.carts.length === 0">
@@ -65,7 +65,6 @@ export default {
   inject: ['emitter'],
   data () {
     return {
-      isPutColor: false,
       cart: {},
       classList: {
         navBarTop: false
@@ -78,9 +77,8 @@ export default {
   methods: {
     openNav () {
       if (window.innerWidth < 992) {
-        this.isPutColor = !this.isPutColor
+        this.toggleNav = !this.toggleNav
       }
-      this.toggleNav = !this.toggleNav
     },
     closeNav () {
       if (window.innerWidth < 992) {
@@ -192,15 +190,26 @@ $nav-textActive:#ede2a6;
         }
     }
     .navbar-collapse{
-      transition: 0.3s ease-in-out;
+      @media(max-width: 992px){
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+      }
     }
+    .active{
+        max-height: 300px;
+      }
     .navbar{
       background-color: $primary-bg;
+      @media (max-width: 992px) {
+        background-color: #4d695d;
+      }
     }
     .navBarQty{
       bottom:35px;
       right:-3px;
     }
+
     .logo{
       img{
         display: block;
