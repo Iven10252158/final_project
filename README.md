@@ -52,7 +52,7 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 * Bootstrap 5
 * Font Awesome
 
-## 前端介紹
+## 前台介紹
 ### 首頁
 ![Image](https://i.imgur.com/ryf7L8d.jpg)
 
@@ -74,4 +74,6 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 當購物車沒有商品時，點擊購物車圖示，會出現小提醒，也會有前往至商品列表的按鈕。
 ![Image](https://i.imgur.com/zFE53NO.jpg)
 
-
+## 後台介紹
+### 登入畫面
+![Image](https://i.imgur.com/wkmnqot.gif)
