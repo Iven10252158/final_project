@@ -98,3 +98,7 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 Demo: [404頁面](http://localhost:8080/final_project/dist/#/ghghgh) <br>
 若網址輸入錯誤，會進入404頁面。
 ![Image](https://i.imgur.com/s7o8hZB.png)
+
+---
+
+更多細節部分，歡迎至 Demo 網站觀看 [https://iven10252158.github.io/final_project/dist/#/](https://iven10252158.github.io/final_project/dist/#/)
