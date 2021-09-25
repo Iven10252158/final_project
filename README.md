@@ -70,8 +70,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/dzhyaR0.gif)
 
 ### 加入購物車
-行程分為4人及6人，若超過4、6人可以點擊聯絡我們的按鈕留言給客服。<br>
-因此加入購物車後，購物車按鈕會disabled，並且會有小提醒顯示已經加入購物車。
+1. 行程分為4人及6人，若超過4、6人可以點擊聯絡我們的按鈕留言給客服。<br>
+2. 因此加入購物車後，購物車按鈕會disabled，並且會有小提醒顯示已經加入購物車。
 ![Image](https://i.imgur.com/Gt2Ol5f.gif)
 
 ### 購物車
