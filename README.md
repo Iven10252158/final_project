@@ -64,5 +64,5 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/wEV8wF9.jpg)
 
 ### 搜尋功能
-![Image](https://i.imgur.com/GlDlKZj.gif)
+![Image](https://i.imgur.com/EjyD6Xj.gif)
 
