@@ -52,3 +52,9 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 * mitt
 * Bootstrap 5
 * Font Awesome
+
+## 前端介紹
+### 首頁
+![Image](https://i.imgur.com/2aMf4sf.jpg)
+
+<br>
