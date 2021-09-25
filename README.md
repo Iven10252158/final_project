@@ -62,6 +62,10 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ### 商品介紹
 ![Image](https://i.imgur.com/wEV8wF9.jpg)
 
+### 我的最愛
+- 使用 localStorage 紀錄我的最愛項目 
+![Image](https://i.imgur.com/ANn1VPF.png)
+
 ### 搜尋功能
 ![Image](https://i.imgur.com/dzhyaR0.gif)
 
@@ -77,3 +81,24 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ## 後台介紹
 ### 登入畫面
 ![Image](https://i.imgur.com/wkmnqot.gif)
+
+
+### 商品管理
+- 圖片上傳可選擇圖片檔案或圖片連結
+- 必填欄位後方都有＊字號提醒，並做表單驗證
+![Image](https://i.imgur.com/FFrIjOH.png)
+
+### 文章管理
+- 文章編輯器使用` CKEditor 5 `套件
+- 可自行輸入標籤內容，點擊新增標籤按鈕可產生標籤
+- 日期以電腦系統時間為準
+![Image](https://i.imgur.com/r1YSG2N.png)
+
+### 製作404頁面
+Demo: [404頁面](http://localhost:8080/final_project/dist/#/ghghgh) <br>
+若網址輸入錯誤，會進入404頁面。
+![Image](https://i.imgur.com/s7o8hZB.png)
+
+---
+
+更多細節部分，歡迎至 Demo 網站觀看 [https://iven10252158.github.io/final_project/dist/#/](https://iven10252158.github.io/final_project/dist/#/)
