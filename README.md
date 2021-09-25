@@ -29,6 +29,7 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ### 前台
 * 電商展示：首頁、商品列表、商品介紹等
 * 購物車：刪除、修改商品數量
+* 我的最愛
 * 優惠券
 * 結帳
 
