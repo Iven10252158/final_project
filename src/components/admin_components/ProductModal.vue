@@ -36,7 +36,7 @@
                               </div>
                           </div>
                           <div v-else>
-                              <button type="button" class="btn btn-primary w-100 my-2" @click="createdImages">新增圖片</button>
+                              <button type="button" class="btn btn-primary w-100 my-2" @click="createdImages">新增陣列圖片</button>
                           </div>
                         </div>
                         <div class="col-8">
