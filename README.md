@@ -57,10 +57,10 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/ryf7L8d.jpg)
 
 ### 商品列表
-![Image](https://i.imgur.com/ST2mHzC.jpg)
+![Image](https://i.imgur.com/LZKvAYJ.jpg)
 
 ### 商品介紹
-![Image](https://i.imgur.com/wEV8wF9.jpg)
+![Image](https://i.imgur.com/GzryAt8.png)
 
 ### 我的最愛
 - 使用 localStorage 紀錄我的最愛項目 
