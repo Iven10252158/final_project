@@ -77,3 +77,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ## 後台介紹
 ### 登入畫面
 ![Image](https://i.imgur.com/wkmnqot.gif)
+
+### 商品管理
+圖片上傳可選擇圖片檔案或圖片連結
+![Image](https://i.imgur.com/wkmnqot.gif)
+
