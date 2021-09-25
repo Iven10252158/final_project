@@ -61,7 +61,7 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/ST2mHzC.jpg)
 
 ### 商品介紹
-![Image](https://i.imgur.com/wEV8wF9.jpg)
+![Image](https://imgur.com/loEeDVv)
 
 ### 搜尋功能
 ![Image](https://i.imgur.com/EjyD6Xj.gif)
