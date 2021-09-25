@@ -21,7 +21,6 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 * 引入 `Bootstrap 5` 樣式
 * 開發後台管理系統
 * 加入 `ESLint Standard` 風格
-* 統一管理 API 路徑
 * 透過 `mitt` 傳遞跨元件資料
 * Layout 使用 `Bootstrap 5` 結合 `SCSS` 切版
 * 使用 `Font Awesome`
@@ -67,12 +66,11 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/dzhyaR0.gif)
 
 ### 加入購物車
-行程分為4人及6人，如果超過4、6人的話可以點擊聯絡我們的按鈕留言給客服。<br>
-因此加入購物車之後，購物車按鈕會disabled，並且會有小提醒顯示，已經加入購物車。
-
+行程分為4人及6人，如果超過4、6人可以點擊聯絡我們的按鈕留言給客服。<br>
+因此加入購物車之後，購物車按鈕會disabled，並且會有小提醒顯示已經加入購物車。
 ![Image](https://i.imgur.com/Gt2Ol5f.gif)
 
-### 購物車沒有商品
+### 購物車
 當購物車沒有商品時，點擊購物車圖示，會出現小提醒，也會有前往至商品列表的按鈕。
 ![Image](https://i.imgur.com/zFE53NO.jpg)
 
