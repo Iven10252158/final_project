@@ -58,3 +58,9 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/2aMf4sf.jpg)
 
 <br>
+### 商品列表
+![Image](https://i.imgur.com/C1l9P67.jpg)
+
+<br>
+### 商品介紹
+![Image](https://i.imgur.com/JB0UHAr.png)
