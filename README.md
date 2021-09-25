@@ -84,3 +84,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 - 必填欄位後方都有＊字號提醒，並做表單驗證
 ![Image](https://i.imgur.com/FFrIjOH.png)
 
+### 文章管理
+- 文章編輯器使用` CKEditor 5 `套件
+- 可自行輸入標籤內容，點擊新增標籤按鈕可產生標籤
+- 日期以電腦系統時間為準
+![Image](https://i.imgur.com/r1YSG2N.png)
