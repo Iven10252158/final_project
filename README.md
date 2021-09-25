@@ -89,3 +89,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 - 可自行輸入標籤內容，點擊新增標籤按鈕可產生標籤
 - 日期以電腦系統時間為準
 ![Image](https://i.imgur.com/r1YSG2N.png)
+
+### 製作404頁面
+Demo: [404頁面](http://localhost:8080/final_project/dist/#/ghghgh)
+若網址輸入錯誤，會進入404頁面。
+![Image](https://i.imgur.com/s7o8hZB.png)
