@@ -66,6 +66,11 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ### 搜尋功能
 ![Image](https://i.imgur.com/dzhyaR0.gif)
 
+### 加入購物車
+行程分為4人及6人，如果超過4、6人的話可以點擊聯絡我們的按鈕留言給客服。
+因此加入購物車之後，購物車按鈕會disabled，並且會有小提醒顯示，已經加入購物車。
+![Image](https://i.imgur.com/Gt2Ol5f.gif)
+
 ### 購物車沒有商品
 當購物車沒有商品時，點擊購物車圖示，會出現小提醒，也會有前往至商品列表的按鈕。
 ![Image](https://i.imgur.com/zFE53NO.jpg)
