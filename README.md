@@ -91,6 +91,6 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/r1YSG2N.png)
 
 ### 製作404頁面
-Demo: [404頁面](http://localhost:8080/final_project/dist/#/ghghgh)
+Demo: [404頁面](http://localhost:8080/final_project/dist/#/ghghgh) <br>
 若網址輸入錯誤，會進入404頁面。
 ![Image](https://i.imgur.com/s7o8hZB.png)
