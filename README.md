@@ -66,3 +66,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ### 搜尋功能
 ![Image](https://i.imgur.com/EjyD6Xj.gif)
 
+### 購物車沒有商品
+當購物車沒有商品時，點擊購物車圖示，會出現小提醒，也會有前往至商品列表的按鈕。
+![Image](https://i.imgur.com/zFE53NO.jpg)
+
+
