@@ -80,6 +80,7 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 
 
 ### 商品管理
-圖片上傳可選擇圖片檔案或圖片連結
-![Image](https://i.imgur.com/bytltUW.png)
+- 圖片上傳可選擇圖片檔案或圖片連結
+- 必填欄位後方都有＊字號提醒，並做表單驗證
+![Image](https://i.imgur.com/FFrIjOH.png)
 
