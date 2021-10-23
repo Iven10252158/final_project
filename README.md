@@ -57,10 +57,10 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/ryf7L8d.jpg)
 
 ### 商品列表
-![Image](https://i.imgur.com/ST2mHzC.jpg)
+![Image](https://i.imgur.com/LZKvAYJ.jpg)
 
 ### 商品介紹
-![Image](https://i.imgur.com/wEV8wF9.jpg)
+![Image](https://i.imgur.com/GzryAt8.png)
 
 ### 我的最愛
 - 使用 localStorage 紀錄我的最愛項目 
@@ -70,8 +70,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 ![Image](https://i.imgur.com/dzhyaR0.gif)
 
 ### 加入購物車
-行程分為4人及6人，如果超過4、6人可以點擊聯絡我們的按鈕留言給客服。<br>
-因此加入購物車之後，購物車按鈕會disabled，並且會有小提醒顯示已經加入購物車。
+1. 行程分為4人團及6人團，若超過人數可以點擊聯絡我們的按鈕留言給客服。<br>
+2. 因此加入購物車後，購物車按鈕會disabled，並且會有小提醒顯示已經加入購物車。
 ![Image](https://i.imgur.com/Gt2Ol5f.gif)
 
 ### 購物車
@@ -80,6 +80,8 @@ Demo：https://iven10252158.github.io/final_project/dist/#/
 
 ## 後台介紹
 ### 登入畫面
+- 製作密碼顯示功能
+
 ![Image](https://i.imgur.com/wkmnqot.gif)
 
 
