@@ -20,8 +20,8 @@
                 <div class="row sticky-md-top">
                     <div class="mt-3">
                         <ul class="list-group pe-auto siderBarLeft rounded-1" :class="siderBarLeft.beLeft">
-                            <li class="list-group-item list-group-item-action" @click="changeProduct(item,index)"
-                            :class="{'bg-primary':'total' === productValue , 'text-white':'total' === productValue}">
+                            <li class="list-group-item list-group-item-action" @click="totalProducts(item)"
+                            :class="{'bg-primary':productValue === '' , 'text-white':productValue === ''}">
                             全部商品
                             </li>
                             <li class="list-group-item list-group-item-action" v-for="(item, index) in productName" :key="index"
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div v-if="productValue === ''" class="col-md-9">
                 <div class="row">
                   <div class="col-md-6 col-xl-4 my-4" v-for="item in typeProduct" :key="item.id">
                     <div class="card h-100">
@@ -74,9 +74,55 @@
                   </div>
                 </div>
             </div>
+
+            <!-- 篩選的部分 -->
+            <div v-else class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6 col-xl-4 my-4" v-for="item in filterProduct" :key="item.id">
+                    <div class="card h-100">
+                      <div class="bg-cover product_image position-relative" :style="{backgroundImage:'url(' +item.imageUrl+ ')',height:'200px' }">
+                        <router-link class="mask text-white text-center fs-4 fw-bold position-absolute" :to="`/product/${ item.id }`">
+                            查看更多
+                        </router-link>
+                      </div>
+                      <div class="card-body pb-2">
+                        <h6 class="card-title text-hidden">
+                          <router-link class="text-grey products_title" :to="`/product/${item.id}`">
+                            {{ item.title }}
+                          </router-link>
+                        </h6>
+                        <div class="card-text d-flex justify-content-between" >
+                          <div v-if="item.origin_price !== item.price">
+                            <del class="text-primary">NT{{ $filters.currency(item.origin_price) }}</del>
+                          </div>
+                            <h6 class="text-color">NT {{ $filters.currency(item.price) }}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                          <button type="button" class="styleBtn favoBtn btn btn-outline-favorite border-0 ps-0"
+                            @click="addMyFavorite(item)">
+                            <span v-if="myFavorite.includes(item.id)">
+                              <i class="fas fa-heart"></i>
+                            </span>
+                            <span v-else>
+                              <i class="far fa-heart"></i>
+                            </span>
+                          </button>
+                          <div v-if="productId.includes(item.id)">
+                            <CartTooltip></CartTooltip>
+                          </div>
+                          <button v-else class="styleBtn cartBtn btn btn-outline-primary border-0 pe-0"
+                            @click="addToCart(item)" :class="{'disabled':productId.includes(item.id)}">
+                            <i class="fas fa-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
         <div class="d-flex justify-content-center">
-            <Pagination :pages="pagination" @change-page="getProducts"></Pagination>
+            <Pagination :pages="pagination" :product-value="productValue" @change-page="getProducts"></Pagination>
         </div>
     </div>
     <Footer/>
@@ -128,6 +174,20 @@ export default {
 
     }
   },
+  computed: {
+    filterProduct () {
+      return this.products.filter(item => item.category.match(this.productValue))
+    }
+    // searchProduct () {
+    //   return this.allProducts.filter(item => {
+    //     if (item.title.match(this.search)) {
+    //       return item
+    //     } else {
+    //       return this.typeProduct
+    //     }
+    //   })
+    // }
+  },
   methods: {
     getFavorite () {
       this.myFavorite = storageMethods.getItem() || []
@@ -148,7 +208,7 @@ export default {
       this.$http.get(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/products/all`)
         .then(res => {
           if (res.data.success) {
-            this.allProducts = res.data.products
+            this.allProducts = res.data.products.reverse()
           }
         }).catch(err => {
           this.$swal({
@@ -158,22 +218,23 @@ export default {
         })
     },
     searchProduct (value) {
-      this.productValue = 'total'
-      this.typeProduct = this.allProducts.filter(item => {
-        if (item.title.match(value)) {
-          return item
-        }
+      if ((this.allProducts.filter((item) => item.title.match(value))).length > 0 && value) {
+        this.typeProduct = this.allProducts.filter((item) => item.title.match(value))
+      } else if (!value) {
+        this.typeProduct = this.products.filter((item) => item.title.match(value))
+      }
+    },
+    totalProducts (item) {
+      this.products.filter((element) => {
         this.productValue = ''
+        return element
       })
     },
     changeProduct (item) {
-      this.typeProduct = this.products.filter((element, index) => {
+      this.products = this.allProducts.filter((element) => {
         if (item === element.category) {
           this.productValue = item
           return element
-        } else if (item === undefined) {
-          this.productValue = 'total'
-          return this.products
         }
       })
     },
@@ -268,9 +329,9 @@ export default {
     this.emitter.on('remove-data', (data) => {
       this.getFavorite()
     })
-    this.emitter.emit('favorite-qty', this.myFavorite)
     this.getProducts()
-    this.productValue = 'total'
+    this.emitter.emit('favorite-qty', this.myFavorite)
+    // this.productValue = 'total'
     window.addEventListener('scroll', () => {
       // console.log(window.scrollY)
       const windowY = window.scrollY

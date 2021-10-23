@@ -1,5 +1,5 @@
 <template>
-    <nav aria-label="Page navigation example">
+    <nav v-if="productValue ==='' " aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item" :class="{'disabled':pages.current_page===1}">
                 <a class="page-link " href="#" aria-label="Previous"
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  props: ['pages'],
+  props: ['pages', 'productValue'],
   emits: ['change-page'],
   methods: {
     change (item) {
