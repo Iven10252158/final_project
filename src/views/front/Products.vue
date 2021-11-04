@@ -221,13 +221,15 @@ export default {
       if ((this.allProducts.filter((item) => item.title.match(value))).length > 0 && value) {
         this.typeProduct = this.allProducts.filter((item) => item.title.match(value))
       } else if (!value) {
-        this.typeProduct = this.products.filter((item) => item.title.match(value))
+        this.typeProduct = this.products.filter((item) => item)
       }
     },
     totalProducts (item) {
-      this.products.filter((element) => {
+      this.typeProduct = this.products.filter((element) => {
         this.productValue = ''
-        return element
+        if (item === undefined) {
+          this.getProducts()
+        }
       })
     },
     changeProduct (item) {

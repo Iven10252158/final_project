@@ -16,6 +16,7 @@
                             <div class="form-group">
                                 <label for="fileInput" class="form-check-label">主要圖片</label>
                                 <input type="file" class="form-control" @change="uploadFile" id="fileInput" ref="fileInput">
+                                <p class="text-danger" v-if="imgStyle === false">{{ imgMessage }}</p>
                                 <input type="text" class="form-control mt-2" v-model="tempProduct.imageUrl">
                                 <img :src="tempProduct.imageUrl" class="img-fluid" alt="">
                             </div>
@@ -151,7 +152,9 @@ export default {
     return {
       bsModal: '',
       tempProduct: {},
-      isOpen: true
+      isOpen: true,
+      imgMessage: '',
+      imgStyle: true
     }
   },
   // 在內層的productModal會接收來自外面的tempProduct傳進來的值，也就是props:['product']
@@ -180,7 +183,11 @@ export default {
       this.$http.post(`${process.env.VUE_APP_URL}api/${process.env.VUE_APP_PATH}/admin/upload`, formData)
         .then((res) => {
           if (res.data.success) {
+            this.imgStyle = res.data.success
             this.tempProduct.imageUrl = res.data.imageUrl
+          } else {
+            this.imgMessage = res.data.message
+            this.imgStyle = res.data.success
           }
         }).catch(err => {
           this.$swal({
