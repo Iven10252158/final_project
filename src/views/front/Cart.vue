@@ -154,7 +154,7 @@ export default {
       this.$http.get(api)
         .then(res => {
           if (res.data.success) {
-            console.log(res)
+            // console.log('getCartList', res)
             this.isLoading = false
             this.cart = res.data.data
           }

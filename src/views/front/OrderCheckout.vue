@@ -11,12 +11,12 @@
     </div>
     <div class="container my-4">
         <h4 class="text-primary mb-0 py-3">訂單資料</h4>
-        <div class="row innerHeight border px-3 d-flex justify-content-center pt-3" v-for="item in orderForm.products" :key="item">
+        <div class="row innerHeight border px-3 d-flex justify-content-center pt-3">
             <div class="col-md-6">
                 <div v-if="orderForm.is_paid">
                     <h2 class="text-center text-danger">付款完成</h2>
                 </div>
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column"  v-for="item in orderForm.products" :key="item">
                     <img class="img-fluid" :src="item.product.imageUrl" alt="購買的產品圖片" style="height: 200px; object-fit: cover;">
                     <div class="pt-1">
                       <p class="mb-2">{{ item.product.title }}</p>
@@ -27,30 +27,30 @@
             </div>
             <div class="col-md-6">
               <hr class="mt-0 d-block d-md-none">
-              <div>
-                  <h4 class="mb-3">訂購人資訊</h4>
+              <div class="d-flex flex-column" :class="{ orderInfo : orderProductTotalQty.length > 1 }">
+                  <h4 class="mb-3 text-center">訂購人資訊</h4>
                   <div class="row" v-if="orderForm.user">
-                    <div class="col-3 h6 text-secondary">姓名</div>
-                    <div class="col-9">{{ orderForm.user.name }}</div>
-                    <div class="col-3 h6 text-secondary">電話</div>
-                    <div class="col-9">{{ orderForm.user.tel }}</div>
-                    <div class="col-3 h6 text-secondary">Email</div>
-                    <div class="col-9">{{ orderForm.user.email }}</div>
-                    <div class="col-3 h6 text-secondary">地址</div>
-                    <div class="col-9">{{ orderForm.user.address }}</div>
+                    <div class="col-5 h6 text-secondary text-center">姓名</div>
+                    <div class="col-7">{{ orderForm.user.name }}</div>
+                    <div class="col-5 h6 text-secondary text-center">電話</div>
+                    <div class="col-7">{{ orderForm.user.tel }}</div>
+                    <div class="col-5 h6 text-secondary text-center">Email</div>
+                    <div class="col-7">{{ orderForm.user.email }}</div>
+                    <div class="col-5 h6 text-secondary text-center">地址</div>
+                    <div class="col-7">{{ orderForm.user.address }}</div>
                 </div>
                 <hr>
                 <div class="row" v-if="orderForm">
-                    <div class="col-3 h6 text-secondary">訂單編號</div>
-                    <div class="col-9">{{ orderForm.id }}</div>
-                    <div class="col-3 h6 text-secondary">付款金額</div>
-                    <div class="col-9">NT$ {{ $filters.currency(orderForm.total) }}</div>
-                    <div class="col-3 h6 text-secondary">付款狀態</div>
-                    <div class="col-9" :class="{'text-primary':orderForm.is_paid}">{{ orderForm.is_paid? '付款成功':'尚未付款' }}</div>
+                    <div class="col-5 h6 text-secondary text-center">訂單編號</div>
+                    <div class="col-7">{{ orderForm.id }}</div>
+                    <div class="col-5 h6 text-secondary text-center">付款金額</div>
+                    <div class="col-7">NT$ {{ $filters.currency(orderForm.total) }}</div>
+                    <div class="col-5 h6 text-secondary text-center">付款狀態</div>
+                    <div class="col-7" :class="{'text-primary':orderForm.is_paid}">{{ orderForm.is_paid? '付款成功':'尚未付款' }}</div>
                 </div>
-                <div class="d-flex" v-if="orderForm.is_paid">
-                    <div class="col-3 h6 text-secondary">訂單成立</div>
-                    <div class="col-9 ps-2 text-primary">{{ dateAndTime }}</div>
+                <div class="row d-flex" v-if="orderForm.is_paid">
+                    <div class="col-5 h6 text-secondary text-center">訂單成立</div>
+                    <div class="col-7 ps-2 text-primary">{{ dateAndTime }}</div>
                 </div>
               </div>
             </div>
@@ -80,6 +80,8 @@ export default {
       orderID: '',
       create_at: '',
       orderForm: [],
+      orderProductQty: [],
+      orderProductTotalQty: [],
       dateAndTime: '',
       isLoading: false
     }
@@ -92,6 +94,9 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.orderForm = res.data.order
+            this.orderProductQty = res.data.order.products
+            const orderProductQty = Object.keys(this.orderProductQty)
+            this.orderProductTotalQty = orderProductQty
             this.create_at = res.data.order.create_at
             this.dateAndTime = new Date(this.create_at * 1000).toLocaleString()
           }
@@ -108,6 +113,7 @@ export default {
       this.$http.post(url)
         .then(res => {
           if (res.data.success) {
+            console.log('payOrder', res)
             this.isLoading = false
             this.getOrder()
             this.emitter.emit('update-qty')
@@ -129,6 +135,9 @@ export default {
 <style lang="scss">
 $text-color:#fff;
 $main-text-color:rgb(90, 147, 88);
+    .container{
+      position: relative;
+    }
     .bg-cover{
       background-position: center center;
       background-size: cover;
@@ -139,6 +148,11 @@ $main-text-color:rgb(90, 147, 88);
       &:hover{
         color:$text-color;
       }
+    }
+    .orderInfo{
+      position: absolute;
+      top: 50%;
+      transForm: translateY(-50%);
     }
     .innerHeight{
       min-height: calc( 59vh - 72px)

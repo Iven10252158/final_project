@@ -90,6 +90,7 @@ export default {
     },
     openCanvas () {
       const data = JSON.parse(localStorage.getItem('MyFavorite')) || []
+      console.log('openCanvas', data)
       this.$refs.canvas.showCanvas(data)
     },
     getCartList () {

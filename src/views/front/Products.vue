@@ -122,7 +122,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <Pagination :pages="pagination" :product-value="productValue" @change-page="getProducts"></Pagination>
+            <Pagination :pages="pagination" :product-value="productValue" :search="search" @change-page="getProducts"></Pagination>
         </div>
     </div>
     <Footer/>
@@ -219,7 +219,9 @@ export default {
     },
     searchProduct (value) {
       if ((this.allProducts.filter((item) => item.title.match(value))).length > 0 && value) {
-        this.typeProduct = this.allProducts.filter((item) => item.title.match(value))
+        this.typeProduct = this.allProducts.filter((item) => {
+          return item.title.match(value)
+        })
       } else if (!value) {
         this.typeProduct = this.products.filter((item) => item)
       }

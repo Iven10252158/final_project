@@ -60,7 +60,9 @@ export default {
     // 打開畫布時取得的資料
     showCanvas (data) {
       // 當畫布打開的時候取得localStorage裡的資料
+      console.log('data', data)
       this.favoItem = data
+      console.log('favoItem', this.favoItem)
       this.getProducts()
       this.bsOffcanvas.show()
     },
