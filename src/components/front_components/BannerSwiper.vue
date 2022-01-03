@@ -1,5 +1,5 @@
 <template>
-    <swiper ref="{swiperRef}" :centeredSlides="true" :spaceBetween="30"
+    <swiper ref="{swiperRef}" :centeredSlides="true" :spaceBetween="30" :loop="true"
       :autoplay='{ "delay": 2500, "disableOnInteraction": false }' class="mySwiper text-center">
         <swiper-slide v-for="(item,index) in bannerFirst " :key="index">
             <div class="bg-cover" :style="{backgroundImage:'url(' +item.img+ ')',height:'600px' }">
